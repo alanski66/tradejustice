@@ -24,7 +24,7 @@ Icon
 
 #phpstorm
 .idea
-.expsettings.php
+.idea/**
 *.csv
 
 #custom

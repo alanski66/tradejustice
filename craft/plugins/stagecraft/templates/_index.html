@@ -1,0 +1,110 @@
+{% extends '_layouts/cp' %}
+
+{% set title = 'Stagecraft' %}
+
+{% set tabs = {
+export: { label: "Export"|t, url: url('stagecraft') },
+import: { label: "Import"|t, url: url('stagecraft/import') },
+} %}
+
+{% set selectedTab = 'export' %}
+
+{% set crumbs = [
+{ label: "Settings"|t, url: url('settings') },
+{ label: "Plugins"|t, url: url('settings/plugins') },
+{ label: "Stagecraft"|t, url: url('stagecraft') }
+] %}
+
+{% includeJsResource('stagecraft/js/default.js') %}
+{% includeCssResource('stagecraft/css/default.css') %}
+
+{% block content %}
+
+  {% import '_includes/forms' as forms %}
+
+  <div class="grid">
+
+    <div class="item">
+
+      <form id="export" method="POST" accept-charset="UTF-8" data-saveshortcut>
+
+        <input type="hidden" name="action" value="stagecraft/export">
+
+        <h2>Exporter</h2>
+
+        <div class="grid">
+          <div class="item">
+            {{ forms.checkboxSelectField({
+              label: 'Assets',
+              name: 'selectedAssets',
+              options: assetOptions
+            }) }}
+          </div>
+
+          <div class="item">
+            {{ forms.checkboxSelectField({
+              label: 'Category Groups',
+              name: 'selectedCategoryGroups',
+              options: categoryOptions
+            }) }}
+          </div>
+
+          <div class="item">
+            {{ forms.checkboxSelectField({
+              label: 'Field Groups',
+              name: 'selectedFieldGroups',
+              options: fieldGroupOptions
+            }) }}
+          </div>
+
+          <div class="item">
+            {{ forms.checkboxSelectField({
+              label: 'Global Sets',
+              name: 'selectedGlobalSets',
+              options: globalSetOptions
+            }) }}
+          </div>
+
+          <div class="item">
+            {{ forms.checkboxSelectField({
+              label: 'Sections',
+              name: 'selectedSections',
+              options: sectionOptions
+            }) }}
+          </div>
+
+          <div class="item">
+            {{ forms.checkboxSelectField({
+              label: 'Tag Groups',
+              name: 'selectedTagGroups',
+              options: tagGroupOptions
+            }) }}
+          </div>
+
+        </div>
+
+        <div id="exportResultContainer" class="field hidden">
+          <div class="heading">
+            <label>Data</label>
+          </div>
+          <div class="instructions">
+            <p>
+              The output JSON data will appear here.
+            </p>
+          </div>
+          <div class="input">
+            <textarea id="exportResult" class="text code fullwidth" rows="15" readonly></textarea>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <input type="submit" class="btn submit" value="Export" />
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+{% endblock %}

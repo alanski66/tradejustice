@@ -1,0 +1,14 @@
+{
+    "name": "emersonstone/stagecraft",
+    "description": "Import and export Craft CMS fields, sections, tags, categories, assets, and globals.",
+    "authors": [
+        {
+            "name": "Zachary Flower",
+            "email": "zach@emersonstone.com"
+        }
+    ],
+    "type": "craft-plugin",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}

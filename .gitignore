@@ -36,7 +36,7 @@ Icon
 # Craft specific
 /autodata/export_users_log.txt
 
-/craft/plugins/**
+#/craft/plugins/**
 /craft/storage/backups/
 /craft/storage/runtime/
 /craft/storage/userphotos/

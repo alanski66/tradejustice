@@ -13,7 +13,9 @@ return array(
         'environmentVariables' => array(
             'baseUrl'  => getenv('CRAFTENV_BASE_URL'),
             'basePath' => getenv('CRAFTENV_BASE_PATH'),
+
         ),
+        'siteUrl' => getenv('CRAFTENV_SITE_URL'),
         'omitScriptNameInUrls' => true,
         'enableTemplateCaching' => false,
         'cache' => false,
@@ -26,11 +28,11 @@ return array(
             'enableTemplateCaching' => false,
             'cache' => false,
             'generateTransformsBeforePageLoad' => false,
+
         ),
 
         'templateselectSubfolder' => 'pages/_types',
         'useCompressedJs' => false,
-        'siteUrl' => getenv('CRAFTENV_SITE_URL'),
     ),
     'tjm.org.uk' => array(
         'devMode' => false,
@@ -42,7 +44,7 @@ return array(
         'templateselectSubfolder' => 'pages/_types',
         'useCompressedJs' => true,
         'omitScriptNameInUrls' => true,
-        'siteUrl' => 'https://www.tjm.org.uk/'
+
     ),
 
 
@@ -56,7 +58,6 @@ return array(
             'generateTransformsBeforePageLoad' => true,
         ),
         'templateselectSubfolder' => 'pages/_types',
-        'siteUrl' => 'http://staging.tjm.org.uk/public_html/'
     )
 
 

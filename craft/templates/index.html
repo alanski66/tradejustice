@@ -1,0 +1,229 @@
+{#
+ # Homepage template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/site" %}
+
+{% block content %}
+<div class="container-xl">
+    <div class="hero">
+        <div class="container">
+
+            <section>
+            <div class="col-xs-16 col-sm-10 col-md-10">
+
+                <div class="home-over-title">
+                    <h1>{{ entry.mainStrapline }}<br><span class="yellow">{{ entry.subStrapLine1 }}</span></h1>
+                </div>
+                    <div class="home-over-text">
+                        <h4>{{ entry.latestHeading }}</h4>
+                        <div class="latest">
+
+                            {% if entry.latestLinkManual | length %}
+                            <a class=" " href="{{ entry.latestLinkManual }}">{{ entry.latestText }}<span class="isprite icon-chev-right"></span></a>
+                            {% else %}
+                                {% set latest = entry.latestLink.first %}
+                                {% if latest | length %}
+                                <a class=" " href="{{ latest.url }}">{{ entry.latestText }}<span class="isprite icon-chev-right"></span></a>
+                                {% endif %}
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+            </div>
+
+                <div class="col-xs-16 col-sm-8 col-md-10">
+
+            </div>
+        </section>
+            </div>
+    </div>
+
+</div>
+
+{% if globalContent.showNewsFlash and globalContent.newsflashLink.first | length %}
+
+<div class="container-xl flash-bg" style="background-color:#3c3c3b">
+    <div class="container">
+
+            <div class="col-xs-3 col-md-2 vertical-centre-container">
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+            </div>
+            <div class="col-xs-13 col-md-14 vertical-centre-container">
+
+                <div class="flash">
+
+                    <a href="{{globalContent.newsflashLink.first().url }}">{{globalContent.newsflashIntro }}</a>
+
+                </div>
+
+            </div>
+
+    </div>
+</div>
+{% endif %}
+<div class="container-xl tweet-bg">
+<div class="container ">
+    <section class="">
+        <div class="col-xs-3 col-md-2">
+            <span class="sprite icon-twitter"></span>
+        </div>
+        <div class="col-xs-13 col-md-14 ">
+
+            <div class="tweet">
+
+                {% cache for 5 mins %}
+                    {% set tweets = craft.twitter.get('statuses/user_timeline', {
+                    count:1,
+                    exclude_replies: true,
+                    include_rts: false,
+                    }) %}
+
+                    {% if tweets %}
+                        {% for tweet in tweets %}
+                            {{tweet|tweetLink|raw}}
+                        {% endfor %}
+                    {% else %}
+                        No tweets
+                    {% endif %}
+                {% endcache %}
+
+            </div>
+
+        </div>
+    </section>
+</div>
+</div>
+
+
+{% for block in entry.homeBlockRow | batch(2) %}
+
+<div class=" container-xl {% if loop.first %}gray-bg-light{% endif %}">
+    <div class="container ">
+<div class="row gutter-85 homerow">
+
+    {% for column in block %}
+
+    {% set link = column.blockLink.first() %}
+    <div class="col-xxs-16 col-xs-8 col-sm-8">
+        {% for image in column.blockImage %}
+        {% set imageTransform = {
+        width: 527,
+        height: 296,
+        mode: 'crop',
+        position: column.focalPoint
+        } %}
+       <a href="{{link.url}}">
+           <span class="yellowline"></span>
+           <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}"></a>
+        {% endfor %}
+        <h2><a href="{{link.url}}">{{ column.blockHeading }}</a></h2>
+        <p>{{ column.blockSummary }}<a href="{{link.url}}"><span class="isprite icon-chev-right-dk"></span></a></p>
+    </div>
+    {% endfor %}
+
+
+
+</div>
+    </div>
+</div>
+
+{% endfor %}
+
+
+
+<div class="container-xl gray-bg-light">
+    <div class="container ">
+        <div class="row gutter-85 homerow">
+            <div class="col-md-16 ">
+                <h3 class="text-center">Reports & Briefings</h3>
+            </div>
+            <div class="col-xs-16 col-sm-7">
+                {% cache %}
+                {% set reportlist = entry.latestReports.limit(6) %}
+
+                {% for entry in reportlist %}
+
+                    {% if loop.index is odd %}
+                    {% set link = entry.url %}
+                {% set image = entry.resourceImage.first() %}
+                    {% set file = entry.resourcesFile.first() %}
+
+                {% if image %}
+                {% set media = image.getUrl('tinyThumb') %}
+                {% else %}
+                {% set media = 'images/meta/pdf-default.png' %}
+                {% endif %}
+                    <div class="media">
+                        <div class="media-left">
+
+                                <a href="{{ entry.url }}" class="">
+                                    <img class="media-object" src="{{ media}}" alt="...">
+                                </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{ entry.title }}</h4>
+                            {{ entry.ShortDescription  }}
+
+                        </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
+                {% endcache %}
+
+            </div>
+            <div class="col-xs-2">
+                <div class="sprite replogo"></div>
+            </div>
+            <div class="col-xs-16 col-sm-7">
+                {% cache %}
+                {% for entry in reportlist %}
+
+                {% if loop.index is even %}
+                {% set link = entry.url %}
+                {% set image = entry.resourceImage.first() %}
+                {% set file = entry.resourcesFile.first() %}
+
+                {% if image %}
+                {% set media = image.getUrl('tinyThumb') %}
+                {% else %}
+                {% set media = 'images/meta/pdf-default.png' %}
+                {% endif %}
+                <div class="media">
+
+                    <div class="media-left">
+                            <a href="{{ entry.url }}" class="">
+                                <img class="media-object" src="{{ media }}" alt="...">
+                            </a>
+                    </div>
+
+                    <div class="media-body">
+                        <h4 class="media-heading"> <a href="{{ entry.url }}" class="">{{ entry.title }}</a></h4>
+                        {{ entry.ShortDescription  }}
+
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endcache %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,366 @@
+/* nav styles */
+
+.navb{
+  @include breakpoint(sm) {
+    margin-top:25px;
+  }
+
+  @include breakpoint(md) {
+    margin-top:16px;
+  }
+  @include breakpoint(lg) {
+    margin-top:16px;
+  }
+}
+
+.navbar-default .navbar-nav>li{
+  margin-left: 25px;
+  height:40px;
+}
+.navbar-default {
+    background-color: $yellow;
+    padding-left: 0;
+	padding-right: 0;
+	border: none;
+    margin-bottom: 0;
+
+  @include breakpoint(xxxs) {
+    height:60px;
+  }
+
+  @include breakpoint(sm) {
+    height:200px;
+  }
+
+}
+
+.navbar-default,.sprite.logo,.navb, .nav{
+  // Animation
+  -webkit-transition: all 0.9s ease;
+  transition: all 0.9s ease;
+  z-index:99;
+}
+
+.dark-bg{
+  // Animation
+  -webkit-transition: all 0.9s ease;
+  transition: all 0.9s ease;
+  z-index:10;
+}
+//shrink settings
+
+//logo shrink
+.shrink .sprite.logo {
+  width: 216px;
+  height: 55px;
+  background-size: 345px 170px;
+  margin-top: 13px;
+}
+
+
+//sidebar shrink
+.inpage{
+  //top:initial;
+  //min-width:100%;
+}
+
+
+//set reduced header height
+.navbar-default.shrink {
+  @include breakpoint(sm) {
+    height:80px;
+  }
+}
+
+.navbar-default.shrink .nav.navbar-nav{
+  //position: absolute;
+  margin-top: -52px;
+  top: 20px;
+}
+
+.dark-bg.shrink{
+  position: fixed;
+  top:80px;
+  width:100%;
+  z-index: 1;
+  height:60px;
+}
+.dark-bg.shrink h1{
+  margin-top:20px;
+  font-size:20px;
+}
+
+li.shrink{
+  display:none
+}
+
+ .shrink .topnav, .shrink .search{
+  display:none;
+}
+.navb.shrink li.shrink{
+  margin: 0;
+  display:inline-block;
+}
+.navb.shrink li.shrink:last-child{
+  margin-right:15px;
+}
+
+.navb.shrink form.search{
+  display: inline-block;
+  margin-top:0;
+}
+
+.navb.shrink form.search.navbar-form .input-group>.form-control{
+  min-width: 50px;
+}
+
+// end shrink
+
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+
+  @include breakpoint(sm) {
+   background: transparent;
+  }
+
+}
+
+//nav style
+
+.navbar-default .navbar-nav>li{
+  margin: 0 15px;
+
+  @include breakpoint(sm) {
+    background: transparent;
+  }
+  @include breakpoint(lg) {
+    margin: 0 30px;
+  }
+}
+
+
+.navbar-default .navbar-nav>li:last-child{
+  margin-right: 0px;
+}
+
+//base menu colors
+.navbar-default .navbar-nav li a{
+  padding: 7px 10px;
+  min-width: 100px;
+  font-weight: bold;
+  color: $black;
+  font-size: $font-size-nav;
+  text-align: center;
+}
+
+//active colors
+.navbar-default .navbar-nav li a.active{
+  background-color: $black;
+  color: $white;
+}
+
+//hovers.navbar-default .navbar-nav li a:hover
+.navbar-default .navbar-nav li a:hover
+{
+  color: $white;
+  background: $black;
+
+}
+
+//topnav
+ul.topnav{
+  text-align: right;
+  margin:7px 0 0 0;
+  line-height: 11px;
+}
+ul.topnav li{
+  border-right: 1px solid $black;
+  padding:0 10px ;
+  height:18px;
+}
+ul.topnav li:last-child{
+  border:none;
+  padding-right:0;
+}
+ul.topnav li a{
+  color: $black;
+  font-size: $font-size-small;
+}
+form.search{
+  margin-top: 50px;
+  padding-right:0;
+}
+
+.navbar-form .input-group>.form-control{
+  min-width: 200px;
+  height:33px;
+}
+
+//dropdowns
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus{
+  height:40px;
+  background: $black;
+  color:$white;
+
+}
+
+.navbar-default .navbar-nav li.dropdown a.active,
+.navbar-default .navbar-nav li.dropdown.open a.active{
+
+}
+
+.navbar-default .navbar-nav li.dropdown a.active:hover{
+  height:40px;
+  background: $black;
+  color:$white;
+}
+
+.navbar-nav>li>.dropdown-menu{
+  right:inherit;
+  left:0;
+  width:auto;
+  background: $black;
+  border-top:none;
+  left: 50%;
+  right: auto;
+  text-align: center;
+  transform: translate(-50%, 0);
+}
+.dropdown-menu:before {
+  position: absolute;
+  top: -7px;
+  left: 40%;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-left: 7px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.dropdown-menu:after {
+  position: absolute;
+  top: -6px;
+  left: 40%;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  border-left: 6px solid transparent;
+  content: '';
+}
+.navbar-nav>li>.dropdown-menu li a{
+  text-align: left;
+  color: $white;
+  font-size:16px;
+  font-weight: normal;
+}
+.navbar-nav>li>.dropdown-menu li a:hover{
+  text-align: left;
+  color: $yellow;
+}
+//sub nav
+.navbar-nav>li>.dropdown-menu li li a.child.active.level2{
+  color: $yellow;
+}
+
+//side nav
+aside .nav>li>a{
+  padding:10px 15px 10px 15px;
+  color: $gray-dark;
+  font-size: $font-size-medium;
+  font-weight: $font-weight-medium;
+  display: inline-block;
+  margin-left:0px;
+}
+aside .nav>li>a:hover,aside .nav>li>a:focus{
+  background:transparent;
+}
+
+.sidemenu.shrink{
+  top: 150px;
+  //position:fixed;
+  //position: absolute;
+}
+.sidemenu{
+  //position:fixed;
+  //position: absolute;
+  top:350px;
+  max-width:288px;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+aside .nav>li>a.sprite{
+  background-image:none;
+
+}
+aside .nav>li.active>a{
+  color:#000;
+  padding: 10px ;
+  border-left:5px solid gold;
+}
+aside .nav>li.active>span.sprite.spy{
+
+
+  width: 28px;
+  height: 30px;
+  background-position: -289px -60px;
+  background-size: 386px 278px;
+  position: absolute;
+  display: inline-flex;
+  //-webkit-transition: display 0.4s ease;
+  //transition: display 0.4s ease;
+
+  //width: 28px;
+  //height: 11px;
+  //background-position: -282px -80px;
+  //background-size: 386px 278px;
+  //display: inline-block;
+}
+
+li.sideblockheading{
+  font-size: $font-size-medium;
+  font-weight: $font-weight-bold;
+  margin: 20px 0 20px 15px;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  width: 82%;
+}
+
+ul.nav li:nth-child(5) a,
+ul.nav li:nth-child(6) a,
+ul.nav li:nth-child(7) a{
+  font-size: $font-size-small-medium;
+}
+//li.sideblockheading ~ li a{
+//  font-size: $font-size-small-medium;
+//}
+
+//
+//               multiple page navigation
+//
+ul.deals li:nth-child(5) a,
+ul.deals li:nth-child(6) a,
+ul.deals li:nth-child(7) a{
+  font-size: $font-size-medium;
+}
+.sidemenu>li.dropdown .children{
+  display:none;
+}
+.sidemenu>li.dropdown.active .children{
+  display:block;
+  margin-bottom: 30px;
+  margin-top:10px;
+}
+.sidemenu>li.dropdown.active li.child a{
+  color: $gray-dark;
+  font-size: $font-size-small-medium;
+  font-weight: $font-weight-medium;
+}
+.sidemenu>li.dropdown.active li.child.active{
+  color: $yellow;
+}
+.sidemenu>li.dropdown.active li.child a.active{
+  color:$black-strong;
+}

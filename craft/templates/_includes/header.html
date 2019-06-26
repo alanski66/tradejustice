@@ -1,0 +1,116 @@
+<header class="header-bg">
+    <nav class="navbar navbar-default  navbar-fixed-top">
+    <div class="container-xl">
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle btn-main-menu" data-toggle="collapse" >
+
+                    <span class=""></span>
+                    <span class=""></span>
+                    <span class=""></span>
+                    <span class=""></span>
+
+                </button>
+                <a class="sprite logo page-scroll" href="{{ siteUrl }}"><span></span></a>
+            </div>
+            <div class="top-right pull-right">
+                <ul class="list-inline topnav">
+                    {% cache globally %}
+                        {% set secondaryMenu = craft.entries.section('secondaryNav').hidePage('< 1') %}
+                        {% nav link in secondaryMenu %}
+                        {% if link.entryLink.first|length %}
+                        {% set slink = link.entryLink.first.uri %}
+                        {% else %}
+                        {% set slink = link.customMenuUrl %}
+                        {% endif %}
+                        <li><a href="{{ siteUrl }}{{ slink }}">{{link.title}}</a></li>
+                        {% endnav %}
+                    {% endcache %}
+
+                </ul>
+                <form class="search navbar-form text-right" role="search" action="{{siteUrl}}search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+        <div class="container wrap-collapse">
+            <div class="navbar-collapse collapse " id="menu-collapse">
+                <ul class="nav navbar-nav navbar-right">
+
+                    {% cache globally %}
+
+
+                        {% set menu = craft.entries.section('menu').hidePage('< 1') %}
+                        {% set navlink = "" %}
+
+                        {# set data toggle hover detect mobile #}
+                        {% set isMobile = craft.detect.isMobile ? '1' : '0' %}
+                        {% set dataBehav = "data-hover" %}
+                        {% if isMobile %}
+                            {% set  dataBehav = "data-toggle" %}
+                        {% endif %}
+
+                        {% nav entry in menu %}
+                            {% if entry.entryLink.first|length %}
+                            {% set navlink = entry.entryLink.first.uri %}
+                            {% else %}
+                            {% set navlink = entry.customMenuUrl %}
+                            {% endif %}
+
+                            {% if entry.level == 1 and entry.children|length %}
+                                <li class="dropdown">
+                                    <a  href="{{ siteUrl }}{{ navlink }}"  class="{{ macros.activeLinkClass(navlink, entry.level)|trim }} dropdown-toggle" role="button" {{ dataBehav }}="dropdown" data-length="{{ entry.title|length }}" aria-haspopup="true" aria-expanded="false">{{ entry.title }}<span class="caret"></span></a>
+                                    <!-- get children -->
+
+                                    <ul class="dropdown-menu " >
+                                        <!-- get children -->
+                                            {% for child in entry.getDescendants().hidePage('< 1') %}
+
+                                                {% if child.entryLink.first|length %}
+                                                {% set childlink = child.entryLink.first.uri %}
+                                                {% else %}
+                                                {% set childlink = child.customMenuUrl %}
+                                                {% endif %}
+                                            <li> <a  href="{{ siteUrl }}{{ childlink }}" class="{{ macros.isActiveChildClass(child.slug) | trim }} level{{ child.level }}">{{ child.title }}</a></li>
+
+                                            {% endfor %}
+                                    </ul>
+
+                                </li>
+                            {% elseif entry.level == 1 and not entry.hasDescendants() %}
+                             <li class="level1 no-children">
+                                 <a href="{{ siteUrl }}{{ navlink }}" class="{{ macros.isParentMenuActive(entry.slug) |trim }} level{{ entry.level }}">{{ entry.title }}</a>
+                                <ul class="dropdown-menu">
+                                    <li>Something</li>
+                                </ul>
+                             </li>
+                            {% endif %}
+                        {% endnav %}
+
+                        <li class="shrink">
+                            <form class="search navbar-form text-right" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="q">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    {% endcache %}
+                    </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+</header>

@@ -1,0 +1,28 @@
+<div class="hidden-xs col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 side-co    ">
+
+    {# set entries = craft.entries.section('pages').find() #}
+
+    {% set entry = craft.entries.section('pages').slug('about-us').first() %}
+    <div class="pside-inner">
+        <aside id="nav" class="psidemenu ">
+            <ul class="nav" data-spy="scrollspy">
+
+                {% for block in entry.contentblock %}
+                {% switch block.type %}
+
+                {% case "pageBlock" %}
+                <li>
+                    <a class="" href="{{entry.url}}#{{ block.heading|lower|replace(' ', '-') }}">{{ block.heading }}</a>
+                </li>
+
+                {% default %}
+
+
+                {% endswitch %}
+                {% endfor %}
+                <li><a href="our-members">Our members</a></li>
+            </ul>
+        </aside>
+    </div>
+
+</div>

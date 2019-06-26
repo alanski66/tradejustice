@@ -1,0 +1,59 @@
+{% set entries = craft.entries.section('blog').order('sticky desc').find() %}
+
+{% for entry in entry.addContent %}
+
+{% if entry.resourceImage |length %}
+{% set image = entry.resourceImage.first() %}
+{% elseif entry.leadImage.first() %}
+{% set image = entry.leadImage.first() %}
+{% endif %}
+
+
+<tr>
+    <td bgcolor="#ffffff" dir="ltr" align="center" valign="top" width="100%" style="padding: 10px;">
+        <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody><tr>
+                <!-- Column : BEGIN -->
+                <td width="33.33%" class="stack-column-center" valign="top">
+                    <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody><tr>
+                            <td dir="ltr" valign="top" style="padding: 0 10px;">
+                                <a href="{{entry.url}}">
+                                <img src="{{ image.url }}" width="170" height="auto" alt="alt_text" border="0" class="center-on-narrow" style="height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody></table>
+                </td>
+                <!-- Column : END -->
+                <!-- Column : BEGIN -->
+                <td width="66.66%" class="stack-column-center" valign="top">
+                    <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody><tr>
+                            <td dir="ltr" valign="top" style="font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding: 10px; text-align: left;" class="center-on-narrow">
+                                <strong style="color:#111111;">{{entry.title}}</strong>
+                                <br><br>
+                                {{ entry.ShortDescription}}
+                                <br><br>
+                                <!-- Button : Begin -->
+                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="center-on-narrow" style="float:left;">
+                                    <tbody><tr>
+                                        <td style="border-radius: 3px; background: #3C3C3B; text-align: center;" class="button-td">
+                                            <a href="{{entry.url}}" style="background: #3C3C3B; border: 5px solid #3C3C3B; font-family: sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">
+                                                <span style="color:#ffffff;" class="button-link">&nbsp;&nbsp;&nbsp;&nbsp;Read more&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody></table>
+                                <!-- Button : END -->
+                            </td>
+                        </tr>
+                        </tbody></table>
+                </td>
+                <!-- Column : END -->
+            </tr>
+            </tbody></table>
+        <hr>
+    </td>
+</tr>
+{% endfor %}

@@ -1,0 +1,58 @@
+{#
+# News index template
+# -------------------
+#
+# This template is loaded whenever http://example.com/news is
+# requested, because it is located at news/index.html in your
+# craft/templates/ folder.
+#
+# See this page for more details on how Craft routes requests:
+# http://craftcms.com/docs/routing
+#}
+
+{% extends "_layouts/site" %}
+
+{% set entries = craft.entries.section('tradeDeals').hidePage('< 1').find()  %}
+
+{% block content %}
+
+<div class="container-xl dark-bg ">
+    <div class="container ">
+        <section class="dark-title">
+            <div class="col-xs-8 col-sm-12 col-md-12">
+                <h1 class="">Trade Deals</h1>
+            </div>
+            <div class="hide col-xs-8 col-sm-4 col-md-4">
+                <div class="time"><span class="glyphicon glyphicon-time"></span> READING TIME 15 mins</div>
+            </div>
+        </section>
+    </div>
+</div>
+{% for entry in entries | batch(2) %}
+
+
+<div class="container-xl {% if loop.first %}first {% endif %}{% if loop.index is divisibleby(2) %}even{% else %}gray-bg-light{% endif %}">
+    <div class="container ">
+        <section class="main row gutter-85 land">
+
+            {% for column in entry %}
+            <div class="col-xxs-16 col-xs-8 col-sm-8">
+                {% for image in column.leadImage %}
+                {% set imageTransform = {
+                width: 527,
+                height: 296,
+                mode: 'crop'
+                } %}
+                <a href="{{column.url}}"><img class="img-responsive" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}"></a>
+                {% endfor %}
+
+                <h2><a href="{{column.url}}">{{ column.title }}</a></h2>
+                <p>{{ column.ShortDescription }} <a href="{{column.url}}"><span class="isprite icon-chev-right-dk"></span></a></p>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

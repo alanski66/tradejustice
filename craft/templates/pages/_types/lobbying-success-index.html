@@ -1,0 +1,25 @@
+
+            {% set entries = craft.entries.section('lobbyingSuccesses').order('sticky desc').find() %}
+
+            {% for entry in entries %}
+
+
+            {% set link = entry.url %}
+            {% set media = entry.leadImage.first() %}
+
+
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <a href="{{ entry.url }}" class="">
+                            <img class="media-object" src="{{ media.getUrl('inlineWithText') }}" alt="...">
+                        </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ entry.title }}</h4>
+                    {{ entry.body }}
+
+                </div>
+            </div>
+            <hr>
+            {% endfor %}

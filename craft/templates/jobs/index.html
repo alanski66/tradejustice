@@ -1,0 +1,64 @@
+
+
+
+
+{% extends "_layouts/site" %}
+{% set entries = craft.entries({
+section: 'jobs'
+}).order('postDate desc') %}
+
+{% block content %}
+<div class="container-xl dark-bg ">
+    <div class="container resources ">
+        <section class="dark-title">
+            <div class="col-xs-16  col-sm-12 col-md-12">
+                <h1 class=""><span class="report-category">Jobs</span> <span class="title-shrunk">Jobs</span></h1>
+
+            </div>
+
+        </section>
+    </div>
+</div>
+<div class="container site page list-emergency">
+    <section class="main">
+        <div class="col-md-10 col-md-offset-0 main">
+
+
+            
+{% if entries | length %}
+
+
+                {% for entry in entries %}
+
+
+
+                <article>
+                    <h2><a href="{{entry.url}}"> {{entry.title}}</a></h2>
+
+
+
+
+
+                    <div class="short-desc">{{ entry.jobIntro }}</div>
+
+                    <a href="{{entry.url}}">read more</a>
+                </article>
+                {% endfor %}
+
+            {% else %}
+            
+<p>Currently we have no vacancies. Please keep in touch via twitter for latest updates.</p>
+            {% endif %}
+        </div>
+        <div class="hidden-xs col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 side-co    ">
+
+
+            <div class="pside-inner">
+
+            </div>
+
+        </div>
+
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,166 @@
+{#
+ # News entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a News entry’s URL is
+ # requested. That’s because the News section’s Template setting is
+ # set to “news/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requested News entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/site" %}
+
+
+{% set q = craft.request.getParam('q')  %}
+
+
+{% if q | length %}
+    {% set results = craft.entries({
+        limit:500,
+        search: {
+            query: q,
+            subLeft: true,
+            subRight: true
+        }
+    })
+%}
+{% else %}
+    {% set results = craft.entries({
+        limit:500,
+        order:['title asc']
+    })
+    %}
+{% endif %}
+
+{%  paginate results.limit(10) as pageInfo, pageEntries %}
+
+{% block content %}
+
+<div class="container-xl dark-bg">
+    <div class="container ">
+    <section class="dark-title">
+        <div class="col-xs-8 col-sm-12 col-md-12">
+            <h1 class="">Search</h1>
+        </div>
+        <div class="col-xs-8 col-sm-4 col-md-4">
+        <div class="follow-us">  <a class="" href="https://twitter.com/intent/follow?&ref_src=twsrc%5Etfw&region=follow_link&screen_name=tradejusticemov&tw_p=followbutton"><span class="sprite icon-twitter"></span> Follow us</a></div>
+            </div>
+    </section>
+    </div>
+
+
+
+</div>
+
+
+<div class="container main-outer">
+
+
+    <section class="main">
+
+
+        <div class="col-sm-10 col-md-10 main-col pages">
+            {% if (results.count()) <= '0' %}
+            <h2>No results found for: {% if q %} "{{ q|capitalize }}"
+                {% else %}
+
+                {% endif %}</h2>
+
+            {% else %}
+
+            <h2>Search results for:
+
+                {% if q %} "{{ q|capitalize }}" {% endif %}
+            </h2>
+            {% endif %}
+
+
+            <form class="searchpage" role="search" action="{{ siteUrl('/search') }}">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{ craft.request.getParam('q') }}">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+
+
+            {% for entry in pageEntries %}
+            <article class="dir-entry">
+                <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+
+                {% if entry.ShortDescription |length %}
+                <p>{{ entry.ShortDescription }}</p>
+                {% else %}
+                {{ entry.body|slice(0, 190)|striptags }}<br>
+
+                {% endif %}
+
+                {% if entry.category.first() %}
+                <span class="label label-default">{{ entry.category.first().title }}</span>
+                {% else %}
+                {% set handle = entry.section.handle | title %}
+                {% set handle = handle | replace("Tradedeals","Trade Deals", handle) %}
+                {% set handle = handle | replace("Tradeissues","Trade Issues", handle) %}
+                <span class="label label-default">{{ handle }}</span>
+                {% endif %}
+                <hr>
+            </article>
+            {% endfor %}
+
+            <div class="res">
+                <p>Current results:({{ pageInfo.total }})</p>
+
+                <ul class="pagination pagination-sm">
+                    <li><a class="first" href="{{ pageInfo.firstUrl }}">First Page</a></li>
+                    {% if pageInfo.prevUrl %}
+                    <li><a class="prev" href="{{ pageInfo.prevUrl }}"> < </a></li>
+                    {% endif %}
+
+
+                    {% for page, url in pageInfo.getPrevUrls(5) %}
+                    <li><a href="{{ url }}">{{ page }}</a></li>
+                    {% endfor %}
+
+                    <li><span class="current">{{ pageInfo.currentPage }}</span></li>
+
+                    {% for page, url in pageInfo.getNextUrls(5) %}
+                    <li><a href="{{ url }}">{{ page }}</a></li>
+                    {% endfor %}
+
+                    {% if pageInfo.nextUrl %}
+                    <li><a class="next" href="{{ pageInfo.nextUrl }}"> > </a></li>
+                    {% endif %}
+                    <li><a  class="last"    href="{{ pageInfo.lastUrl }}">Last Page</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="hide hidden-xs col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 side-co    ">
+
+            {% set entries = craft.entries.section('pages').find() %}
+            <div class="pside-inner">
+                <aside id="nav" class="psidemenu ">
+
+
+                <ul class="nav" data-spy="scrollspy">
+                {% for entry in entries %}
+                <li  {{ macros.isMenuActive(entry.slug)|trim }}><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+                {% endfor %}
+            </ul>
+                    </aside>
+                </div>
+
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

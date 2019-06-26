@@ -1,0 +1,113 @@
+/* Hero styles */
+.hero	{
+	height: 600px;
+	background: url(../images/bg-hero.jpg) center center no-repeat;
+	background-size: cover;
+	text-align: center;
+	padding: 30px;
+}
+.hero h1	{
+	font-size: 22px;
+	font-family: "effra", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFF;
+}
+
+.box-dark {
+	background-color: rgba(0,0,0, 0.5);
+	top: 50%;
+    left: 50%;
+    float: left;
+    position: relative;
+    width: 400px;
+    height: 100px;
+    margin: -50px 0 0 -200px;
+}
+.arrow-down {
+  background-image: url(../images/sprite.svg);
+	background-position: -223px -54px;
+	width: 95px;
+    height: 52px;
+    display: block !important;
+    top: 90%;
+    left: 50%;
+    position: relative;
+    margin: -36px 0 0 -47px;
+}
+.arrow-down:hover {
+	background-position: -223px 0;
+}
+.arrow-down span {
+	display: none;
+}
+
+.hero-media	{
+  //height: 605px;
+  background-size: cover;
+  text-align: center;
+  padding: 0px;
+}
+header.video{
+  background: $black;
+}
+//video
+#video {
+  position: relative;
+  //background: $black;
+  max-width: 1140px;
+  margin: 0px auto;
+}
+
+#video img,
+#video iframe { display: block; }
+#video img{
+  overflow:hidden;
+  margin:0 auto;
+}
+#play {
+
+  /* background-image: url(../images/sprite.svg); */
+  position: absolute;
+  width: 125px;
+  height: 125px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+  /* background-size: 320px 470px, cover; */
+  z-index: 9999;
+  background-position: -62px -342px;
+  background-repeat: no-repeat;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+#play:hover {
+  //background-color: rgba(0,0,0,0.2) !important;
+  background-position: -187px -343px;
+}
+
+.videowrapper {
+  float: none;
+  clear: both;
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 0px;
+  height: 0;
+}
+.videowrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-height:641.25px;
+}
+//home page
+.overwrap{
+  position: relative;
+}

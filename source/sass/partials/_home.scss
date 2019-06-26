@@ -1,0 +1,18 @@
+
+.blocks img{
+  margin-bottom:20px;
+}
+.blocks .sameHeight p{
+//  min-height:120px
+}
+.blocks .sameHeight h4{
+  position: absolute;
+  top:100%;
+  font-family: $font-family-base;
+  color: $red-dark;
+  font-size:22px;
+}
+
+a span.sprite.icon-help:hover{
+  background-position: -425px -10px;
+}

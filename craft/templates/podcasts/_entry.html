@@ -1,0 +1,74 @@
+{#
+ # News entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a News entry’s URL is
+ # requested. That’s because the News section’s Template setting is
+ # set to “news/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requested News entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/site" %}
+{% block content %}
+
+<div class="container-xl dark-bg">
+    <div class="container ">
+        <section class="dark-title">
+            <div class="col-xs-16 col-sm-12 col-md-12">
+                <h1 class="">{{ entry.title }}</h1>
+            </div>
+            <div class="col-xs-16 col-sm-4 col-md-4">
+
+                <div class="hide time">
+                    Posted on {{ entry.postDate.format('F d, Y') }}
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<div class="container ">
+    <section class="main">
+        <div class="col-sm-10 col-md-10 main-col">
+            <article>
+
+                {{ entry.embedCode | raw }}
+
+            </article>
+
+        </div>
+
+        <div class="hidden-xs col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-2 side-col">
+
+            <div class="pside-inner">
+                <aside id="nav" class="psidemenu ">
+                    <h3>Podcasts</h3>
+
+
+
+                    <ul class="nav" data-spy="scrollspy">
+                        {% set entries = craft.entries({
+                        section: 'podcasts'
+                        }).order('sticky desc', 'postDate desc') %}
+                        {% for entry in entries %}
+                        <li {{ macros.isMenuActive(entry.slug)|trim }}>
+                            <a href="{{ entry.url }}">{{entry.title}}</a></li>
+                        {% endfor %}
+                    </ul>
+
+
+                </aside>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

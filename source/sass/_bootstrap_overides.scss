@@ -7,3 +7,59 @@ $grid-columns:              16 !default;
 //** Padding between columns. Gets divided in half for the left and right.
 $grid-gutter-width:         30px !default;
 
+
+@media (min-width: 641px) {
+  .gutter-85.row {
+    margin-right: -15px;
+    margin-left: -15px; } }
+
+@media (min-width: 768px) {
+  .gutter-85.row {
+    margin-right: -40px;
+    margin-left: -40px; } }
+
+@media (min-width: 641px) {
+  .gutter-85 > [class^="col-"], .gutter-85 > [class^=" col-"] {
+    padding-right: -15px;
+    padding-left: -15px; } }
+
+@media (min-width: 768px) {
+  .gutter-85 > [class^="col-"], .gutter-85 > [class^=" col-"] {
+    padding-right: 40px;
+    padding-left: 40px; } }
+
+.gutter-60.row {
+  margin-right: -30px;
+  margin-left: -30px; }
+
+.gutter-60 > [class^="col-"], .gutter-60 > [class^=" col-"] {
+  padding-right: 30px;
+  padding-left: 30px; }
+
+.gutter-20.row {
+  margin-right: -10px;
+  margin-left: -10px; }
+
+.gutter-20 > [class^="col-"], .gutter-20 > [class^=" col-"] {
+  padding-right: 10px;
+  padding-left: 10px; }
+
+.gutter-10.row {
+  margin-right: -5px;
+  margin-left: -5px; }
+
+.gutter-10 > [class^="col-"], .gutter-10 > [class^=" col-"] {
+  padding-right: 5px;
+  padding-left: 5px; }
+
+.gutter-0.row {
+  margin-right: 0;
+  margin-left: 0; }
+
+.gutter-0 > [class^="col-"], .gutter-0 > [class^=" col-"] {
+  padding-right: 0;
+  padding-left: 0; }
+
+.col-xxs {
+  width: 100% !important; }
+

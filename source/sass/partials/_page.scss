@@ -14,10 +14,10 @@ body {
 
 body.homepage{
   @include breakpoint(xxxs) {
-    padding-top:200px;
+    padding-top:150px;
   }
   @include breakpoint(sm) {
-    padding-top:200px;
+    padding-top:150px;
   }
 }
 body.pages{
@@ -43,6 +43,8 @@ h2#subtitle{
   margin: 30px 0 20px 0;
 }
 ul{font-size: $font-size-medium}
+
+
 //page header and title
 .dark-bg {
   background: $black;
@@ -56,7 +58,7 @@ ul{font-size: $font-size-medium}
   }
   @include breakpoint(sm) {
     height:120px;
-    top:200px;
+    top:150px;
   }
 }
 
@@ -70,7 +72,7 @@ ul{font-size: $font-size-medium}
     top: 60px;
   }
   @include breakpoint(sm) {
-    top:80px;
+    top:110px;
   }
 }
 //.dark-bg.shrink h1{
@@ -130,7 +132,7 @@ section.main.showfeatured{
     //margin-top: -75px;
   }
   @include breakpoint(sm) {
-    padding-top:270px;
+    padding-top:230px;
     margin-top: 0px;
   }
 
@@ -142,7 +144,7 @@ section.main.showfeatured.shrink{
     //margin-top: -75px;
   }
   @include breakpoint(sm) {
-    padding-top:95px;
+    padding-top:145px;
     margin-top: 0px;
   }
 }
@@ -393,7 +395,7 @@ section.content h3{
 }
 
 .main .label-default a{
-  color: $label-tag-color;
+  //color: $label-tag-color;
 }
 
 
@@ -404,7 +406,7 @@ section.content h3{
   position: fixed;
   background: #5fc786;
   background: $gray-ex-light;
-  top: 320px;
+  top: 270px;
   z-index: 9999999;
   width: 100%;
   -webkit-transition: top 0.9s ease;
@@ -420,7 +422,7 @@ section.content h3{
   }
 
   @include breakpoint(sm){
-    top: 320px;
+    top: 270px;
     //height: 111px;
     //padding-top: 37px;
   }
@@ -476,7 +478,7 @@ section.content h3{
     height:60px;
   }
   @include breakpoint(sm){
-    top: 140px;
+    top: 170px;
     height:60px;
     //
   }
@@ -519,7 +521,7 @@ section.content h3{
     font-size: $font-size-medium;
   }
   @include breakpoint(sm){
-    font-size: $font-size-medium-large;
+    font-size: $font-size-medium;
   }
   @include breakpoint(md){
 

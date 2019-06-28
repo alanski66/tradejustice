@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ craft.locale }}">
@@ -45,17 +43,19 @@
     </head>
 
 
-
-
     <body id="page-top"  {% if bodyClass is defined %}class="{{bodyClass}}"{% endif %} data-spy="scroll" data-target="#nav" data-offset="280">
+
     <div class="mainwrapper">
-    {% include '_includes/header.html' %}
+    {% include '_includes/header' %}
+
     {% block body %}
 
     {% endblock %}
     {% block foot %}
-    {% include '_includes/footer.html' %}
-    {% include '_includes/footer-js.html' %}
+        {{ baseUrl }}
+    {% include '_includes/footer' %}
+
+    {% include '_includes/footer-js' %}
     {% endblock %}
     </div>
     </body>

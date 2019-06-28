@@ -45,8 +45,8 @@ display: inline-block;
   background-size: 450px;
 }
 
-.icon-twitter {
-  @include breakpoint(xxxs){
+@media (min-width: 320px) {
+  .icon-twitter {
     margin-top: 8px;
     width: 40px;
     height: 35px;
@@ -57,20 +57,10 @@ display: inline-block;
     margin-right: 15px;
     float: left;
     background-size: 323px 335px;
-    margin-top:13px;
-  }
+    margin-top: 13px; } }
 
-  @include breakpoint(sm){
-    //width: 40px;
-    //height: 35px;
-    //background-position: 0px -161px;
-    //padding: 0px;
-    //font-size: 14px;
-    //display: inline-block;
-    //margin-right: 15px;
-    //float: left;
-    //background-size: 323px 335px;
-    //margin-top: 8px;
+@media (min-width: 768px) {
+  .icon-twitter {
     width: 67px;
     height: 67px;
     background-position: -12px -137px;
@@ -80,12 +70,92 @@ display: inline-block;
     margin-right: 27px;
     float: left;
     background-size: 600px 300px;
-    margin-top:0px;
-  }
-  @include breakpoint(md){
-    margin-right: 27px;
-  }
-}
+    margin-top: 0px; } }
+
+@media (min-width: 992px) {
+  .icon-twitter {
+    margin-right: 27px; } }
+
+.icon-chev-right {
+  width: 17px;
+  height: 29px;
+  background-position: 0 -6px;
+  padding: 0;
+  background-color: inherit;
+  margin: 0 0 -9px 10px;
+  border-radius: inherit; }
+
+.icon-chev-right-dk {
+  width: 17px;
+  height: 29px;
+  background-position: 0 -36px;
+  padding: 0;
+  background-color: inherit;
+  margin: 0 0 -11px 7px; }
+
+a > .icon-chev-right-dk:hover {
+  background-position: 0 -3px; }
+
+.shrink .icon-report {
+  width: 35px;
+  height: 35px;
+  background-position: 2px -67px;
+  padding: 0px;
+  font-size: 14px;
+  display: flex;
+  margin: 0 10px 0 0;
+  background-size: 200px; }
+
+.icon-external-link {
+  width: 25px;
+  height: 25px;
+  background-position: -418px -47px;
+  padding: 7px 0 0 20px;
+  margin: 0px 0px 0 10px; }
+
+section.main .link-resource a:hover,
+section.main .link-resource a:hover > .icon-external-link {
+  color: #F4D233;
+  width: 25px;
+  height: 25px;
+  background-position: -418px -76px;
+  padding: 7px 0 0 0px; }
+
+.icon-subscribe {
+  width: 45px;
+  height: 45px;
+  background-position: -75px -4px;
+  padding: 0px;
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 27px;
+  float: left;
+  background-color: transparent;
+  margin-top: 15px; }
+
+.shrink .icon-twitter {
+  width: 40px;
+  height: 35px;
+  background-position: 0px -161px;
+  padding: 0px;
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 15px;
+  float: left;
+  background-size: 323px 335px;
+  margin-top: 8px; }
+
+section.main .icon-twitter {
+  width: 54px;
+  height: 35px;
+  background-position: 0px -162px;
+  padding: 0px;
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 0px;
+  float: left;
+  background-size: 323px 335px;
+  margin-top: 0px; }
 
 //.icon-twitter{
 //  width: 46px;

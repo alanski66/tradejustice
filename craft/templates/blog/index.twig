@@ -59,10 +59,17 @@
 
             <article>
                 <h2><a href="{{entry.url}}"> {{entry.title}}</a></h2>
+                {% set thumb = {
+                mode: 'crop',
+                width: 700,
+                height: 400,
+                quality: 85,
+                position: 'top-center'
+                } %}
                 {% set image = entry.leadImage[0] ?? null %}
 
                 {% if image %}
-                <a href="{{entry.url}}"><img class="img-responsive "src="{{ image.getUrl('tablet') }}" ></a>
+                <a href="{{entry.url}}"><img class="img-responsive "src="{{ image.getUrl(thumb) }}" ></a>
                 {% endif %}
                 <div class="short-desc">{{ entry.ShortDescription }}</div>
 

@@ -1,57 +1,137 @@
 /* Hero styles */
-.hero	{
-	height: 600px;
-	background: url(../images/bg-hero.jpg) center center no-repeat;
-	background-size: cover;
-	text-align: center;
-	padding: 30px;
-}
-.hero h1	{
-	font-size: 22px;
-	font-family: "effra", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    color: #FFF;
-}
-
-.box-dark {
-	background-color: rgba(0,0,0, 0.5);
-	top: 50%;
-    left: 50%;
-    float: left;
-    position: relative;
-    width: 400px;
-    height: 100px;
-    margin: -50px 0 0 -200px;
-}
-.arrow-down {
-  background-image: url(../images/sprite.svg);
-	background-position: -223px -54px;
-	width: 95px;
-    height: 52px;
-    display: block !important;
-    top: 90%;
-    left: 50%;
-    position: relative;
-    margin: -36px 0 0 -47px;
-}
-.arrow-down:hover {
-	background-position: -223px 0;
-}
-.arrow-down span {
-	display: none;
-}
-
-.hero-media	{
-  //height: 605px;
-  background-size: cover;
-  text-align: center;
+.hero {
+  background: #3C3C3B url(../img/map.png) center center no-repeat;
   padding: 0px;
+  width: auto;
+  height: auto; }
+@media (min-width: 320px) {
+  .hero {
+    margin-top: -140px;
+    height: 209px;
+    background-size: 1500px 209px;
+    background-position-x: 50px; } }
+@media (min-width: 768px) {
+  .hero {
+    margin-top: 0px;
+    height: 300px;
+    background-size: 2195px 300px;
+    background-position-x: 0px; } }
+@media (min-width: 992px) {
+  .hero {
+    height: 410px;
+    background-size: 3000px 410px; } }
+
+.hero h1 {
+  font-weight: 400;
+  font-style: normal;
+  color: #FFF; }
+@media (min-width: 320px) {
+  .hero h1 {
+    font-size: 20px; } }
+@media (min-width: 768px) {
+  .hero h1 {
+    font-size: 30px; } }
+@media (min-width: 992px) {
+  .hero h1 {
+    font-size: 40px; } }
+@media (min-width: 1400px) {
+  .hero h1 {
+    font-size: 40px; } }
+
+@media (min-width: 320px) {
+  .hero .home-over-title {
+    margin-top: 15px; } }
+
+@media (min-width: 768px) {
+  .hero .home-over-title {
+    margin-top: 60px;
+    margin-bottom: 30px; } }
+
+@media (min-width: 992px) {
+  .hero .home-over-title {
+    margin-top: 100px;
+    margin-bottom: 30px; } }
+
+@media (min-width: 320px) {
+  .latest {
+    font-size: 20px; } }
+
+@media (min-width: 768px) {
+  .latest {
+    font-size: 20px; } }
+
+@media (min-width: 992px) {
+  .latest {
+    font-size: 30px; } }
+
+@media (min-width: 1200px) {
+  .latest {
+    font-size: 40px; } }
+
+@media (min-width: 320px) {
+  .tweet {
+    font-size: 16px; } }
+
+@media (min-width: 768px) {
+  .tweet {
+    font-size: 20px; } }
+
+@media (min-width: 992px) {
+  .tweet {
+    font-size: 20px; } }
+
+.tweet a {
+  color: #e8c10c;
 }
-header.video{
-  background: $black;
-}
+.hero section h4 {
+  color: #F4D233;
+  margin: 10px 0; }
+@media (min-width: 320px) {
+  .hero section h4 {
+    font-size: 20px; } }
+@media (min-width: 768px) {
+  .hero section h4 {
+    font-size: 20px; } }
+@media (min-width: 992px) {
+  .hero section h4 {
+    font-size: 20px; } }
+@media (min-width: 1400px) {
+  .hero section h4 {
+    font-size: 40px; } }
+
+.hero section a {
+  color: #FFFFFF;
+  text-decoration: none; }
+
+.hero section a span.icon-chev-right:hover,
+.hero section a:hover {
+  color: #F4D233; }
+
+// twitter feed
+
+.tweet-bg {
+  background-color: #EAEAEA;
+  margin-bottom: 0px;
+  height: auto;
+  padding: 26px 0 15px;
+  min-height: 115px; }
+
+.tweet-holder {
+  display: table;
+  table-layout: fixed; }
+
+.tweet {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left; }
+
+//end
+
+
 //video
+header.video{
+background: $black;
+}
 #video {
   position: relative;
   //background: $black;

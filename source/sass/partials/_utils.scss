@@ -37,25 +37,31 @@
     //height:106px;
     //background-size: 6  00px 300px;
     //margin: 29px 0 0 0px;
-    width: 320px;
-    height: 102px;
-    background-size: 500px 250px;
-    margin: 38px 0 0 0px;
+
+    width: 252px;
+    height: 83px;
+    background-size: 395px 198px;
+    margin: 25px 0 0 0px;
     background-position: 0 17px;
     position: absolute;
   }
   @include breakpoint(md) {
-    width:405px;
-    height:95px;
-    background-size: 600px 300px;
-    margin: 49px 0 0 0px;
+    //width:405px;
+    //height:95px;
+    //background-size: 600px 300px;
+    //margin: 25px 0 0 0px;
+    //background-position: 0 0;
+    width: 285px;
+    height: 75px;
+    background-size: 448px 230px;
+    margin: 37px 0 0 0px;
     background-position: 0 0;
   }
   @include breakpoint(lg) {
-    width:405px;
+    width:325px;
     height:95px;
-    background-size: 600px 300px;
-    margin: 49px 0 0 0px;
+    background-size: 500px 273px;
+    margin: 25px 0 0 0px;
   }
 
 }
@@ -124,6 +130,10 @@
 }
 .pagination>li>a.last{
   border-right:0
+}
+
+.main.row.gutter-85.land{
+  padding-top:50px;
 }
 
 span.yellowline{

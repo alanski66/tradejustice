@@ -7970,6 +7970,14 @@ h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
 h1 {
   font-size: 42px; }
 
+@media (min-width: 320px) {
+  h2 {
+    font-size: 23px; } }
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 30px; } }
+
 article h1, label {
   color: #3C3C3B; }
 

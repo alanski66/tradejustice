@@ -9,10 +9,10 @@ if (file_exists('../.env.php'))
 if (!defined('CRAFT_ENVIRONMENT'))
 	define('CRAFT_ENVIRONMENT', getenv('CRAFTENV_CRAFT_ENVIRONMENT'));
 
-if (CRAFT_ENVIRONMENT == "local"){
-	$_SERVER['PHP_SELF'] = 'tjm.test';
-	$_SERVER['SCRIPT_NAME'] = 'tjm.test';
-}
+//if (CRAFT_ENVIRONMENT == "local"){
+//	$_SERVER['PHP_SELF'] = 'tjm.test';
+//	$_SERVER['SCRIPT_NAME'] = 'tjm.test';
+//}
 
 // Path to your craft/ folder
 $craftPath = '../craft';

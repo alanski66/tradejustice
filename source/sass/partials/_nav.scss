@@ -1,5 +1,77 @@
 /* nav styles */
 
+
+/* ani burger */
+.navbar-toggle {
+  margin: 18px 15px 0 0;
+  background-color: transparent;
+  border: none;
+  width: 35px;
+  height: 40px;
+  position: relative;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer; }
+
+.navbar-toggle > span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #3C3C3B;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  transition: .25s ease-in-out; }
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background: transparent; }
+
+/* ani burger */
+.navbar-toggle span:nth-child(1) {
+  top: 0px; }
+
+.navbar-toggle span:nth-child(2), .navbar-toggle span:nth-child(3) {
+  top: 10px; }
+
+.navbar-toggle span:nth-child(4) {
+  top: 20px; }
+
+.navbar-toggle.open span:nth-child(1) {
+  top: 10px;
+  width: 0%;
+  left: 50%; }
+
+.navbar-toggle.open span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg); }
+
+.navbar-toggle.open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg); }
+
+.navbar-toggle.open span:nth-child(4) {
+  top: 10px;
+  width: 0%;
+  left: 50%; }
+/* end ani burger */
+.wrap-collapse {
+
+  @include breakpoint(xxxs) {
+    padding: 0;
+    margin-top: 2px;
+    background: #3C3C3B;
+    opacity: 0.95;
+  }
+  @include breakpoint(sm) {
+    background: transparent;
+  }
+
+
+}
 .navb{
   @include breakpoint(sm) {
     margin-top:25px;
@@ -15,7 +87,7 @@
 
 .navbar-default .navbar-nav>li{
   margin-left: 25px;
-  height:40px;
+  //height:40px;
 }
 .navbar-default {
     background-color: $yellow;
@@ -74,7 +146,7 @@
 
 .navbar-default.shrink .nav.navbar-nav{
   //position: absolute;
-  margin-top: -30px;
+  margin-top: 2px;
   top: 20px;
 }
 
@@ -122,6 +194,10 @@ li.shrink{
 
 // top menu right
 @media (max-width: 767px) {
+
+  .navbar.navbar-default.shrink  .navbar-collapse{
+    margin-top:0;
+  }
   .top-right.pull-right{
     display:none;
   }
@@ -134,7 +210,11 @@ li.shrink{
 // end top menu right
 
 .navbar-default .navbar-collapse{
-  margin-top:76px;
+
+  max-height: 100%;
+  @include breakpoint(sm) {
+    margin-top: 76px;
+  }
 }
 .navbar-default .navbar-collapse, .navbar-default .navbar-form{
 
@@ -147,10 +227,15 @@ li.shrink{
 //nav style
 
 .navbar-default .navbar-nav>li{
-  margin: 0 15px;
+
 
   @include breakpoint(sm) {
     background: transparent;
+    margin: 0 3px;
+  }
+  @include breakpoint(md) {
+    background: transparent;
+    margin: 0 10px;
   }
   @include breakpoint(lg) {
     margin: 0 30px;
@@ -170,6 +255,24 @@ li.shrink{
   color: $black;
   font-size: $font-size-nav;
   text-align: center;
+
+  @include breakpoint(xxxs) {
+    color:$white;
+    text-align: left;
+  }
+
+  @include breakpoint(sm) {
+    font-size: 16px; color: $black;
+  }
+  @include breakpoint(md) {
+    font-size: $font-size-nav;
+  }
+}
+
+.navbar-default .navbar-nav li{
+  @include breakpoint(sm) {
+
+  }
 }
 
 //active colors
@@ -236,6 +339,23 @@ form.search button{
 
 
 //dropdowns
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #fff; }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #333;
+    background-color: transparent; }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #555;
+    background-color: #e7e7e7; }
+  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #ccc;
+    background-color: transparent; }
+  .navbar-default .navbar-nav li.dropdown.open > .dropdown-menu{
+    margin-top:10px;
+  }
+}
 .navbar-default .navbar-nav li.dropdown.open > .dropdown-menu {
   display: block; }
 
@@ -647,38 +767,38 @@ li.sideblockheading.second span {
   position: absolute; }
 
 
-//moble nabvar toggle
-.navbar-toggle span:nth-child(1) {
-  top: 0px;
-}
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
-  background: transparent;
-}
-.navbar-toggle  {
-  margin: 7px 30px 0 0;
-  background: transparent;
-  border: none;
-  width: 35px;
-  height: 40px;
-  //padding:9px 10px;
-  position: relative;
-  float: right;
-  transform: rotate(0deg);
-  transition: .5s ease-in-out;
-  cursor: pointer;
-  right:0;
-  left:initial;
-}
-.navbar-toggle > span {
-  display: block;
-  height: 4px;
-  width: 45px;
-  background: #3C3C3B;
-  border-radius: 9px;
-  opacity: 1;
-  left: 0;
-  margin-bottom: 8px;
-  transform: rotate(0deg);
-  transition: .25s ease-in-out;
-}
-
+////moble nabvar toggle
+//.navbar-toggle span:nth-child(1) {
+//  top: 0px;
+//}
+//.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+//  background: transparent;
+//}
+//.navbar-toggle  {
+//  margin: 7px 30px 0 0;
+//  background: transparent;
+//  border: none;
+//  width: 35px;
+//  height: 40px;
+//  //padding:9px 10px;
+//  position: relative;
+//  float: right;
+//  transform: rotate(0deg);
+//  transition: .5s ease-in-out;
+//  cursor: pointer;
+//  right:0;
+//  left:initial;
+//}
+//.navbar-toggle > span {
+//  display: block;
+//  height: 4px;
+//  width: 45px;
+//  background: #3C3C3B;
+//  border-radius: 9px;
+//  opacity: 1;
+//  left: 0;
+//  margin-bottom: 8px;
+//  transform: rotate(0deg);
+//  transition: .25s ease-in-out;
+//}
+//

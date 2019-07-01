@@ -6898,7 +6898,8 @@ li.shrink {
   @media (min-width: 768px) {
     .navbar-default .navbar-nav li a {
       font-size: 16px;
-      color: #3C3C3B; } }
+      color: #3C3C3B;
+      text-align: right; } }
   @media (min-width: 992px) {
     .navbar-default .navbar-nav li a {
       font-size: 18px; } }

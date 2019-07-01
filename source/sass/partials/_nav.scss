@@ -263,7 +263,7 @@ li.shrink{
 
   @include breakpoint(sm) {
     font-size: 16px; color: $black;
-    text-align: right;
+    text-align: center;
   }
   @include breakpoint(md) {
     font-size: $font-size-nav;

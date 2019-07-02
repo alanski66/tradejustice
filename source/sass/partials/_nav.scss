@@ -69,8 +69,13 @@
   @include breakpoint(sm) {
     background: transparent;
   }
+}
 
-
+@media (min-width: 768px) {
+  .navbar-right {
+    float: right !important;
+    margin-right: 0px;
+  }
 }
 .navb{
   @include breakpoint(sm) {

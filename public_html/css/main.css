@@ -6770,6 +6770,11 @@ a span.sprite.icon-help:hover {
     background: transparent; } }
 
 @media (min-width: 768px) {
+  .navbar-right {
+    float: right !important;
+    margin-right: 0px; } }
+
+@media (min-width: 768px) {
   .navb {
     margin-top: 25px; } }
 

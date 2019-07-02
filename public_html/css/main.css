@@ -6699,6 +6699,9 @@ header.video {
 a span.sprite.icon-help:hover {
   background-position: -425px -10px; }
 
+.yellow {
+  color: #F4D233; }
+
 /* nav styles */
 /* ani burger */
 .navbar-toggle {

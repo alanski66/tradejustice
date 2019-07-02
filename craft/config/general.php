@@ -48,17 +48,12 @@ return array(
     ),
 
 
-    'staging.tjm.org.uk' => array(
+    'tjm.stagingbox.co.uk' => array(
         'devMode' => false,
-        'environmentVariables' => array(
-            'basePath' => '/home/tjmorg/staging/public_html/',
-            'baseUrl'  => 'http://staging.tjm.org.uk/public_html/',
-            'enableTemplateCaching' => true,
-            'cache' => true,
-            'generateTransformsBeforePageLoad' => true,
-        ),
+        'cache' => true,
+        'enableTemplateCaching' => true,
+        'generateTransformsBeforePageLoad' => true,
         'templateselectSubfolder' => 'pages/_types',
     )
-
 
 );

@@ -218,7 +218,7 @@ li.shrink{
 
   max-height: 100%;
   @include breakpoint(sm) {
-    margin-top: 76px;
+    margin-top: 73px;
   }
 }
 .navbar-default .navbar-collapse, .navbar-default .navbar-form{
@@ -518,8 +518,12 @@ form.search button{
 
 aside {
   width: 100%;
-  height: 1000px;
-  position: relative; }
+
+  position: relative;
+  @include breakpoint(sm) {
+    //height: 1000px;
+  }
+}
 @media (min-width: 768px) {
   aside {
     min-width: 260px; } }
@@ -572,18 +576,25 @@ aside .nav > li > a:hover, aside .nav > li > a:focus {
   top: 150px; }
 
 .psidemenu {
-  position: fixed;
-  top: 290px;
-  max-width: 288px;
-  transition: top 1s ease;
-  z-index: 1; }
+  max-width: inherit;
+  @media (min-width: 990px) {
+    position: fixed;
+    top: 290px;
+    max-width: 288px;
+    transition: top 1s ease;
+    z-index: 1;
+  }
+  }
 
 @media (min-width: 768px) {
   .psidemenu.showfeatured {
     padding-top: 110px; } }
 
 .shrink .psidemenu {
-  top: 185px; }
+  @media (min-width: 768px) {
+    top: 185px;
+  }
+}
 
 aside h3, aside h4 {
   margin: 5px 0; }

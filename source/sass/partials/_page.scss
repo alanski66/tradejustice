@@ -777,29 +777,76 @@ section.main img{
 }
 #nav.psidemenu h3{margin-top:0}
 
+//blog
+.blog .date {
+
+  @include breakpoint(xxxs) {
+    margin:0 0 10px 0;
+    font-size: 18px;
+  }
+}
+.blog .time{
+
+  @include breakpoint(xxxs) {
+   display: none;
+  }
+
+  @include breakpoint(sm) {
+    display: block;
+  }
+}
+section.main.blogindex{
+  @include breakpoint(sm) {
+    padding-top: 80px;
+  }
+}
+section.main.blogentry{
+  @include breakpoint(sm) {
+    padding-top: 98px;
+  }
+}
+
 .blog h4.media-heading{
   font-size:$font-size-small-medium;
 }
 .blog .psidemenu{
-  max-width: 212px;
-  min-width: 212px;
+  //max-width: 212px;
+  //min-width: 212px;
 }
 .blog .psidemenu .media{
   margin-top:0;
 }
-.blog h2{
-  margin-bottom:15px;
-}
 
-.blog article{
-  margin-bottom:40px;
-}
-.blog article img{
-  margin-bottom:10px;
-}
-.blog .short-desc{
+.blog .psidemenu .media-body{
 
 }
-.resources .publisher{
-  font-size: $font-size-small;
+.blog  .psidemenu .media-left {
+
+  @include breakpoint(xxs) {
+    width: 50%;
+  }
+  @include breakpoint(sm) {
+    width: 35%;
+  }
 }
+.blog .psidemenu .short-desc{
+  @include breakpoint(sm) {
+    display: none;
+  }
+}
+  .blog h2{
+    margin-bottom:15px;
+  }
+
+  .blog article{
+    margin-bottom:40px;
+  }
+  .blog article img{
+    margin-bottom:10px;
+  }
+  .blog .short-desc{
+
+  }
+  .resources .publisher{
+    font-size: $font-size-small;
+  }

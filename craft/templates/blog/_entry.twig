@@ -34,13 +34,16 @@
 
 
 <div class="container ">
-    <section class="main">
+    <section class="main blogentry">
         <div class="col-sm-10 col-md-10 main-col">
             <article>
+                <div class="date">
+                    Posted on {{ entry.postDate.format('F d, Y') }}
+                </div>
                 {% set image = entry.leadImage[0] ?? null %}
 
                 {% if image %}
-                <img class="img-responsive "src="{{ image.getUrl('tablet') }}" >
+                <img class="img-responsive" src="{{ image.getUrl('tablet') }}" >
                 {% endif %}
                 {{ entry.body }}
 
@@ -48,25 +51,82 @@
 
         </div>
 
-        <div class="hidden-xs col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-2 side-col">
+        <div class=" col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 side-co    ">
+
 
             <div class="pside-inner">
                 <aside id="nav" class="psidemenu ">
                     <h3>Blog posts</h3>
 
 
+                    {% if year is not defined %}
+                        {% set year = now.year %}
+                    {% endif %}
+                    {% if year is not defined %}
+                        {% redirect "blog/archive/"~now.year %}
+                    {% endif %}
 
-                    <ul class="nav" data-spy="scrollspy">
-                        {% set entries = craft.entries({
-                        section: 'blog',
-                        with:
-                        ['leadImage']
-                        }).order('sticky desc', 'postDate desc') %}
+
+                    {% set entries = craft.entries({
+                    section: 'blog',
+                    with:
+                    ['leadImage']
+                    }).order('sticky desc', 'postDate desc') %}
+
+
+                    <div class="nav" data-spy="scrollspy">
                         {% for entry in entries %}
-                        <li {{ macros.isMenuActive(entry.slug)|trim }}>
-                            <a href="{{ entry.url }}">{{entry.title}}</a></li>
+                            {% if entry.sticky %}
+                                {% set sticky = "sticky" %}
+                            {% else %}
+                                {% set sticky = '' %}
+                            {% endif %}
+
+
+                        <div class="media {{sticky}}">
+
+                            {% set image = entry.leadImage[0] %}
+                            {% set transformedImages = craft.imager.transformImage(image,
+                            [
+                            { width: 320, ratio: 4/3, jpegQuality: 65 },
+                            { width: 768, ratio: 1/1 ,position:'center-center'},
+
+                            ],
+                            {
+                            format: 'jpg',
+                            allowUpscale: false,
+                            mode: 'crop',
+                            jpegQuality: 80,
+
+                            interlace: true
+                            }
+                            ) %}
+                            <div class="media-left">
+                                {% if image %}
+                                    <a href="{{entry.url}}">
+                                        <picture>
+                                            <source media="(max-width: 768px)" sizes="100vw" srcset="{{ transformedImages[0].url }}">
+                                            <source media="(max-width: 3000px)" sizes="100vw" srcset="{{ transformedImages[1].url }}">
+                                            <img class="img-responsive" src="{{ transformedImages[1].url }}" alt="{{ image.title }}">
+                                        </picture>
+
+
+                                    </a>
+                                {% endif %}
+                            </div>
+
+
+
+
+
+                            <div class="media-body">
+                                <h4 class="media-heading"><a href="{{ entry.url }}">{{ entry.title }}</a></h4>
+                                <div class="short-desc">{{ entry.ShortDescription }}</div>
+
+                            </div>
+                            </div>
                         {% endfor %}
-                    </ul>
+                    </div>
 
 
                 </aside>

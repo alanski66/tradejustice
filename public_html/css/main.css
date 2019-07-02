@@ -6115,8 +6115,7 @@ button.close {
 span.yellowline {
   width: 100%;
   border-top: 8px solid #F4D233;
-  display: block;
-  max-width: 527px; }
+  display: block; }
 
 .grayscale {
   filter: grayscale(100%);
@@ -6155,6 +6154,66 @@ span.yellowline {
   background: #F4D233;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px; }
+
+.flash-bg {
+  background-color: #b13432;
+  margin-bottom: 0px;
+  height: auto;
+  padding: 0;
+  min-height: 100px;
+  color: #FFFFFF; }
+
+.flash-bg .glyphicon-exclamation-sign {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: #FFFFFF; }
+
+@media (min-width: 320px) {
+  .flash-bg .glyphicon-exclamation-sign {
+    font-size: 40px; } }
+
+@media (min-width: 768px) {
+  .flash-bg .glyphicon-exclamation-sign {
+    font-size: 40px;
+    margin-left: 10px; } }
+
+@media (min-width: 768px) {
+  .flash-bg .glyphicon-exclamation-sign {
+    font-size: 60px;
+    margin-left: 0px; } }
+
+.flash {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: #FFFFFF; }
+
+.flash a:hover {
+  color: #FFFFFF; }
+
+.flash a {
+  color: #FFFFFF;
+  line-height: 18px;
+  display: inline-block; }
+
+@media (min-width: 481px) {
+  .flash a {
+    font-size: 16px; } }
+
+@media (min-width: 641px) {
+  .flash a {
+    font-size: 16px; } }
+
+@media (min-width: 768px) {
+  .flash a {
+    font-size: 20px; } }
+
+.vertical-centre-container {
+  position: relative;
+  height: 115px; }
 
 .isprite {
   background-image: url(../img/icon-sprite.png);
@@ -6420,8 +6479,12 @@ section.main a.btn-default:hover,
 
 @media (min-width: 992px) {
   .hero {
-    height: 410px;
-    background-size: 3000px 410px; } }
+    height: 570px;
+    background-size: 3000px 570px; }
+  .home-top-col {
+    background: #f2f2f2; }
+  .home-top-col .card-content {
+    padding: 0px 15px 10px; } }
 
 .hero h1 {
   font-weight: 400;

@@ -23,48 +23,36 @@
 <div class="container-xl">
     <div class="hero">
         <div class="container">
-            <div class="row gutter-85 homerow">
-            {% for block in entry.homeBlockRow| batch(2) %}
 
+            <section>
+            <div class="col-xs-16 col-sm-10 col-md-10">
 
+                <div class="home-over-title">
+                    <h1>{{ entry.mainStrapline }}<br><span class="yellow">{{ entry.subStrapLine1 }}</span></h1>
+                </div>
+                    <div class="home-over-text">
+                        <h4>{{ entry.latestHeading }}</h4>
+                        <div class="latest">
 
-                {% if loop.first %}
-                            {% for column in block %}
+                            {% if entry.latestLinkManual | length %}
+                            <a class=" " href="{{ entry.latestLinkManual }}">{{ entry.latestText }}<span class="isprite icon-chev-right"></span></a>
+                            {% else %}
+                                {% set latest = entry.latestLink.first %}
+                                {% if latest | length %}
+                                <a class=" " href="{{ latest.url }}">{{ entry.latestText }}<span class="isprite icon-chev-right"></span></a>
+                                {% endif %}
+                            {% endif %}
 
+                        </div>
 
-                                {% set link = column.blockLink.first() %}
-
-
-                                <div class="col-xxs-16 col-xs-8 col-sm-8">
-                                    <div class="home-top-col">
-                                    {% for image in column.blockImage %}
-
-                                        {% set imageTransform = {
-                                        width: 530,
-                                        height: 296,
-                                        mode: 'crop',
-
-                                        } %}
-                                        <a href="{{link.url}}">
-
-                                            <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}"></a>
-                                    {% endfor %}
-                                        <div class="card-content">
-                                            <h2><a href="{{link.url}}">{{ column.blockHeading }}</a></h2>
-                                            <p>{{ column.blockSummary }}<a href="{{link.url}}"><span class="isprite icon-chev-right-dk"></span></a></p>
-                                        </div>
-                                        <span class="yellowline"></span>
-                                    </div>
-                                </div>
-
-
-                            {% endfor %}
-                {% endif %}
-
-
-            {% endfor %}
+                    </div>
             </div>
-        </div>
+
+                <div class="col-xs-16 col-sm-8 col-md-10">
+
+            </div>
+        </section>
+            </div>
     </div>
 
 </div>
@@ -124,40 +112,30 @@
 </div>
 
 
-{% for block in entry.homeBlockRow | batch(2)  %}
-{% if loop.first %}
-{% else %}
+{% for block in entry.homeBlockRow | batch(2) %}
+
 <div class=" container-xl {% if loop.first %}gray-bg-light{% endif %}">
     <div class="container ">
-
 <div class="row gutter-85 homerow">
 
     {% for column in block %}
-      {#{%  if  loop.revindex == 2 %}#}
-        {% set link = column.blockLink.first() %}
 
-
-        <div class="col-xxs-16 col-xs-8 col-sm-8">
-            <div class="home-top-col">
-                {% for image in column.blockImage %}
-
-                    {% set imageTransform = {
-                    width: 530,
-                    height: 296,
-                    mode: 'crop',
-
-                    } %}
-                    <a href="{{link.url}}">
-                        <span class="yellowline"></span>
-                        <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}"></a>
-                {% endfor %}
-                <div class="card-content">
-                    <h2><a href="{{link.url}}">{{ column.blockHeading }}</a></h2>
-                    <p>{{ column.blockSummary }}<a href="{{link.url}}"><span class="isprite icon-chev-right-dk"></span></a></p>
-                </div>
-            </div>
-        </div>
-      {#{% endif %}#}
+    {% set link = column.blockLink.first() %}
+    <div class="col-xxs-16 col-xs-8 col-sm-8">
+        {% for image in column.blockImage %}
+        {% set imageTransform = {
+        width: 527,
+        height: 296,
+        mode: 'crop',
+        position: column.focalPoint
+        } %}
+       <a href="{{link.url}}">
+           <span class="yellowline"></span>
+           <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}"></a>
+        {% endfor %}
+        <h2><a href="{{link.url}}">{{ column.blockHeading }}</a></h2>
+        <p>{{ column.blockSummary }}<a href="{{link.url}}"><span class="isprite icon-chev-right-dk"></span></a></p>
+    </div>
     {% endfor %}
 
 
@@ -165,7 +143,7 @@
 </div>
     </div>
 </div>
-{% endif %}
+
 {% endfor %}
 
 

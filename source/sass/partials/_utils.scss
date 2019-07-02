@@ -157,7 +157,7 @@ span.yellowline{
   width:100%;
   border-top: 8px solid $yellow;
   display: block;
-  max-width:527px;
+  //max-width:527px;
 }
 //grayscale images
 .grayscale{
@@ -199,4 +199,65 @@ span.yellowline{
   background: $yellow;
   border-top-right-radius:5px;
   border-top-left-radius: 5px;
+}
+
+//flash alert
+
+.flash-bg {
+  background-color: #b13432;
+  margin-bottom: 0px;
+  height: auto;
+  padding: 0;
+  min-height: 100px;
+  color: #FFFFFF; }
+
+.flash-bg .glyphicon-exclamation-sign {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: #FFFFFF;
+}
+@media (min-width: 320px) {
+  .flash-bg .glyphicon-exclamation-sign {
+    font-size: 40px; }
+}
+@media (min-width: 768px) {
+  .flash-bg .glyphicon-exclamation-sign {
+    font-size: 40px;
+    margin-left: 10px; }
+}
+@media (min-width: 768px) {
+  .flash-bg .glyphicon-exclamation-sign {
+    font-size: 60px;
+    margin-left: 0px; }
+}
+
+.flash {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: #FFFFFF; }
+
+.flash a:hover {
+  color: #FFFFFF; }
+
+.flash a {
+  color: #FFFFFF;
+  line-height: 18px;
+  display: inline-block; }
+@media (min-width: 481px) {
+  .flash a {
+    font-size: 16px; } }
+@media (min-width: 641px) {
+  .flash a {
+    font-size: 16px; } }
+@media (min-width: 768px) {
+  .flash a {
+    font-size: 20px; } }
+
+.vertical-centre-container {
+  position: relative;
+  height: 115px;
 }

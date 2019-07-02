@@ -807,7 +807,14 @@ section.main.blogentry{
 }
 
 .blog h4.media-heading{
-  font-size:$font-size-small-medium;
+
+  @include breakpoint(xxs) {
+    font-size: 21px;
+  }
+  @include breakpoint(md) {
+    font-size: $font-size-small-medium;
+  }
+
 }
 .blog .psidemenu{
   //max-width: 212px;
@@ -830,7 +837,7 @@ section.main.blogentry{
   }
 }
 .blog .psidemenu .short-desc{
-  @include breakpoint(sm) {
+  @include breakpoint(md) {
     display: none;
   }
 }

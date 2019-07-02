@@ -7958,8 +7958,13 @@ section.main img {
   section.main.blogentry {
     padding-top: 98px; } }
 
-.blog h4.media-heading {
-  font-size: 16px; }
+@media (min-width: 481px) {
+  .blog h4.media-heading {
+    font-size: 21px; } }
+
+@media (min-width: 992px) {
+  .blog h4.media-heading {
+    font-size: 16px; } }
 
 .blog .psidemenu .media {
   margin-top: 0; }
@@ -7972,7 +7977,7 @@ section.main img {
   .blog .psidemenu .media-left {
     width: 35%; } }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .blog .psidemenu .short-desc {
     display: none; } }
 

@@ -24,9 +24,9 @@
             </div>
             <div class="col-xs-16 col-sm-4 col-md-4">
 
-                <div class="time">
-                    Posted on {{ entry.postDate.format('F d, Y') }}
-                </div>
+                {#<div class="time">#}
+                    {#Posted on {{ entry.postDate.format('F d, Y') }}#}
+                {#</div>#}
             </div>
         </section>
     </div>
@@ -35,7 +35,7 @@
 
 <div class="container ">
     <section class="main blogentry">
-        <div class="col-xs-16 col-sm-10 col-md-9 main-col">
+        <div class="col-xs-16  col-md-9 main-col">
             <article>
                 <div class="date">
                     Posted on {{ entry.postDate.format('F d, Y') }}
@@ -51,7 +51,7 @@
 
         </div>
 
-        <div class="col-xs-16 col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 side-co    ">
+        <div class="col-xs-16  col-md-4 col-md-offset-2 side-co    ">
 
 
             <div class="pside-inner">
@@ -72,6 +72,11 @@
                     with:
                     ['leadImage']
                     }).order('sticky desc', 'postDate desc') %}
+
+                    {% set entries = craft.entries({
+                    section:        'blog',
+                    with: ['leadImage']
+                    }).order('sticky desc', 'postDate desc').id('not ' ~ entry.id) %}
 
 
                     <div class="nav" data-spy="scrollspy">
@@ -94,7 +99,7 @@
                             ],
                             {
                             format: 'jpg',
-                            allowUpscale: false,
+                            allowUpscale: true,
                             mode: 'crop',
                             jpegQuality: 80,
 

@@ -12,6 +12,13 @@
     height: 209px;
     background-size: 1500px 209px;
     background-position-x: 50px;
+
+
+    //new
+    margin-top: -90px;
+    height:auto;
+    background-position-y: 0px;
+    background-size: 2500px 309px;
   }
 }
 
@@ -30,7 +37,7 @@
     background-size: 3000px 570px;
   }
   .home-top-col{
-    background: $gray-light;
+    //background: $gray-light;
   }
   .home-top-col .card-content{
     padding:0px 15px 10px;

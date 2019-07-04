@@ -6050,15 +6050,15 @@ button.close {
     .sprite.logo {
       width: 285px;
       height: 75px;
-      background-size: 448px 230px;
+      background-size: 448px 235px;
       margin: 37px 0 0 0px;
       background-position: 0 0; } }
   @media (min-width: 1200px) {
     .sprite.logo {
-      width: 325px;
-      height: 95px;
-      background-size: 500px 273px;
-      margin: 25px 0 0 0px; } }
+      width: 295px;
+      height: 96px;
+      background-size: 465px 275px;
+      margin-top: 15px; } }
 
 @media (min-width: 320px) {
   .shrink .sprite.logo {
@@ -6072,21 +6072,12 @@ button.close {
 @media (min-width: 768px) {
   .shrink .sprite.logo {
     width: 229px;
-    height: 87px;
+    height: 82px;
     background-size: 345px 172px;
     background-repeat: no-repeat;
     margin: 0 15px 0 0;
     background-position: 0 28px;
     z-index: -99; } }
-
-@media (min-width: 1200px) {
-  .shrink .sprite.logo {
-    width: 222px;
-    height: 82px;
-    background-size: 340px 209px;
-    background-repeat: no-repeat;
-    margin: 0;
-    background-position: 0 10px; } }
 
 .logo {
   width: 405px;
@@ -6468,7 +6459,11 @@ section.main a.btn-default:hover,
     margin-top: -140px;
     height: 209px;
     background-size: 1500px 209px;
-    background-position-x: 50px; } }
+    background-position-x: 50px;
+    margin-top: -90px;
+    height: auto;
+    background-position-y: 0px;
+    background-size: 2500px 309px; } }
 
 @media (min-width: 768px) {
   .hero {
@@ -6481,8 +6476,6 @@ section.main a.btn-default:hover,
   .hero {
     height: 570px;
     background-size: 3000px 570px; }
-  .home-top-col {
-    background: #f2f2f2; }
   .home-top-col .card-content {
     padding: 0px 15px 10px; } }
 
@@ -6868,10 +6861,14 @@ a span.sprite.icon-help:hover {
     .navbar-default {
       height: 150px; } }
 
-.navbar-default, .sprite.logo, .navb, .nav {
-  -webkit-transition: all 0.9s ease;
+.navbar-default, .navb, .nav {
   transition: all 0.9s ease;
   z-index: 99; }
+
+.shrink .sprite.logo,
+.sprite.logo {
+  transition: all 0.9s;
+  transition-timing-function: ease-in-out; }
 
 .dark-bg {
   -webkit-transition: all 0.9s ease;
@@ -8298,5 +8295,65 @@ form.monkey {
 @media (min-width: 641px) {
   .subscribe .col-xxs {
     width: 50% !important; } }
+
+@media all and (-ms-high-contrast: none) {
+  *::-ms-backdrop, .navbar-default, .sprite.logo, .navb, .nav {
+    /* IE11 */
+    transition: none; }
+  .shrink .sprite.logo {
+    transition: none !important; } }
+
+@media all and (-ms-high-contrast: none) and (min-width: 1200px) {
+  .sprite.logo {
+    width: 335px;
+    height: 86px;
+    background-size: 523px 263px;
+    margin-top: 30px;
+    transition: none !important; } }
+
+.flex-grid {
+  display: flex; }
+
+.flex-grid .flexcol {
+  flex: 1; }
+
+.flex-grid-thirds {
+  display: flex;
+  justify-content: space-between; }
+
+.flex-grid-thirds .flexcol {
+  width: 28%; }
+
+@media (max-width: 600px) {
+  .flex-grid,
+  .flex-grid-thirds {
+    display: block; }
+    .flex-grid .flexcol,
+    .flex-grid-thirds .flexcol {
+      width: 100%;
+      margin: 0 0 10px 0; }
+  .hero {
+    height: 100%; }
+  .flexcol img {
+    width: 100%; } }
+
+@media (max-width: 768px) {
+  .flexcol .card-content p {
+    display: none; }
+  .flexcol .card-content h2 a {
+    color: #FFFFFF;
+    font-size: 18px; } }
+
+.flexcol .card-content h2 a {
+  color: #FFFFFF; }
+
+.flexcol .card-content p {
+  display: none; }
+
+* {
+  box-sizing: border-box; }
+
+.flex-grid {
+  margin: 0 0 20px 0; }
 
 /*# sourceMappingURL=main.css.map */

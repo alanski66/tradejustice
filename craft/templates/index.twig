@@ -23,8 +23,16 @@
 <div class="container-xl">
     <div class="hero">
         <div class="container">
-            <div class="row gutter-85 homerow">
-            {% for block in entry.homeBlockRow| batch(2) %}
+            <div class="row">
+                <div class="col-xs-16">
+                    <div class="strap">
+                        <h1>{{ entry.mainStrapline }}<br><span class="yellow">{{ entry.subStrapLine1 }}</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-grid-thirds">
+
+            {% for block in entry.homeBlockRow| batch(3) %}
 
 
 
@@ -35,7 +43,7 @@
                                 {% set link = column.blockLink.first() %}
 
 
-                                <div class="col-xxs-16 col-xs-8 col-sm-8">
+                                <div class="flexcol">
                                     <div class="home-top-col">
                                     {% for image in column.blockImage %}
 

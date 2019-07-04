@@ -1,0 +1,31 @@
+@media all and (-ms-high-contrast:none)
+{
+  .navbar-default,.sprite.logo,.navb, .nav{
+
+  }
+  *::-ms-backdrop, .navbar-default,.sprite.logo,.navb, .nav { /* IE11 */
+    transition: none;
+  }
+  .shrink .sprite.logo {
+    transition: none!important;
+  }
+  .sprite.logo {
+    @include breakpoint(lg) {
+      //width:325px;
+      //height:90px;
+      //background-size: 500px 273px;
+      //margin: 25px 0 0 0px;
+      //width: 384px;
+      //height: 96px;
+      //background-size: inherit;//500px 321px;
+      //margin-top: 22px;
+      width: 335px;
+      height: 86px;
+      background-size: 523px 263px;
+      margin-top: 30px;
+      //border:1px solid red;
+    transition: none!important;
+
+    }
+  }
+}

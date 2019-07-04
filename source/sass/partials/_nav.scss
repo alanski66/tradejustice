@@ -111,12 +111,18 @@
 
 }
 
-.navbar-default,.sprite.logo,.navb, .nav{
+.navbar-default,.navb, .nav{
   // Animation
-  -webkit-transition: all 0.9s ease;
+
   transition: all 0.9s ease;
   z-index:99;
 }
+.shrink .sprite.logo,
+.sprite.logo{
+  transition: all 0.9s ;
+  transition-timing-function: ease-in-out;
+}
+
 
 .dark-bg{
   // Animation

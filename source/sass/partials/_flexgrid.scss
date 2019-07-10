@@ -12,6 +12,23 @@
   width: 28%;
 }
 
+.flexcol .card-content h2{
+  font-size:19px;
+}
+.flexcol .card-content h2 a {
+  color: $white;
+}
+.flexcol .card-content{
+  padding:0;
+}
+.flexcol span.yellowline{
+  border-top-width: 2px;
+}
+
+.flexcol a > .icon-chev-right-dk{
+  background-position: 0 -3px;
+}
+
 @media (max-width: 600px) {
   .flex-grid,
 
@@ -33,24 +50,34 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 990px) {
 
   .flexcol .card-content p{
     display:none
   }
   .flexcol .card-content h2 a{
     color:$white;
-    font-size: 18px;
+
   }
 }
+@media (min-width: 992px) {
+  .flexcol .card-content p{
+    //display:none
+    color:$white;
+    font-size:19px;
+    line-height: 1.2;
+    min-height:60px;
+    display: block;
+  }
+  .flexcol .card-content h2{
+    font-size:24px;
+  }
+
+}
 
 
-.flexcol .card-content h2 a {
-  color: $white;
-}
-.flexcol .card-content p{
-  display:none
-}
+
+
 
 * {
   box-sizing: border-box;

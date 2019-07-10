@@ -6469,7 +6469,7 @@ section.main a.btn-default:hover,
   .hero {
     margin-top: 0px;
     height: 300px;
-    background-size: 2195px 300px;
+    background-size: 2195px 330px;
     background-position-x: 0px; } }
 
 @media (min-width: 992px) {
@@ -8324,6 +8324,21 @@ form.monkey {
 .flex-grid-thirds .flexcol {
   width: 28%; }
 
+.flexcol .card-content h2 {
+  font-size: 19px; }
+
+.flexcol .card-content h2 a {
+  color: #FFFFFF; }
+
+.flexcol .card-content {
+  padding: 0; }
+
+.flexcol span.yellowline {
+  border-top-width: 2px; }
+
+.flexcol a > .icon-chev-right-dk {
+  background-position: 0 -3px; }
+
 @media (max-width: 600px) {
   .flex-grid,
   .flex-grid-thirds {
@@ -8337,18 +8352,21 @@ form.monkey {
   .flexcol img {
     width: 100%; } }
 
-@media (max-width: 768px) {
+@media (max-width: 990px) {
   .flexcol .card-content p {
     display: none; }
   .flexcol .card-content h2 a {
+    color: #FFFFFF; } }
+
+@media (min-width: 992px) {
+  .flexcol .card-content p {
     color: #FFFFFF;
-    font-size: 18px; } }
-
-.flexcol .card-content h2 a {
-  color: #FFFFFF; }
-
-.flexcol .card-content p {
-  display: none; }
+    font-size: 19px;
+    line-height: 1.2;
+    min-height: 60px;
+    display: block; }
+  .flexcol .card-content h2 {
+    font-size: 24px; } }
 
 * {
   box-sizing: border-box; }

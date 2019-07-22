@@ -67,6 +67,10 @@ class MailchimpSubscribeService extends BaseApplicationComponent
                       'email_type' => $emailType,
                       'email_address' => $email
                     );
+                    
+                    if ($member && $member['status']==='unsubscribed') {
+                        $postVars['status'] = 'subscribed';
+                    }
 
                     if (count($vars) > 0) {
                         $postVars['merge_fields'] = $vars;
@@ -108,6 +112,71 @@ class MailchimpSubscribeService extends BaseApplicationComponent
     }
 
     /**
+     * Unsubscribe from one or more Mailchimp lists
+     *
+     * @param $email
+     * @param $formListId
+     * @return array
+     */
+    public function unsubscribe($email, $formListId)
+    {
+        if ($email != '' && $this->validateEmail($email)) { // validate email
+
+            $listIdStr = $formListId != '' ? $formListId : $this->getSetting('mcsubListId');
+
+            // check if we got an api key and a list id
+            if ($this->getSetting('mcsubApikey') != '' && $listIdStr != '') {
+
+                // create a new api instance, and subscribe
+                $mc = new Mailchimp($this->getSetting('mcsubApikey'));
+
+                // split id string on | in case more than one list id is supplied
+                $listIdArr = explode('|', $listIdStr);
+
+                // loop over list id's and subscribe
+                $results = array();
+                foreach ($listIdArr as $listId) {
+
+                    $member = $this->_getMemberByEmail($email, $listId);
+
+                    if ($member) {
+                        // subscribe
+                        $vars = array(
+                          'status' => 'unsubscribed'
+                        );
+    
+                        try {
+                            $result = $mc->request('lists/' . $listId . '/members/' . md5(strtolower($email)), $vars, 'PATCH');
+                            array_push($results, $this->_getMessage(200, $email, $vars, Craft::t("Unsubscribed successfully"), true));
+                        } catch (\Exception $e) { // an error occured
+                            $msg = json_decode($e->getMessage());
+                            array_push($results, $this->_getMessage($msg->status, $email, $vars, Craft::t($msg->title)));
+                        }
+                    }
+                }
+
+                if (count($results) === 0) {
+                    return null;
+                } 
+                
+                if (count($results) > 1) {
+                    return $this->_parseMultipleListsResult($results);
+                }
+                
+                return $results[0];
+
+            } else {
+                // error, no API key or list id
+                return $this->_getMessage(2000, $email, $vars, Craft::t("API Key or List ID not supplied. Check your settings."));
+            }
+
+        } else {
+            // error, invalid email
+            return $this->_getMessage(1000, $email, $vars, Craft::t("Invalid email"));
+        }
+    }    
+    
+    /**
      * Return user object by email if it is present in one or more lists.
      *
      * @param $email
@@ -145,7 +214,9 @@ class MailchimpSubscribeService extends BaseApplicationComponent
             if ($this->getSetting('mcsubApikey') != '' && $listIdStr != '') {
 
                 $results = array();
-                if ($this->_getMemberByEmail($email, $listIdStr)) {
+                $member = $this->_getMemberByEmail($email, $listIdStr);
+                
+                if ($member && $member['status'] !== 'unsubscribed') {
                     array_push($results, $this->_getMessage(200, $email, array(), Craft::t("The email address passed exists on this list"), true));
                 } else {
                     array_push($results, $this->_getMessage(1000, $email, array(), Craft::t("The email address passed does not exist on this list"), false));
@@ -170,16 +241,17 @@ class MailchimpSubscribeService extends BaseApplicationComponent
 
     /**
      * Returns interest groups in list by list id
-     * 
+     *
      * @param $listId
+     * @param int $count
      * @return array
      */
-    public function getListInterestGroups($listId)
+    public function getListInterestGroups($listId, $count = 10)
     {
         if ($listId == '') {
             return array(
-              'success' => false,
-              'message' => Craft::t('No list ID given')
+                'success' => false,
+                'message' => Craft::t('No list ID given')
             );
         }
 
@@ -200,7 +272,7 @@ class MailchimpSubscribeService extends BaseApplicationComponent
                     $categoryData['type'] = $category->type;
                     $categoryData['interests'] = array();
 
-                    $interestsResult = $mc->request('lists/' . $listId . '/interest-categories/' . $category->id . '/interests');
+                    $interestsResult = $mc->request('lists/' . $listId . '/interest-categories/' . $category->id . '/interests/?count=' . intval($count) . '&offset=0');
 
                     foreach ($interestsResult['interests'] as $interest) {
                         $interestData = array();
@@ -215,22 +287,22 @@ class MailchimpSubscribeService extends BaseApplicationComponent
 
 
                 return array(
-                  'success' => true,
-                  'groups' => $return
+                    'success' => true,
+                    'groups' => $return
                 );
             } catch (\Exception $e) { // subscriber didn't exist
                 $msg = json_decode($e->getMessage());
 
                 return array(
-                  'success' => false,
-                  'message' => $msg->detail
+                    'success' => false,
+                    'message' => $msg->detail
                 );
             }
 
         } else {
             return array(
-              'success' => false,
-              'message' => 'API Key not supplied. Check your settings.'
+                'success' => false,
+                'message' => 'API Key not supplied. Check your settings.'
             );
         }
     }

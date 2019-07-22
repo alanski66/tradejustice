@@ -19,8 +19,20 @@
 
 {% extends "_layouts/site" %}
 
+{%  set noHomeCols = entry.homeBlockRow | length %}
+{% if  noHomeCols is odd  %}
+    {%  set colClass = "flex-grid-thirds" %}
+    {% set batchNo = '3' %}
+{% endif %}
+
+{% if  noHomeCols is even  %}
+    {%  set colClass = "flex-grid-even" %}
+    {% set batchNo = '2' %}
+{% endif %}
+
 {% block content %}
-<div class="container-xl">
+
+    <div class="container-xl">
     <div class="hero">
         <div class="container">
             <div class="row">
@@ -30,9 +42,10 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-grid-thirds">
+            <div class="{{ colClass  }}">
 
-            {% for block in entry.homeBlockRow| batch(3) %}
+
+            {% for block in entry.homeBlockRow| batch(batchNo) %}
 
 
 

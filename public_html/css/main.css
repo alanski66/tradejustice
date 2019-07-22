@@ -8324,6 +8324,13 @@ form.monkey {
 .flex-grid-thirds .flexcol {
   width: 28%; }
 
+.flex-grid-even {
+  display: flex;
+  justify-content: space-between; }
+
+.flex-grid-even .flexcol {
+  width: 49%; }
+
 .flexcol .card-content h2 {
   font-size: 19px; }
 

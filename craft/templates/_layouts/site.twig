@@ -26,7 +26,29 @@
 	{% set title %}{% if title is defined %}{{ title }} - {% endif %}{{ nav[bodyClass].title }}{% endset %}
 {% endif %}
 
+{% if entry is defined and entry.leadImage |length %}
+    {% set twitter = seomaticMeta.twitter %}
+    {% set og = seomaticMeta.og %}
+
+    {% if entry.ShortDescription | length %}
+        {% set seomaticMeta = seomaticMeta | merge({'seoDescription': entry.ShortDescription }) %}
+        {% set twitter = twitter | merge({'description': entry.ShortDescription }) %}
+        {% set og = og | merge({'description': entry.ShortDescription }) %}
+    {% endif %}
+
+
+
+    {% set twitter = twitter | merge({'image': entry.leadImage.first.url }) %}
+    {% set seomaticMeta = seomaticMeta | merge({'twitter': twitter}) %}
+
+    {% set og = og | merge({'image': entry.leadImage.first.url }) %}
+    {% set seomaticMeta = seomaticMeta | merge({'og': og}) %}
+
+    {% set seomaticMeta = seomaticMeta | merge({'seoImage': entry.leadImage.first.url }) %}
+{% endif %}
+
 {% block body %}
+
 
 {# comment #}
 

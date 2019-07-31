@@ -14,6 +14,7 @@
  #}
 
 {% extends "_layouts/site" %}
+
 {% block content %}
 
 
@@ -27,12 +28,12 @@
     {#Bottom-Left#}
     {#Bottom-Center#}
     {#Bottom-Right#}
-    {%  if entry.cropPosition = "center" %}
-        {% set cropPos = 'center-center' %}
-    {% endif %}
-    {% if entry.cropPosition = "left" %}
-        {% set cropPos = 'center-left' %}
-    {% endif %}
+    {#{%  if entry.cropPosition = "center" %}#}
+        {#{% set cropPos = 'center-center' %}#}
+    {#{% endif %}#}
+    {#{% if entry.cropPosition = "left" %}#}
+        {#{% set cropPos = 'center-left' %}#}
+    {#{% endif %}#}
 
 
     <div class="container-xl dark-bg">

@@ -290,6 +290,7 @@ li.shrink{
 //active colors
 .navbar-default .navbar-nav li a.active{
   background-color: $black;
+  background-color: #353535;
   color: $white;
 }
 
@@ -579,13 +580,14 @@ aside .nav > li > a:hover, aside .nav > li > a:focus {
   position: relative; }
 
 .psidemenu.shrink {
-  top: 150px; }
+  //top: 150px;
+}
 
 .psidemenu {
   max-width: inherit;
   @media (min-width: 990px) {
-    position: fixed;
-    top: 290px;
+    //position: fixed;
+    //top: 290px;
     max-width: 288px;
     transition: top 1s ease;
     z-index: 1;
@@ -598,7 +600,7 @@ aside .nav > li > a:hover, aside .nav > li > a:focus {
 
 .shrink .psidemenu {
   @media (min-width: 768px) {
-    top: 185px;
+    //top: 185px;
   }
 }
 
@@ -825,3 +827,8 @@ li.sideblockheading.second span {
 //  transition: .25s ease-in-out;
 //}
 //
+section.blogentry .shrink .psidemenu,
+section.blogentry .sidemenu{
+  position: relative!important;
+  top:inherit!important;
+}

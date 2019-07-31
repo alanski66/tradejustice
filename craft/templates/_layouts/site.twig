@@ -37,7 +37,8 @@
     {% endif %}
 
 
-
+{# summary_large_image #}
+    {% set twitter = twitter | merge({'card': 'summary_large_image'  }) %}
     {% set twitter = twitter | merge({'image': entry.leadImage.first.url }) %}
     {% set seomaticMeta = seomaticMeta | merge({'twitter': twitter}) %}
 

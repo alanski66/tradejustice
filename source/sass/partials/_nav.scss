@@ -557,16 +557,17 @@ aside .nav > li > a {
 aside .nav > li > a:hover, aside .nav > li > a:focus {
   background: transparent; }
 
-.sidemenu.shrink {
-  top: 150px; }
 
 .sidemenu {
   position: fixed;
-  top: 350px;
+  top: 300px;
   max-width: 288px;
   transition: top 1s ease;
   z-index: 1;
   width: 100%; }
+.shrink .sidemenu.shrink {
+  top: 200px;
+}
 
 @media (min-width: 768px) {
   .sidemenu.showfeatured {

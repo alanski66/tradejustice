@@ -6022,6 +6022,36 @@ button.close {
   display: inline-block;
   background-color: inherit; }
 
+.footwrap {
+  transition: top 1s ease; }
+
+.form-inline .form-control.search-input {
+  width: 200px; }
+
+@media (min-width: 768px) {
+  .res-search {
+    height: 120px;
+    margin-top: 44px; } }
+
+@media (min-width: 768px) {
+  .shrink .res-search {
+    height: 60px;
+    margin-top: 14px; } }
+
+.res-search-col {
+  padding-right: 0; }
+
+@media (min-width: 768px) {
+  .res-search-mob {
+    display: none; } }
+
+@media (min-width: 768px) {
+  .res-search-desktop {
+    display: inherit; } }
+
+.inline {
+  display: inline; }
+
 .page {
   background: #FFFFFF;
   min-height: 650px;
@@ -6077,7 +6107,7 @@ button.close {
     background-repeat: no-repeat;
     margin: 0 15px 0 0;
     background-position: 0 28px;
-    z-index: -99; } }
+    z-index: 999; } }
 
 .logo {
   width: 405px;
@@ -7184,16 +7214,16 @@ aside .nav > li > a {
 aside .nav > li > a:hover, aside .nav > li > a:focus {
   background: transparent; }
 
-.sidemenu.shrink {
-  top: 150px; }
-
 .sidemenu {
   position: fixed;
-  top: 350px;
+  top: 300px;
   max-width: 288px;
   transition: top 1s ease;
   z-index: 1;
   width: 100%; }
+
+.shrink .sidemenu.shrink {
+  top: 200px; }
 
 @media (min-width: 768px) {
   .sidemenu.showfeatured {
@@ -7506,8 +7536,13 @@ ul {
 @media (min-width: 768px) {
   section.main {
     padding-top: 185px;
+    padding-top: 110px;
     margin-top: 0px;
     margin-bottom: 100px; } }
+
+@media (min-width: 768px) {
+  section.main.shrink {
+    padding-top: 80px; } }
 
 @media (min-width: 320px) {
   section.main.showfeatured {
@@ -7924,6 +7959,10 @@ section.main .resources > a:hover {
 .resources h4 {
   margin: 5px 0;
   font-size: 20px; }
+
+.resources section.main .media {
+  margin-bottom: 40px;
+  margin-top: 0; }
 
 .link-report,
 .link-resource {

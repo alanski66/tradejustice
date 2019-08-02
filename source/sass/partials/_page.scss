@@ -111,8 +111,21 @@ section.main{
   }
   @include breakpoint(sm) {
     padding-top:185px;
+    padding-top:110px;
     margin-top: 0px;
     margin-bottom: 100px;
+  }
+
+}
+section.main.shrink{
+
+  @include breakpoint(xxxs) {
+
+  }
+  @include breakpoint(sm) {
+
+    padding-top:80px;
+
   }
 
 }
@@ -670,6 +683,12 @@ section.main .resources>a:hover{
   margin: 5px 0;
   font-size: $font-size-medium;
 }
+
+.resources section.main  .media{
+  margin-bottom: 40px;
+  margin-top: 0;
+}
+
 .link-report,
 .link-resource{
   margin: 0 0 30px 0;

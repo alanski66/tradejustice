@@ -66,13 +66,13 @@
                                         mode: 'crop',
 
                                         } %}
-                                        <a href="{{link.url}}">
-
-                                            <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}"></a>
+                                        {% if link %}<a href="{{link.url}}">{% endif %}
+                                            <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}">
+                                            {% if link %}</a>{% endif %}
                                     {% endfor %}
                                         <div class="card-content">
-                                            <h2><a href="{{link.url}}">{{ column.blockHeading }}</a></h2>
-                                            <p>{{ column.blockSummary }}<a href="{{link.url}}"><span class="isprite icon-chev-right-dk"></span></a></p>
+                                            <h2>{% if link %}<a href="{{link.url}}">{% endif %}{{ column.blockHeading }}{% if link %}</a>{% endif %}</h2>
+                                            <p>{{ column.blockSummary }}{% if link %}<a href="{{link.url}}">{% endif %}<span class="isprite icon-chev-right-dk"></span>{% if link %}</a>{% endif %}</p>
                                         </div>
                                         <span class="yellowline"></span>
                                     </div>

@@ -9,7 +9,43 @@
   display: inline-block;
   background-color: inherit;
 }
+.footwrap{
+  transition: top 1s ease;
+}
+.form-inline .form-control.search-input{
+  width:200px;
+}
+.res-search{
+  @include breakpoint(xxxs) {
 
+  }
+  @include breakpoint(sm) {
+    height:120px;
+    margin-top: 44px;
+  }
+}
+.shrink .res-search{
+  @include breakpoint(sm){
+    height:60px;
+    margin-top: 14px;
+  }
+}
+.res-search-col{
+  padding-right: 0;
+}
+.res-search-mob{
+  @include breakpoint(sm){
+    display: none;
+  }
+}
+.res-search-desktop{
+  @include breakpoint(sm){
+    display: inherit;
+  }
+}
+.inline{
+  display:inline;
+}
 .page{
   background: $white;
   min-height:650px;
@@ -109,7 +145,7 @@
       background-repeat: no-repeat;
       margin: 0 15px 0 0;
       background-position: 0 28px;
-      z-index:-99;
+      z-index:999;
   }
   //@include breakpoint(lg) {
   //  //width: 222px;

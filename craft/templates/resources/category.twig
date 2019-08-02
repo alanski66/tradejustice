@@ -13,18 +13,18 @@
 {% extends "_layouts/site" %}
 
 
-{% set ids = [] %}
+{#{% set ids = [] %}#}
 
-{% set ids = ids|merge(craft.entries.section('reports,briefings').ids()) %}
+{#{% set ids = ids|merge(craft.entries.section('reports,briefings').ids()) %}#}
 
-{% set TJMentries = craft.entries({
-    with:[
-        'category',
-        'resourceImage',
-        'resourcesFile'
-    ]
-}).tjmOwnedResource('yes').id(ids).order('sticky desc','postDate desc')
-%}
+{#{% set TJMentries = craft.entries({#}
+    {#with:[#}
+        {#'category',#}
+        {#'resourceImage',#}
+        {#'resourcesFile'#}
+    {#]#}
+{#}).tjmOwnedResource('yes').id(ids).order('sticky desc','postDate desc')#}
+{#%}#}
 
 
 {% set results  = craft.entries({
@@ -32,6 +32,7 @@ limit:null,
 section:'reports,briefings',
 order:['title asc'],
 with:['categoryFieldHandle'],
+relatedTo: category,
 localeEnabled: false
 }).order('sticky desc','postDate desc')
 %}
@@ -44,29 +45,17 @@ localeEnabled: false
 <div class="container-xl dark-bg ">
     <div class="container resources ">
         <section class="dark-title">
-            <div class="col-xs-8  col-sm-9 col-md-9">
-                <h1 class="inline"><span class="report-category">Resources</span> <span class="title-shrunk">Resources</span></h1>
+            <div class="col-xs-12  col-sm-12 col-md-12">
+                <h1 class=""><span class="report-category">Resources: {{ category.title }}</span> <span class="title-shrunk">Resources:{{ category.title }}</span></h1>
 
             </div>
-            <div class="col-xs-8 col-sm-7 col-md-7 res-search-col">
-                <form class="form-inline text-center res-search">
+            <div class="col-xs-4 col-sm-4 col-md-4 time-bg">
 
-                    {#<div class="col-xs-8">#}
-                    <div class="input-group">
+                <div class="time">
 
-                        <input class="form-control search-input" name="q"  >
-                        <div class="input-group-btn res-search-mob">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
-                    </div>
-
-
-                    {#</div>#}
-                    {#<div class="col-xs-8">#}
-                    <button class="btn btn-default res-search-tablet"type="submit">Search</button>
-                    {#</div>#}
-
-                </form>
+                    <span class="hide glyphicon glyphicon-time"></span>
+                    <div class="time-heading">Resources</div>
+                    <div class="estimate">Essential reading on trade</div></div>
             </div>
         </section>
     </div>

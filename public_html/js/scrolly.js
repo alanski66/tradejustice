@@ -22,6 +22,7 @@ var sidecolright = "";
 var $sidebarHeight = parseInt($('.sidemenu').css('height'),10);
 //
 var PageHeight = parseInt($('.page').css('height'),10);
+var $footerContainer = $('.footer');
 //var $scrollTop = $(window).scrollTop();
 
 //$(window).scroll(function() {
@@ -179,7 +180,11 @@ if ( window.location.hash ) {
         console.log('scrollspy actived');
     })
 }
-
+function pushFooterDown(){
+    $('.footwrap').css({
+        'margin-top': "390px"
+    });
+}
 
 $(document).ready(function () {
 
@@ -187,7 +192,7 @@ $(document).ready(function () {
     adjustSideHeight();
 
     $( window ).resize(function() {
-        resizeSidebar();
+      //  resizeSidebar();
     });
 
 
@@ -217,7 +222,13 @@ $(document).ready(function () {
 
 
 
-        console.log(headerHeight);
+        //console.log(headerHeight);
+
+        $('.footwrap').css({
+            'margin-top': "390px"
+        });
+        console.log("footer margin added");
+
         $featheight = addFeaturedHeight();
         headerHeight = ($featheight + $topOffSet);
        // console.log('header offset height is ' + headerHeight);
@@ -296,3 +307,29 @@ $(document).ready(function () {
 //$(document).on('click', ' .dropdown-menu', function (e) {
 //    e.stopPropagation();
 //});
+
+// ake all extrnal links blank window
+jQuery(document).ready(function($) {
+    $('a')
+        .filter('[href^="http"], [href^="//"]')
+        .not('[href*="' + window.location.host + '"]')
+        .attr('rel', 'noopener noreferrer')
+        .attr('target', '_blank');
+});
+
+// fix footer sidebar colision
+function getDocHeight() {
+    var D = document;
+    return Math.max(
+        D.body.scrollHeight, D.documentElement.scrollHeight,
+        D.body.offsetHeight, D.documentElement.offsetHeight,
+        D.body.clientHeight, D.documentElement.clientHeight
+    );
+}
+$(window).scroll(function() {
+    if($(window).scrollTop() + $(window).height() == getDocHeight()) {
+        //$(window).unbind('scroll');
+        console.log("near bottom!");
+        pushFooterDown();
+    }
+});

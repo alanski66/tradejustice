@@ -18,8 +18,8 @@
  #}
 
 {% extends "_layouts/site" %}
-
-{%  set noHomeCols = entry.homeBlockRow | length %}
+{#  work out odd even for 2 or three item display across the top of the home page #}
+{%  set noHomeCols = entry.featuredItems | length %}
 {% if  noHomeCols is odd  %}
     {%  set colClass = "flex-grid-thirds" %}
     {% set batchNo = '3' %}
@@ -42,48 +42,35 @@
                     </div>
                 </div>
             </div>
-            <div class="{{ colClass  }}">
+            <div class="flexcont {{ colClass  }}">
+
+            {% for fentry in entry.featuredItems %}
+                {% set link = fentry.url %}
+                {% set image = fentry.leadImage.first %}
+                <div class="flexcol">
+                    <div class="home-top-col">
 
 
-            {% for block in entry.homeBlockRow| batch(batchNo) %}
+                            {% set imageTransform = {
+                            width: 530,
+                            height: 296,
+                            mode: 'crop',
 
+                            } %}
+                            {% if link %}<a href="{{link}}">{% endif %}
+                            <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}">
+                            {% if link %}</a>{% endif %}
 
-
-                {% if loop.first %}
-                            {% for column in block %}
-
-
-                                {% set link = column.blockLink.first() %}
-
-
-                                <div class="flexcol">
-                                    <div class="home-top-col">
-                                    {% for image in column.blockImage %}
-
-                                        {% set imageTransform = {
-                                        width: 530,
-                                        height: 296,
-                                        mode: 'crop',
-
-                                        } %}
-                                        {% if link %}<a href="{{link.url}}">{% endif %}
-                                            <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}">
-                                            {% if link %}</a>{% endif %}
-                                    {% endfor %}
-                                        <div class="card-content">
-                                            <h2>{% if link %}<a href="{{link.url}}">{% endif %}{{ column.blockHeading }}{% if link %}</a>{% endif %}</h2>
-                                            <p>{{ column.blockSummary }}{% if link %}<a href="{{link.url}}">{% endif %}<span class="isprite icon-chev-right-dk"></span>{% if link %}</a>{% endif %}</p>
-                                        </div>
-                                        <span class="yellowline"></span>
-                                    </div>
-                                </div>
-
-
-                            {% endfor %}
-                {% endif %}
-
+                        <div class="card-content">
+                            <h2>{% if link %}<a href="{{link}}">{% endif %}{{ fentry.title }}{% if link %}</a>{% endif %}</h2>
+                            {#<p>{{ fentry.ShortDescription }}{% if link %}<a href="{{fentry.url}}">{% endif %} <span class="isprite icon-chev-right-dk"></span>{% if link %}</a>{% endif %}</p>#}
+                        </div>
+                        <span class="yellowline"></span>
+                    </div>
+                </div>
 
             {% endfor %}
+
             </div>
         </div>
     </div>
@@ -145,49 +132,38 @@
 </div>
 
 
-{% for block in entry.homeBlockRow | batch(2)  %}
-{% if loop.first %}
-{% else %}
-<div class=" container-xl {% if loop.first %}gray-bg-light{% endif %}">
-    <div class="container ">
+    {% for block in entry.homeBlockRow | batch(2) %}
 
-<div class="row gutter-85 homerow">
+        <div class=" container-xl {% if loop.first %}gray-bg-light{% endif %}">
+            <div class="container ">
+                <div class="row gutter-85 homerow">
 
-    {% for column in block %}
-      {#{%  if  loop.revindex == 2 %}#}
-        {% set link = column.blockLink.first() %}
+                    {% for column in block %}
 
+                        {% set link = column.blockLink.first() %}
+                        <div class="col-xxs-16 col-xs-8 col-sm-8">
+                            {% for image in column.blockImage %}
+                                {% set imageTransform = {
+                                width: 527,
+                                height: 296,
+                                mode: 'crop',
+                                position: column.focalPoint
+                                } %}
+                                {% if link %}<a href="{{link.url}}">{% endif %}
+                                        <span class="yellowline"></span>
+                                        <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}">
+                                {% if link %}</a>{% endif %}
+                            {% endfor %}
+                            <h2>{% if link %}<a href="{{link.url}}">{% endif %}{{ column.blockHeading }}{% if link %}</a>{% endif %}</h2>
+                            <p>{{ column.blockSummary }}{% if link %}<a href="{{link.url}}"><span class="isprite icon-chev-right-dk"></span></a>{% endif %}</p>
+                        </div>
+                    {% endfor %}
 
-        <div class="col-xxs-16 col-xs-8 col-sm-8">
-            <div class="home-top-col">
-                {% for image in column.blockImage %}
-
-                    {% set imageTransform = {
-                    width: 530,
-                    height: 296,
-                    mode: 'crop',
-
-                    } %}
-                    <a href="{{link.url}}">
-                        <span class="yellowline"></span>
-                        <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}"></a>
-                {% endfor %}
-                <div class="card-content">
-                    <h2><a href="{{link.url}}">{{ column.blockHeading }}</a></h2>
-                    <p>{{ column.blockSummary }}<a href="{{link.url}}"><span class="isprite icon-chev-right-dk"></span></a></p>
                 </div>
             </div>
         </div>
-      {#{% endif %}#}
+
     {% endfor %}
-
-
-
-</div>
-    </div>
-</div>
-{% endif %}
-{% endfor %}
 
 
 
@@ -270,3 +246,33 @@
     </div>
 </div>
 {% endblock %}
+
+
+    {% set myJs %}
+        $(document).ready(function(){
+
+        // Select and loop the container element of the elements you want to equalise
+        $('.flexcont').each(function(){
+
+        // Cache the highest
+        var highestBox = 0;
+
+        // Select and loop the elements you want to equalise
+        $('.card-content', this).each(function(){
+
+        // If this box is higher than the cached highest then store it
+        if($(this).height() > highestBox) {
+        highestBox = $(this).height();
+        }
+
+        });
+
+        // Set the height of all those children to whichever was highest
+        $('.card-content',this).height(highestBox);
+
+        });
+
+        });
+    {% endset %}
+
+    {% includeJs myJs %}

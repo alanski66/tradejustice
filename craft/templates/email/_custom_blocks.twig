@@ -1,0 +1,53 @@
+{% set entries = craft.entries.section('blog').order('sticky desc').find() %}
+
+
+{% for block in entry.emailContentBlock %}
+{% switch block.type %}
+
+{% case "emailContent" %}
+
+<tr>
+    <td bgcolor="#ffffff" dir="ltr" align="center" valign="top" width="100%" style="padding: 10px;">
+        <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody><tr>
+                <!-- Column : BEGIN -->
+                {% for image in block.blockimage %}
+                {% set imageTransform = {
+                width: 170,
+                height: auto
+                } %}
+                <td width="33.33%" class="stack-column-center" valign="top">
+                    <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody><tr>
+                            <td dir="ltr" valign="top" style="padding: 0 10px;">
+
+                                    <img src="{{ image.url }}" width="170" height="auto" alt="alt_text" border="0" class="center-on-narrow" style="height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+
+                            </td>
+                        </tr>
+                        </tbody></table>
+                </td>
+                {% endfor %}
+                <!-- Column : END -->
+                <!-- Column : BEGIN -->
+                <td width="66.66%" class="stack-column-center" valign="top">
+                    <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody><tr>
+                            <td dir="ltr" valign="top" style="font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding: 10px; text-align: left;" class="center-on-narrow">
+                                <strong style="color:#111111;">{{ block.blockHeading }}</strong>
+                                <br>
+                                {{ block.blockBody }}
+                                <br><br>
+                            </td>
+                        </tr>
+                        </tbody></table>
+                </td>
+                <!-- Column : END -->
+            </tr>
+            </tbody></table>
+        <hr>
+    </td>
+</tr>
+{% default %}
+{% endswitch %}
+{% endfor %}

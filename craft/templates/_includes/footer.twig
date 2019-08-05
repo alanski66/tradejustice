@@ -1,0 +1,118 @@
+<div class="footwrap">
+<div id="footer" class="footer" style="display:none">
+
+<div class="container-xl subs-bg">
+    <div class="container">
+
+        <section class="subscribe">
+            <div class="col-xxs col-xs-8 col-sm-8 col-md-8 col">
+                <div class="instru">
+                <div class="centerBlock">
+                    <span class="pull-left isprite icon-subscribe"></span>
+                    <div class="pull-left">
+                        <div class="subscribe-title">Want to stay up to date?</div>
+                        <span>Enter your email address</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-xxs col-xs-8 col-sm-4 col-md-8 col">
+                <div class="center-block">
+                <div class="centerBlock">
+
+                    <form id="monkey" class="monkey form-inline" action="" method="POST">
+                        <input type="hidden" name="action" value="mailchimpSubscribe/list/Subscribe">
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+                                <input type="text" class="form-control submail" id="email" name="email" value="enter your email"/>
+                                <div class="input-group-addon subme"><button type="submit">Sign up</button></div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</div>
+
+<div class="container-xl footer-bg">
+    <footer class="container">
+        <section class="">
+            <div class="col-xxs-16 col-xs-8 col-sm-5 footer-links">
+                <h4>Trade Issues</h4>
+                <ul  class="list-unstyled" >
+                    {% set sidemenu = craft.entries.section('tradeIssues').order('title').level('1').hidePage('< 1') %}
+                    {% nav entry in sidemenu %}
+                    {% set navlink = entry.uri %}
+                    <li>
+                        <a href="{{ siteUrl }}{{ navlink }}" class=" level{{ entry.level }}">{{ entry.title }}</a>
+                    </li>
+                    {% endnav %}
+                </ul>
+            </div>
+            <div class="col-xxs-16 col-xs-8 col-sm-5 footer-links">
+                <h4>Trade deals</h4>
+                <ul  class="list-unstyled" >
+                    {% set sidemenu = craft.entries.section('tradeDeals').level('1').hidePage('< 1') %}
+                    {% nav entry in sidemenu %}
+                    {% set navlink = entry.uri %}
+                    <li>
+                        <a href="{{ siteUrl }}{{ navlink }}" class=" level{{ entry.level }}">{{ entry.title }}</a>
+                    </li>
+                    {% endnav %}
+                </ul>
+            </div>
+            <div class="col-xs-16 col-sm-5 col-sm-offset-1 footer-links">
+                <h4>About us</h4>
+                <ul  class="list-unstyled" >
+                    {% set sidemenu = craft.entries.section('pages').order('title').level('1').hidePage('< 1') %}
+                    {% nav entry in sidemenu %}
+                    {% set navlink = entry.uri %}
+                    <li>
+                        <a href="{{ siteUrl }}{{ navlink }}" class=" level{{ entry.level }}">{{ entry.title }}</a>
+                    </li>
+                    {% endnav %}
+                </ul>
+            </div>
+        </section>
+    </footer>
+</div>
+    <div class="container-xl footer-copyright ">
+        <footer class="container">
+            <section class="">
+                <div class="col-xs-16   footer-links">
+                   <span class="hide"> {% if organisation.orgCopyright | length %}
+                        {# &copy; {{ now.year }} {{ organisation.orgCopyright }} #}
+                    {% endif %}</span>
+                     {{ organisation.orgInfo | striptags }}
+
+                </div>
+                </section>
+            </footer>
+        </div>
+</div>
+<!-- modal message -->
+
+
+<div id="msg" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Subscription feedback</h4>
+            </div>
+            <div class="modal-body">
+                <p id="subResult">One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

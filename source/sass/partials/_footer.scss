@@ -1,0 +1,160 @@
+.subs-bg{
+  background: $yellow;
+  min-height:60px;
+}
+
+footer {
+	clear: both;
+}
+.footer-bg {
+	background: $black;
+	//color: $gray-mid;
+	//padding: 20px 30px;
+}
+.footer-copyright{
+ background: $gray-mid;
+  color:$gray-light;
+  font-size: $font-size-small;
+  padding: 20px 0
+
+}
+.footer-bg h4{
+  color: $gray-ex-light;
+  margin: 30px 0 15px;
+}
+.footer-logo{
+  width:119px;
+  height:89px;
+  background-position: -295px -3px;
+}
+.footer-links ul{
+  margin-top:0;
+}
+.footer-links ul li{
+  padding:5px 0;
+  line-height: 0.7em;
+}
+.footer-links ul li a{
+  font-size: $font-size-small;
+  color: $gray-ex-light;
+}
+.footer a:hover,
+.footer-links ul li a:hover{
+  color: lighten($gray-ex-light, 10%);
+}
+.footer a{
+  color: $gray-mid;
+}
+.company p{
+  font-size:$font-size-small;
+  color:$gray-mid;
+}
+.logo-20 {
+	background-position: 0 -226px;
+	width: 319px;
+	height: 114px;
+}
+
+.home .logo-20{
+  background-position: 0 -226px;
+  width: 319px;
+  height: 114px;
+}
+//chat
+.navbar-fixed-bottom.chat{
+  height: 49px;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 8px 0;
+}
+
+.footwrap{
+  position:relative;
+  z-index: 11;
+}
+#footer{
+  -webkit-transition: all 0.9s ease;
+  transition: all 0.9s ease;
+  position: relative;
+  z-index: 1;
+  width:100%;
+  background: $white;
+  //;
+}
+.subscribe .col{
+  position: relative;
+  height:110px;
+}
+.subscribe .col .center-block{
+  text-align: center;
+}
+.subscribe .col .centerBlock{
+  //position: absolute;
+  //top: 50%;
+  //transform: translateY(-50%);
+  //width:100%;
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  height: 110px;
+}
+.subscribe-title{
+
+  font-weight: bold;
+  @include breakpoint(xs) {
+    font-size: 20px;
+  }
+  @include breakpoint(sm) {
+    font-size: 24px;
+  }
+}
+
+form.monkey{
+margin-top:20px;
+}
+.monkey .input-group{
+  @include breakpoint(xs) {
+    width:257px;
+  }
+  @include breakpoint(sm) {
+    width:320px;
+  }
+
+}
+
+.monkey .input-group-addon,.monkey .form-control{
+  border-radius:25px;
+
+  border:none;
+  height:40px;
+}
+.monkey .input-group-addon{
+  border-top-left-radius: 0;
+  -moz-border-radius-bottomleft: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  padding:0;
+  border:none;
+}
+.input-group-addon.subme button{
+
+  background: transparent;
+  border: none;
+  display: inline-block;
+  width: 100%;
+  height: 26px;
+}
+.instru span{
+  font-size: 18px;
+}
+
+.subscribe .col-xxs{
+  @include breakpoint(xxs) {
+    width: 100%!important;
+  }
+  @include breakpoint(xs) {
+    width: 50%!important;
+  }
+  //@include breakpoint(xs) {
+  //  width: 100%;
+  //}
+}

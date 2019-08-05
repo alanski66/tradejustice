@@ -1,0 +1,100 @@
+.flex-grid {
+  display: flex;
+}
+.flex-grid .flexcol {
+  flex: 1;
+}
+.flex-grid-thirds {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-grid-thirds .flexcol {
+  width: 28%;
+}
+
+
+.flex-grid-even{
+  display: flex;
+  justify-content: space-between;
+}
+.flex-grid-even .flexcol {
+  width: 49%;
+}
+
+.flexcol .card-content h2{
+  font-size:19px;
+}
+.flexcol .card-content h2 a {
+  color: $white;
+}
+.flexcol .card-content{
+  padding:0;
+}
+.flexcol span.yellowline{
+  border-top-width: 2px;
+}
+
+.flexcol a > .icon-chev-right-dk{
+  background-position: 0 -3px;
+}
+
+@media (max-width: 600px) {
+  .flex-grid,
+
+  .flex-grid-thirds {
+    display: block;
+
+    .flexcol {
+      width: 100%;
+      margin: 0 0 10px 0;
+    }
+  }
+  .hero{
+    height:100%
+  }
+
+  .flexcol img{
+    width:100%;
+  }
+}
+
+
+@media (max-width: 990px) {
+
+  .flexcol .card-content p{
+    display:none
+  }
+  .flexcol .card-content h2 a{
+    color:$white;
+
+  }
+}
+@media (min-width: 992px) {
+  .flexcol .card-content p{
+    //display:none
+    color:$white;
+    font-size:19px;
+    line-height: 1.2;
+    min-height:60px;
+    display: block;
+  }
+  .flexcol .card-content h2{
+    font-size:24px;
+  }
+
+}
+
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+.flex-grid {
+  margin: 0 0 20px 0;
+}
+.flexcol {
+  //background: salmon;
+  //padding: 20px;
+}

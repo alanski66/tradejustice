@@ -1,0 +1,137 @@
+body {
+	font-family: $font-family-base;
+    font-size: $font-size-medium;
+  //background-color: $yellow;
+}
+
+
+body p{
+  font-size:20px;
+  line-height:29px;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: $headings-font-family;
+    font-weight: 400;
+    font-style: normal;
+  margin-top:30px;
+  margin-bottom:30px;
+}
+h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
+	font-family: $headings-font-family;
+    font-weight: 700;
+    font-style: normal;
+}
+h1{
+  font-size: $font-size-xlarge;
+}
+
+h2{
+  @include breakpoint(xxxs) {
+    font-size: 23px;
+  }
+  @include breakpoint(sm) {
+    font-size: 30px;
+  }
+}
+
+article h1, label{
+  color:$headings-color;
+}
+ul,ol{
+  margin-top:20px;
+  margin-bottom: 20px;
+}
+hr{
+  border-color:$gray-line;
+}
+section a, a {
+	color: $red-dark;
+}
+section a:hover {
+	color: #111c24;
+	text-decoration: none
+}
+a:hover{
+  color:$red;
+  text-decoration: none;
+  cursor: pointer;
+}
+//a.ext{
+//  background: url(../resources/external-link.png) no-repeat 100% 3px;
+//  background-size: 20px 20px;
+//  padding-right: 22px;
+//}
+
+.emergency h2 a{
+  color: $white;
+}
+section a:hover span.sprite.icon-download:hover {
+  background-position: -141px 0px;
+}
+.logos h5{
+  color:#bbb;
+}
+
+.box:hover{
+  transition: background-color 0.1s ease;
+  background: #FFF1A8;
+  cursor: pointer;
+  cursor: hand;
+}
+
+p {
+	font-size: 16px;
+}
+.section-heading {
+	margin: 130px 0 20px 0;
+}
+
+.section-heading span{
+ font-weight:400
+}
+
+.section-subheading {
+	margin: 0 0 30px 0;
+    padding: 0;
+    line-height: 0;
+}
+
+.sidebar h3{
+  border-bottom: 5px solid $yellow;
+  padding:0 0 10px;
+}
+
+section.main h2 a, section.main h3 a, section.main h4 a, section.main h5 a, section.main h6 a {
+  color: $black;
+  text-decoration: none;
+}
+
+blockquote{
+  border-top: 1px solid #F4D233;
+  border-bottom: 1px solid #F4D233;
+  padding: 20px 0 15px;
+  border-left: none;
+  margin: 40px 0 50px 0;
+  font-weight:500;
+  font-style: italic;
+  max-width: 571px;
+  width: 74%;
+}
+
+blockquote footer{
+
+}
+blockquote cite{
+  font-size: $font-size-small;
+}
+
+//.icon-twitter{
+//  width: 46px;
+//  height: 46px;
+//  background-position: -2px -101px;
+//  padding: 6px 0 0 40px;
+//  font-size: $font-size-small;
+//  display: block;
+//  margin-top:20px;
+//  width:100%;
+//}

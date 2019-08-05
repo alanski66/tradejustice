@@ -1,0 +1,57 @@
+{% extends '_layouts/cp' %}
+
+{% set title = 'Stagecraft' %}
+
+
+{% set tabs = {
+export: { label: "Export"|t, url: url('stagecraft') },
+import: { label: "Import"|t, url: url('stagecraft/import') },
+} %}
+
+{% set selectedTab = 'import' %}
+
+{% set crumbs = [
+{ label: "Settings"|t, url: url('settings') },
+{ label: "Plugins"|t, url: url('settings/plugins') },
+{ label: "Stagecraft"|t, url: url('stagecraft') }
+] %}
+
+{% includeJsResource('stagecraft/js/default.js') %}
+{% includeCssResource('stagecraft/css/default.css') %}
+
+{% block content %}
+
+  {% import '_includes/forms' as forms %}
+
+  <div class="grid">
+
+    <div class="item">
+
+      <form method="POST" accept-charset="UTF-8" data-saveshortcut>
+
+        <input type="hidden" name="action" value="stagecraft/importstep2">
+
+        <h2>Importer</h2>
+
+          {{ getCsrfInput() }}
+          {{ forms.textareaField({
+              label: 'Data',
+              instructions: 'Paste the JSON data to import.',
+              name: 'data',
+              required: true,
+              class: 'code',
+              rows: 10,
+            })
+          }}
+
+        <div class="buttons">
+          <input type="submit" class="btn submit" value="Import" />
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+{% endblock %}

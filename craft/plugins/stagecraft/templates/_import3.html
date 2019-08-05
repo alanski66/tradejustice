@@ -1,0 +1,35 @@
+{% extends '_layouts/cp' %}
+
+{% set title = 'Stagecraft' %}
+
+
+{% set tabs = {
+export: { label: "Export"|t, url: url('stagecraft') },
+import: { label: "Import"|t, url: url('stagecraft/import') },
+} %}
+
+{% set selectedTab = 'import' %}
+
+{% set crumbs = [
+{ label: "Settings"|t, url: url('settings') },
+{ label: "Plugins"|t, url: url('settings/plugins') },
+{ label: "Stagecraft"|t, url: url('stagecraft') }
+] %}
+
+{% includeJsResource('stagecraft/js/default.js') %}
+{% includeCssResource('stagecraft/css/default.css') %}
+
+{% block content %}
+
+  {% import '_includes/forms' as forms %}
+
+  <div class="grid">
+
+    <div class="item">
+
+      <h2>All Done :)</h2>
+    </div>
+
+  </div>
+
+{% endblock %}

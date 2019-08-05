@@ -1,0 +1,60 @@
+{% macro isActive(slug) %}
+    {% if slug in craft.request.firstSegment %} class="active" {% endif %}
+    {% if slug in craft.request.segments %} class="active"{% endif %}
+
+{% endmacro %}
+{% macro isActiveChildClass(slug) %}
+    {% if slug in craft.request.getLastSegment()|trim %} child active {% endif %}
+
+{% endmacro %}
+
+{% macro activeLinkClass(linkUri, requestSegmentNumber) %}
+
+    {# Request the relevant path segment in the URL #}
+    {% set nthRequestSegment = craft.request.segment(requestSegmentNumber) %}
+
+    {# Split the link's URI into a list of path segments #}
+    {% set linkSegments = linkUri|split('/') %}
+
+    {# Get the path segment relevant for our comparison #}
+    {% set nthLinkSegment = linkSegments[requestSegmentNumber - 1] %}
+
+    {# Return `active` if the nthLinkSegment equals the nthRequestSegment #}
+    {% if nthLinkSegment == nthRequestSegment %}active{% else %}notactive{% endif %}
+
+{% endmacro %}
+
+{% macro isMenuActive(slug) %}
+    {% if slug in craft.request.segments %} class=active{% endif %}
+{% endmacro %}
+
+{%  macro getNavLink(entry) %}
+    {% set navlink = entry.entryLink.first() %}
+    {{ navlink ? navlink : entry.customMenuUrl }}
+{% endmacro %}
+
+{% macro isParentMenuActive(slug) %}
+    {% if slug in craft.request.segments %}active{% endif %}
+{% endmacro %}
+
+{% macro activeParentLinkClass(linkUri, slug) %}
+
+    {# Request the relevant path segment in the URL #}
+    {% set nthRequestSegment = craft.request.segment(2) %}
+
+    {% if slug in nthRequestSegment %} active {% endif %}
+{% endmacro %}
+
+{% macro isSticky(entry) %}
+    {% if entry.sticky %}sticky{% endif %}
+{% endmacro %}
+
+{% macro getMedia(image) %}
+
+
+
+{% endmacro %}
+
+{% macro setCategoryUrl(entry) %}
+    {% set category = entry.category[0] ?? null %}
+{% endmacro %}

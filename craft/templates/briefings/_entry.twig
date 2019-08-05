@@ -1,0 +1,141 @@
+{#
+# News entry template
+# -------------------
+#
+# This template gets loaded whenever a News entry’s URL is
+# requested. That’s because the News section’s Template setting is
+# set to “news/_entry”, the path to this template.
+#
+# When this template is loaded, it will already have an ‘entry’
+# variable, set to the requested News entry.
+#
+# See this page for more details on how Craft routes requests:
+# http://craftcms.com/docs/routing
+#}
+
+{% extends "_layouts/site" %}
+
+{% set pdfAsset = entry.resourcesFile.first() %}
+{% set pdfAssets = entry.resourcesFile %}
+{% set pdfAssetsOthers = entry.resourcesFile.offset(1) %}
+
+{% block content %}
+
+<div class="container-xl dark-bg ">
+    <div class="container resources ">
+        <section class="dark-title">
+            <div class="col-xs-16  col-sm-12 col-md-12">
+                <h1 class=""><span class="report-category">Briefings</span> <span class="title-shrunk">{{ entry.title }}</span></h1>
+
+
+            </div>
+            <div class="col-xs-16 col-sm-4 col-md-4 time-bg">
+
+                <div class="time">
+
+                    <span class="glyphicon glyphicon-time"></span>
+                    <div class="time-heading">Briefings</div>
+                    {% set readingTime = entry.timeToRead | default('15') %}
+                    <div class="estimate">READING TIME {{readingTime}} mins</div></div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="container ">
+    <section class="main ">
+        <div class="col-sm-10 col-md-10 ">
+
+
+                <h2 id="subtitle">{{ entry.title }}</h2>
+
+                <p class="lead">{{ entry.resourceIntro }}</p>
+                {{ entry.body }}
+
+
+            {% if pdfAssets %}
+            <a name="additional-documents" id="also"></a>
+            <h3>Downloads</h3>
+            <ul class="doclist list-unstyled">
+                {% for pdf in pdfAssets %}
+                    <li class="list-item"><a href="{{ pdf.url }}" title="{{pdf.title}} report" class=" " role="button">
+                        <span class="glyphicon glyphicon-download"></span> {{pdf.title}}</a></li>
+                {% endfor %}
+                </ul>
+
+            {% endif %}
+
+{% set tags = entry.tags %}
+            {% if tags | length %}
+<hr>
+
+            {% for tag in tags %}
+            <span class="label label-default"> <a href="{{ baseUrl }}topics/{{tag.slug}}">{{ tag.title }}</a></span>
+            {% endfor %}
+
+            {% endif %}
+
+
+        </div>
+
+        <div class="col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2">
+
+            <div class="side thumbnail">
+                {% set image = entry.resourceImage.first() %}
+
+                {% if image %}
+                <a class="img-thumbnail" href="{{ pdfAsset.url }}" >
+                    <img class="img-responsive lead" srcset="{{ image.getUrl('mobile') }} 320w,
+                                 {{ image.getUrl('mobile') }} 450w,
+                                 {{ image.getUrl('tablet') }} 800w"
+                     src="{{ image.getUrl('mobile') }}" alt="{{ entry.title }}">
+                </a>
+                {% endif %}
+
+            </div>
+            <div class="caption">
+                {% set publisher = "" %}
+                {% set memberPublisher = entry.createdByMember.first() %}
+
+                {% if entry.tjmOwnedResource == "yes" %}
+
+                    {% set publisher = 'TJM' %}
+
+                {% elseif entry.memberResource == "yes" %}
+
+                    {% if memberPublisher  %}
+
+                        {% set publisher = entry.createdByMember.first() %}
+                        {% set publisherUrl = entry.createdByMember.first().url %}
+
+                    {% endif %}
+
+                {% elseif entry.createdBy | length and  entry.memberResource == "no" %}
+
+                    {% set memberPublisher = "" %}
+                    {% set publisher = entry.createdBy %}
+
+                {% endif %}
+
+                <span class="hide">Published {{ entry.postDate.format('F  Y') }} </span>
+                <span class="author">
+                    {% if memberPublisher  %}by <a href="{{publisherUrl}}">{% endif %}
+                        {{publisher}}
+                    {% if memberPublisher  %}</a>{% endif %}
+                    </span>
+
+
+
+                <p class="text-center download">
+                    <a href="{{ pdfAsset.url }}" class="btn btn-default btn-lg" role="button">
+                        <span class="glyphicon glyphicon-download"></span> Download</a>
+                </p>
+                <p class="text-center"><a href="#additional-documents">See all docs</a></p>
+            </div>
+
+
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

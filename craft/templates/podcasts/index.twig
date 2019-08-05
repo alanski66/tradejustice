@@ -1,0 +1,146 @@
+
+{% extends "_layouts/site" %}
+
+
+{% if year is not defined %}
+{% set year = now.year %}
+{% endif %}
+{% if year is not defined %}
+{% redirect "blog/archive/"~now.year %}
+{% endif %}
+
+
+{% set entries = craft.entries({
+    section: 'podcasts'
+}).order('sticky desc', 'postDate desc') %}
+
+{% set myCss %}
+div.episode p.description{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+article.podcast{
+}
+{% endset %}
+
+{% includeCss myCss %}
+
+{% block content %}
+
+<div class="container-xl dark-bg ">
+    <div class="container resources ">
+        <section class="dark-title">
+            <div class="col-xs-16  col-sm-12 col-md-12">
+                <h1 class=""><span class="report-category">Podcasts</span> <span class="title-shrunk">Podcasts</span></h1>
+
+            </div>
+            <div class="col-xs-16 col-sm-4 col-md-4 time-bg">
+
+                <div class="hide time">
+
+                    <span class="glyphicon glyphicon-time"></span>
+                    <div class="time-heading">Reports</div>
+                    <div class="estimate">READING TIME 15 mins</div></div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="container site page list-emergency">
+    <section class="main">
+        <div class="col-md-10 col-md-offset-0 main">
+            <div class="well">
+                <p>The Trade Justice Movement, a UK-based coalition of trade unions, NGOs and fairtrade groups, brings you this podcast series that explores progressive, alternative approaches to trade as the UK gears up to leave the EU. </p>
+            </div>
+
+
+
+            {% for entry in entries %}
+
+            {% if entry.sticky %}
+            {% set sticky = "sticky" %}
+            {% else %}
+            {% set sticky = '' %}
+            {% endif %}
+
+            {% set link = entry.url %}
+
+
+            <article class="podcast">
+                <h2 class="hidden"><a href="{{entry.url}}"> {{entry.title}}</a></h2>
+
+                <div class="short-desc"> {{ entry.embedCode | raw }}</div>
+
+            </article>
+            {% endfor %}
+
+
+        </div>
+        <div class="hidden hidden-xs col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 side-co    ">
+
+
+            <div class="pside-inner">
+                <aside id="nav" class="psidemenu ">
+                    <h3>Podcasts</h3>
+
+
+
+                        <div class="nav" data-spy="scrollspy">
+                            {% for entry in entries %}
+                            {% if entry.sticky %}
+                            {% set sticky = "sticky" %}
+                            {% else %}
+                            {% set sticky = '' %}
+                            {% endif %}
+
+                            <div class="media {{sticky}}">
+
+                                {% set image = entry.leadImage[0] ?? null %}
+
+                                {% set thumb = {
+                                mode: 'crop',
+                                width: 60,
+                                height: 60,
+                                quality: 75,
+                                position: 'top-center'
+                                } %}
+
+                                {% if image %}
+                                {% set thumb = {
+                                mode: 'crop',
+                                width: 60,
+                                height: 60,
+                                quality: 75,
+                                position: 'top-center'
+                                } %}
+                                <div class="media-left">
+
+
+                                    <a href="{{ entry.url }}" class="">
+                                        <img src="{{ image.getUrl(thumb) }}" width="{{ image.getWidth(thumb) }}" height="{{ image.getHeight(thumb) }}"
+                                        alt="{{entry.title}}">
+                                    </a>
+                                </div>
+
+                                {% endif %}
+
+
+
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="{{ entry.url }}">{{ entry.title }}</a></h4>
+
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+
+                </aside>
+            </div>
+
+        </div>
+
+    </section>
+</div>
+{% endblock %}

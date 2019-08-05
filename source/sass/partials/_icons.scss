@@ -1,0 +1,296 @@
+.isprite{
+//background-image: url(../img/icon-sprite.svg);
+  background-image: url(../img/icon-sprite.png);
+background-size: 200px 100px;
+background-repeat: no-repeat;
+position: relative;
+display: inline-block;
+  background-color: transparent;
+  border-radius: inherit;
+}
+.icon-wrap{
+
+  display: table-cell;
+  vertical-align: middle;
+  float:left;
+}
+.featured .icon-wrap{
+  @include breakpoint(xxxs) {
+    height:60px;
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+  }
+  @include breakpoint(xxs) {
+    height:auto;
+  }
+
+}
+.icon-report {
+  //width: 74px;
+  //height: 75px;
+  //background-position: 0px -248px;
+  //padding: 0px;
+  //font-size: 14px;
+  //display: inline-block;
+  //margin: 10px 20px 0 0;
+  //background-size: 453px 417px;
+  width: 74px;
+  height: 75px;
+  background-position: 0px -153px;
+  padding: 0px;
+  font-size: 14px;
+  display: inline-block;
+  margin: 10px 20px 0 0;
+  background-size: 450px;
+}
+
+@media (min-width: 320px) {
+  .icon-twitter {
+    margin-top: 8px;
+    width: 40px;
+    height: 35px;
+    background-position: 0px -161px;
+    padding: 0px;
+    font-size: 14px;
+    display: inline-block;
+    margin-right: 15px;
+    float: left;
+    background-size: 323px 335px;
+    margin-top: 13px; } }
+
+@media (min-width: 768px) {
+  .icon-twitter {
+    width: 67px;
+    height: 67px;
+    background-position: -12px -137px;
+    padding: 0px;
+    font-size: 14px;
+    display: inline-block;
+    margin-right: 27px;
+    float: left;
+    background-size: 600px 300px;
+    margin-top: 0px; } }
+
+@media (min-width: 992px) {
+  .icon-twitter {
+    margin-right: 27px; } }
+
+.icon-chev-right {
+  width: 17px;
+  height: 29px;
+  background-position: 0 -6px;
+  padding: 0;
+  background-color: inherit;
+  margin: 0 0 -9px 10px;
+  border-radius: inherit; }
+
+.icon-chev-right-dk {
+  width: 17px;
+  height: 29px;
+  background-position: 0 -36px;
+  padding: 0;
+  background-color: inherit;
+  margin: 0 0 -11px 7px; }
+
+a > .icon-chev-right-dk:hover {
+  background-position: 0 -3px; }
+
+.shrink .icon-report {
+  width: 35px;
+  height: 35px;
+  background-position: 2px -67px;
+  padding: 0px;
+  font-size: 14px;
+  display: flex;
+  margin: 0 10px 0 0;
+  background-size: 200px; }
+
+.icon-external-link {
+  width: 25px;
+  height: 25px;
+  background-position: -418px -47px;
+  padding: 7px 0 0 20px;
+  margin: 0px 0px 0 10px; }
+
+section.main .link-resource a:hover,
+section.main .link-resource a:hover > .icon-external-link {
+  color: #F4D233;
+  width: 25px;
+  height: 25px;
+  background-position: -418px -76px;
+  padding: 7px 0 0 0px; }
+
+.icon-subscribe {
+  width: 45px;
+  height: 45px;
+  background-position: -75px -4px;
+  padding: 0px;
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 27px;
+  float: left;
+  background-color: transparent;
+  margin-top: 15px; }
+
+.shrink .icon-twitter {
+  width: 40px;
+  height: 35px;
+  background-position: 0px -161px;
+  padding: 0px;
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 15px;
+  float: left;
+  background-size: 323px 335px;
+  margin-top: 8px; }
+
+section.main .icon-twitter {
+  width: 54px;
+  height: 35px;
+  background-position: 0px -162px;
+  padding: 0px;
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 0px;
+  float: left;
+  background-size: 323px 335px;
+  margin-top: 0px; }
+
+//.icon-twitter{
+//  width: 46px;
+//  height: 46px;
+//  background-position: -2px -101px;
+//  padding: 6px 0 0 40px;
+//  font-size: $font-size-small;
+//  display: block;
+//  margin-top:20px;
+//  width:100%;
+//}
+.icon-chev-right{
+  width: 17px;
+  height: 29px;
+  background-position: 0 -6px;
+  padding: 0;
+  background-color: inherit;
+  margin: 0 0 -9px 10px;
+  border-radius: inherit;
+}
+
+
+.icon-chev-right-dk{
+  //width: 25px;
+  //height: 25px;
+  //background-position: -454px -52px;
+  //padding: 0 5px 0 22px;
+  //display: inline;
+  //background-color: inherit;
+  //background-size: 600px 300px;
+  //width: 17px;
+  //height: 29px;
+  //background-position: -462px -52px;
+  //padding: 0;
+  //background-color: inherit;
+  //background-size: 600px 300px;
+  //margin: 0 0 -9px;
+  width: 17px;
+  height: 29px;
+  background-position: 0 -36px;
+  padding: 0;
+  background-color: inherit;
+  margin: 0 0 -11px 7px
+}
+a>.icon-chev-right-dk:hover{
+  background-position: 0 -3px;
+  //-webkit-transition: all .6s ease;
+  //transition:  all .6s ease;
+}
+.shrink .icon-report{
+  //width: 50px;
+  //height: 50px;
+
+  //width: 30px;
+  //height: 30px;
+  //background-position: 2px -198px;
+  //padding: 0px;
+  //font-size: 14px;
+  //display: flex;
+  //margin: 0 10px 0 0;
+  //background-size: 163px 369px;
+
+  width: 35px;
+  height: 35px;
+  background-position: 2px -67px;
+  padding: 0px;
+  font-size: 14px;
+  display: flex;
+  margin: 0 10px 0 0;
+  background-size: 200px;
+}
+.icon-external-link{
+  width: 25px;
+  height: 25px;
+  background-position: -418px -47px;
+  padding: 7px 0 0 20px;
+  margin: 0px 0px 0 10px;
+}
+section.main .link-resource a:hover,
+section.main .link-resource a:hover>.icon-external-link{
+  color: $yellow;
+  width: 25px;
+  height: 25px;
+  background-position: -418px -76px;
+  padding: 7px 0 0 0px;
+}
+.icon-subscribe{
+width: 45px;
+height: 45px;
+background-position: -75px -4px;
+padding: 0px;
+font-size: 14px;
+display: inline-block;
+margin-right: 27px;
+float: left;
+  background-color: transparent;
+//background-size: 542px 438px;
+  margin-top:15px;
+}
+.shrink .icon-twitter {
+  width: 40px;
+  height: 35px;
+  background-position: 0px -161px;
+  padding: 0px;
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 15px;
+  float: left;
+  background-size: 323px 335px;
+  margin-top: 8px;
+}
+
+section.main .icon-twitter {
+  width: 54px;
+  height: 35px;
+  background-position: 0px -162px;
+  padding: 0px;
+  font-size: 14px;
+  display: inline-block;
+  margin-right: 0px;
+  float: left;
+  background-size: 323px 335px;
+  margin-top: 0px;
+}
+//buttons
+section.main a.btn-default,
+.btn-default{
+  color: $gray-dark;
+  background-color: $yellow;
+  border-color: #adadad;
+  text-decoration: none;
+}
+section.main a.btn-default:hover,
+.btn-default:hover {
+  color: lighten($gray-dark, 10%);
+  background-color: lighten($yellow, 10%);
+  border-color: #adadad;
+}

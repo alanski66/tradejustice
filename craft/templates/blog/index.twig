@@ -1,0 +1,218 @@
+
+{% extends "_layouts/site" %}
+
+
+{% if year is not defined %}
+{% set year = now.year %}
+{% endif %}
+{% if year is not defined %}
+{% redirect "blog/archive/"~now.year %}
+{% endif %}
+
+
+{% paginate craft.entries({
+    section: 'blog',
+    with:
+    ['leadImage']
+}).order('sticky desc', 'postDate desc').limit(8) as pageInfo, pageEntries  %}
+
+    {#{% paginate craft.entries.section('blog').limit(3) as pageInfo, pageEntries %}#}
+
+
+{% block content %}
+<div class="container-xl dark-bg ">
+    <div class="container  ">
+        <section class="dark-title">
+            <div class="col-xs-16  col-sm-12 col-md-12">
+                <h1 class=""><span class="report-category">Blog</span> <span class="title-shrunk">Blog</span></h1>
+
+            </div>
+            <div class="col-xs-16 col-sm-4 col-md-4 time-bg">
+
+                <div class="hide time">
+
+                    <span class="glyphicon glyphicon-time"></span>
+                    <div class="time-heading">Reports</div>
+                    <div class="estimate">READING TIME 15 mins</div></div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="container main-outer">
+    <div class="col-xs-12">i am wide</div>
+    <section class="main blogindex row">
+        <div class="col-xs-16  col-md-9 col-md-offset-0 ">
+
+
+
+            {% for entry in pageEntries %}
+
+            {% if entry.sticky %}
+            {% set sticky = "sticky" %}
+            {% else %}
+            {% set sticky = '' %}
+            {% endif %}
+
+            {% set link = entry.url %}
+
+            {#{% set image = entry.leadImage[0] ?? null %}#}
+
+            {#{% if image %}#}
+            {#{% set media = image.getUrl('tablet') %}#}
+            {#{% endif %}#}
+
+            <article>
+                <h2><a href="{{entry.url}}"> {{entry.title}}</a></h2>
+                {% set image = entry.leadImage[0] %}
+                {% if image %}
+
+                    {% set position = entry.leadImage[0].cropPosition |default("center-center") %}
+                    {% set transformedImages = craft.imager.transformImage(image,
+                    [
+                    { width: 1200, ratio: 2/1 },
+                    { width: 1024, ratio: 2/1 },
+                    { width: 600, ratio: 2/1, jpegQuality: 65 },
+                    ],
+                    {
+                    format: 'jpg',
+                    allowUpscale: false,
+                    mode: 'crop',
+                    jpegQuality: 80,
+                    position: ''~position,
+                    interlace: true
+                    }
+                    ) %}
+
+                    <a href="{{entry.url}}">
+                    <img class="img-responsive" src="{{ transformedImages[1].url }}"
+                    sizes="100vw"
+                    srcset="{{ craft.imager.srcset(transformedImages) }}"
+                    alt="{{ image.title }}">
+                </a>
+                {% endif %}
+                <div class="short-desc">{{ entry.ShortDescription }}</div>
+
+            </article>
+            {% endfor %}
+
+            <div class=" container">
+                <div class="row ">
+                    <div class="col-md-12  text-sm-center">
+                        <ul class="pagination mb-5 justify-content-center">
+                            <li class="page-item d-none d-sm-block">
+                                <a class="page-link" href="{{ pageInfo.firstUrl }}">Start</a>
+                            </li>
+
+                            {% if pageInfo.prevUrl %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ pageInfo.prevUrl }}">Previous</a>
+                                </li>
+                            {% endif %}
+
+
+
+                            {% for page, url in pageInfo.getPrevUrls(3) %}
+                            <li class="page-item "><a class="page-link" href="{{ url }}">{{ page }}</a>
+                                {% endfor %}
+
+                            <li class="page-item "><a class="page-link">{{ pageInfo.currentPage }}</a></li>
+
+                            {% for page, url in pageInfo.getNextUrls(3) %}
+                            <li class="page-item "><a class="page-link" href="{{ url }}">{{ page }}</a>
+                                {% endfor %}
+
+                                {% if pageInfo.nextUrl %}
+                            <li class="page-item "><a class="page-link" href="{{ pageInfo.nextUrl }}">Next</a></li>
+                            {% endif %}
+
+                            <li class="page-item d-none d-sm-block">
+                                <a class="page-link" href="{{ pageInfo.lastUrl }}">End</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class=" col-xs-16  col-md-4 col-md-offset-2 side-co    ">
+
+
+            <div class="pside-inner">
+                <aside id="nav" class="psidemenu ">
+                    <h3>Blog posts</h3>
+
+
+
+                        <div class="nav" data-spy="scrollspy">
+                            {% for entry in craft.entries({
+                            section: 'blog',
+                            with:
+                            ['leadImage']
+                            }).order('sticky desc', 'postDate desc')  %}
+                                {% if entry.sticky %}
+                                {% set sticky = "sticky" %}
+                                {% else %}
+                                {% set sticky = '' %}
+                                {% endif %}
+
+                            <div class="media {{sticky}}">
+
+
+                                {% set image = entry.leadImage[0] %}
+
+                                <div class="media-left">
+                                    {% if image %}
+                                        {% set position = entry.leadImage[0].cropPosition |default("center-center") %}
+                                        {% set transformedImages = craft.imager.transformImage(image,
+                                        [
+                                        { width: 320, ratio: 4/3, jpegQuality: 65 },
+                                        { width: 768, ratio: 1/1 },
+
+                                        ],
+                                        {
+                                        format: 'jpg',
+                                        allowUpscale: true,
+                                        mode: 'crop',
+                                        jpegQuality: 80,
+
+                                        interlace: true
+                                        }
+                                        ) %}
+                                        <a href="{{entry.url}}">
+                                            <picture>
+                                                <source media="(max-width: 768px)" sizes="100vw" srcset="{{ transformedImages[0].url }}">
+                                                <source media="(max-width: 3000px)" sizes="100vw" srcset="{{ transformedImages[1].url }}">
+                                                <img class="img-responsive" src="{{ transformedImages[1].url }}" alt="{{ image.title }}">
+                                            </picture>
+
+
+                                        </a>
+                                    {% endif %}
+                                </div>
+
+
+
+
+
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="{{ entry.url }}">{{ entry.title }}</a></h4>
+                                    <div class="short-desc">{{ entry.ShortDescription }}</div>
+
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+
+                </aside>
+            </div>
+
+        </div>
+
+    </section>
+</div>
+{% endblock %}

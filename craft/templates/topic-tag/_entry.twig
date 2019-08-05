@@ -1,0 +1,126 @@
+{#
+# News entry template
+# -------------------
+#
+# This template gets loaded whenever a News entry’s URL is
+# requested. That’s because the News section’s Template setting is
+# set to “news/_entry”, the path to this template.
+#
+# When this template is loaded, it will already have an ‘entry’
+# variable, set to the requested News entry.
+#
+# See this page for more details on how Craft routes requests:
+# http://craftcms.com/docs/routing
+#}
+
+{% extends "_layouts/site" %}
+
+{% set pdfAsset = entry.resourcesFile.first() %}
+
+{% block content %}
+
+<div class="container-xl dark-bg ">
+    <div class="container resources ">
+        <section class="dark-title">
+            <div class="col-sm-12 col-md-12">
+                <h1 class=""><span class="report-category">Reports</span> <span class="title-shrunk">{{ entry.title }}</span></h1>
+
+            </div>
+            <div class="col-sm-4 col-md-4">
+
+                <div class="time">
+
+                    <span class="glyphicon glyphicon-time"></span>
+                    <div class="time-heading">Reports</div>
+                    <div class="estimate">READING TIME 15 mins</div></div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="container ">
+    <section class="main ">
+        <div class="col-sm-10 col-md-10 ">
+
+
+                <h2 id="subtitle">{{ entry.title }}</h2>
+
+                <p class="lead">{{ entry.resourceIntro }}</p>
+
+
+                {{ entry.body }}
+            <p><a href="{{ pdfAsset.url }}" title="{{entry.title}} report" class="btn btn-default " role="button">
+                <span class="glyphicon glyphicon-download"></span> Download</a></p>
+
+{% set tags = entry.tags %}
+            {% if tags | length %}
+<hr>
+            <h3>Some great tags</h3>
+            {% for tag in tags %}
+            <span class="label label-default"> <a href="{{tag.url}}">{{ tag.title }}</a></span>
+            {% endfor %}
+
+            {% endif %}
+
+
+        </div>
+
+        <div class="col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2">
+
+            <div class="thumbnail">
+                {% set image = entry.resourceImage.first() %}
+
+                {% if image %}
+                <a class="img-thumbnail" href="{{ pdfAsset.url }}" >
+                    <img class="img-responsive lead" srcset="{{ image.getUrl('mobile') }} 320w,
+                                 {{ image.getUrl('mobile') }} 450w,
+                                 {{ image.getUrl('tablet') }} 800w"
+                     src="{{ image.getUrl('mobile') }}" alt="{{ entry.title }}">
+                </a>
+                {% endif %}
+
+            </div>
+            <div class="caption">
+                {% set publisher = "" %}
+                {% set memberPublisher = entry.createdByMember.first() %}
+
+                {% if entry.tjmOwnedResource == "yes" %}
+
+                    {% set publisher = 'TJM' %}
+
+                {% elseif entry.memberResource == "yes" %}
+
+                    {% if memberPublisher  %}
+
+                        {% set publisher = entry.createdByMember.first() %}
+                        {% set publisherUrl = entry.createdByMember.first().url %}
+
+                    {% endif %}
+
+                {% elseif entry.createdBy | length and  entry.memberResource == "no" %}
+
+                    {% set memberPublisher = "" %}
+                    {% set publisher = entry.createdBy %}
+
+                {% endif %}
+
+                <span>Published {{ entry.postDate.format('F  Y') }} </span>
+                <span><br>by
+                    {% if memberPublisher  %}<a href="{{publisherUrl}}">{% endif %}
+                        {{publisher}}
+                    {% if memberPublisher  %}</a>{% endif %}
+                    </span>
+
+
+
+                <p class="text-center download">
+                    <a href="{{ pdfAsset.url }}" class="btn btn-default btn-lg" role="button">
+                        <span class="glyphicon glyphicon-download"></span> Download</a>
+            </div>
+
+
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

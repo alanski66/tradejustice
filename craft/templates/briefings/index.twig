@@ -1,0 +1,62 @@
+{#
+ # News index template
+ # -------------------
+ #
+ # This template is loaded whenever http://example.com/news is
+ # requested, because it is located at news/index.html in your
+ # craft/templates/ folder.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/site" %}
+
+{% set entries = craft.entries.section('briefings').order('sticky desc').find() %}
+{% block content %}
+<div class="container-xl dark-bg ">
+    <div class="container resources ">
+        <section class="dark-title">
+            <div class="col-xs-16  col-sm-12 col-md-12">
+                <h1 class=""><span class="report-category">Briefings</span> <span class="title-shrunk">Briefings</span></h1>
+
+            </div>
+            <div class="col-xs-16 col-sm-4 col-md-4 time-bg">
+
+                <div class="time">
+
+                    <span class="glyphicon glyphicon-time"></span>
+                    <div class="time-heading">Briefings</div>
+                    <div class="estimate">READING TIME 15 mins</div></div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="container site page list-emergency">
+    <section class="main">
+        <div class="col-md-8 col-md-offset-0 ">
+
+
+
+            {% set sticky = "" %}
+            {% for entry in entries %}
+            {% if entry.sticky %}
+            {% set sticky = "sticky" %}
+            {% else %}
+            {% set sticky = '' %}
+            {% endif %}
+            <article class="{{sticky}}">
+                <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+
+                {{ entry.resourceShortDescription }}
+                <p><a href="{{ entry.url }}">Continue reading</a></p>
+            </article>
+            {% endfor %}
+
+
+
+        </div>
+
+    </section>
+</div>
+{% endblock %}

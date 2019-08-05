@@ -1,0 +1,183 @@
+{% extends '_layouts/cp' %}
+
+{% set title = 'Stagecraft - Import Preview' %}
+
+
+{% set tabs = {
+export: { label: "Export"|t, url: url('stagecraft') },
+import: { label: "Import"|t, url: url('stagecraft/import') },
+} %}
+
+{% set selectedTab = 'import' %}
+
+{% set crumbs = [
+{ label: "Settings"|t, url: url('settings') },
+{ label: "Plugins"|t, url: url('settings/plugins') },
+{ label: "Stagecraft"|t, url: url('stagecraft') }
+] %}
+
+{% includeJsResource('stagecraft/js/default.js') %}
+{% includeCssResource('stagecraft/css/default.css') %}
+
+{% block content %}
+
+  {% import '_includes/forms' as forms %}
+
+  <div class="grid">
+
+    <div class="item">
+      <form method="POST" accept-charset="UTF-8">
+        <input type="hidden" name="action" value="stagecraft/importstep3">
+
+        {% if model.assets | length %}
+          <h2>Assets</h2>
+          <hr />
+        {% endif %}
+
+        {% if model.categories | length %}
+          <h2>Categories</h2>
+          <table class="data fullwidth">
+            <thead>
+              <tr>
+                <th style="width: 20%">Category</th>
+                <th style="width: 20%">Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for key, group in model.categories %}
+              <tr>
+                <th>{{ key }}</th>
+                <th>Group</th>
+                <td>{{ craft.Stagecraft.CategoryGroupStatus(key) | raw }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <hr />
+        {% endif %}
+
+        {% if model.globals | length %}
+          <h2>Globals</h2>
+          <table class="data fullwidth">
+            <thead>
+              <tr>
+                <th style="width: 20%">Global</th>
+                <th style="width: 20%">Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for key, set in model.globals %}
+              <tr>
+                <th>{{ key }}</th>
+                <th>Set</th>
+                <td>{{ craft.Stagecraft.GlobalSetStatus(key) | raw }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <hr />
+        {% endif %}
+
+        {% if model.fields | length %}
+          <h2>Fields</h2>
+          <table class="data fullwidth">
+            <thead>
+              <tr>
+                <th style="width: 20%">Field</th>
+                <th style="width: 20%">Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for key, group in model.fields %}
+              <tr>
+                <th>{{ key }}</th>
+                <th>Group</th>
+                <td>{{ craft.Stagecraft.FieldGroupStatus(key) | raw }}</td>
+              </tr>
+              {% for fkey, field in group %}
+                <tr>
+                  <td>&nbsp;&nbsp;&nbsp;{{ fkey }}</td>
+                  <td>{{  field.type }}</td>
+                  <td>{{ craft.Stagecraft.FieldStatus(key, fkey, field.type) | raw }}</td>
+                </tr>
+              {% endfor %}
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <hr />
+        {% endif %}
+
+        {% if model.sections | length %}
+          <h2>Sections</h2>
+          <table class="data fullwidth">
+            <thead>
+              <tr>
+                <th style="width: 20%">Section</th>
+                <th style="width: 20%">Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for key, section in model.sections %}
+              <tr>
+                <th>{{ key }}</th>
+                <td>{{ section.type | capitalize }}</td>
+                <td>{{ craft.Stagecraft.SectionStatus(key, section.type) | raw }}</td>
+              </tr>
+              {% for ckey, contenttype in section.entryTypes %}
+                <tr>
+                  <td>&nbsp;&nbsp;{{ ckey }}</td>
+                  <td>Entry Type</td>
+                  <td>{{ craft.Stagecraft.EntryTypeStatus(key, ckey) | raw }}</td>
+                </tr>
+              {% endfor %}
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <hr />
+        {% endif %}
+
+        {% if model.tags | length %}
+          <h2>Tags</h2>
+          <table class="data fullwidth">
+            <thead>
+              <tr>
+                <th style="width: 20%">Tag</th>
+                <th style="width: 20%">Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for key, set in model.tags %}
+              <tr>
+                <th>{{ key }}</th>
+                <th>Group</th>
+                <td>{{ craft.Stagecraft.TagGroupStatus(key) | raw }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <hr />
+        {% endif %}
+
+        <input type="hidden" name="data" id="importData" value='{{ rawdata|replace({"\n":'', "\r":''}) }}' />
+        <input type="hidden" name="applyTo" id="applyTo" value='' />
+
+        <div class="buttons">
+          <input type="submit" class="btn submit" id="step3Submit" value="Import" />
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

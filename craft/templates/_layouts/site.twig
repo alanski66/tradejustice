@@ -1,0 +1,66 @@
+{#
+
+ # The site layout template
+ # ------------------------
+ #
+ # This layout template extends the _layouts/base.html layout, and defines the
+ # main site layout: the header, footer, and main content area.
+ #
+ # It’s never accessed directly. Instead it is extended by all of our main site
+ # templates.
+ #
+ # This template defines one block region, `main`, which should be extended by
+ # child templates to define the main contents for the page.
+-#}
+
+{% extends "_layouts/base" %}
+
+{# Set the `bodyClass` variable to the entry's section handle if there is one,
+   or the first URI segment (this is used by the parent template) #}
+{% if bodyClass is not defined %}
+	{% set bodyClass = entry is defined ? entry.section.handle : craft.request.firstSegment %}
+{% endif %}
+
+{# Set the `title` variable to the nav item that matches the first segment #}
+{% if nav[bodyClass] is defined %}
+	{% set title %}{% if title is defined %}{{ title }} - {% endif %}{{ nav[bodyClass].title }}{% endset %}
+{% endif %}
+
+{% if entry is defined and entry.leadImage |length %}
+    {% set twitter = seomaticMeta.twitter %}
+    {% set og = seomaticMeta.og %}
+
+    {% if entry.ShortDescription | length %}
+        {% set seomaticMeta = seomaticMeta | merge({'seoDescription': entry.ShortDescription }) %}
+        {% set twitter = twitter | merge({'description': entry.ShortDescription }) %}
+        {% set og = og | merge({'description': entry.ShortDescription }) %}
+    {% endif %}
+
+
+{# summary_large_image #}
+    {% set twitter = twitter | merge({'card': 'summary_large_image'  }) %}
+    {% set twitter = twitter | merge({'image': entry.leadImage.first.url }) %}
+    {% set seomaticMeta = seomaticMeta | merge({'twitter': twitter}) %}
+
+    {% set og = og | merge({'image': entry.leadImage.first.url }) %}
+    {% set seomaticMeta = seomaticMeta | merge({'og': og}) %}
+
+    {% set seomaticMeta = seomaticMeta | merge({'seoImage': entry.leadImage.first.url }) %}
+{% endif %}
+
+{% block body %}
+
+
+{# comment #}
+
+<div id="content" class="container-xl page {{bodyClass}}"  >
+
+
+    <a name="content-top"></a>
+    {% block content %}
+        {% endblock %}
+
+</div>
+
+
+{% endblock %}

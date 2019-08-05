@@ -1,0 +1,30 @@
+@mixin breakpoint($point){
+
+  @if ($point == lg){
+    @media (min-width: 1200px){ @content }
+  }
+  @else if ($point == md){
+    @media (min-width: 992px){ @content }
+  }
+
+  @else if ($point == sm){
+    @media (min-width: 768px){ @content }
+  }
+
+  @else if ($point == xs){
+    @media (min-width: 641px){ @content }
+  }
+
+  @else if ($point == xxs){
+    @media (min-width: 481px){ @content }
+  }
+
+  @else if ($point == xxxs){
+    @media  (min-width: 320px){ @content }
+  }
+}
+//.class  {
+//  @include breakpoint(sm){
+//    width: 60%;
+//  }
+//}

@@ -1,0 +1,47 @@
+{#
+ # News index template
+ # -------------------
+ #
+ # This template is loaded whenever http://example.com/news is
+ # requested, because it is located at news/index.html in your
+ # craft/templates/ folder.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/site" %}
+
+{% set tag = craft.tags.title(tag).first() %}
+{% if not tag %}
+{% exit 404 %}
+{% endif %}
+
+
+{% block content %}
+<div class="container site page list-emergency">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-0 main">
+
+
+            <h1>Entries tagged with “{{ tag.title }}”</h1>
+
+            {% set entries = craft.entries.relatedTo(tag).order('title') %}
+
+            {% if entries | length %}
+            <ul>
+                {% for entry in entries %}
+                <li>{{ entry.getLink() }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No entries could be found with that tag.</p>
+            {% endif %}
+
+
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}

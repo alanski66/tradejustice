@@ -1,0 +1,73 @@
+{#
+# Page entry template
+# -------------------
+#
+# This template gets loaded whenever a News entry’s URL is
+# requested. That’s because the News section’s Template setting is
+# set to “news/_entry”, the path to this template.
+#
+# When this template is loaded, it will already have an ‘entry’
+# variable, set to the requested News entry.
+#
+# See this page for more details on how Craft routes requests:
+# http://buildwithcraft.com/docs/routing
+#}
+
+{% extends "_layouts/site" %}
+
+{% block content %}
+<div class="container site page">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-1 main">
+
+            <form method="post" action="" accept-charset="UTF-8">
+                {{ getCsrfInput() }}
+                <input type="hidden" name="action" value="guestEntries/saveEntry">
+                <input type="hidden" name="redirect" value="success">
+                <input type="hidden" name="sectionId" value="3">
+
+                <div class="form-group">
+                    <label for="title">{{ "Title" | t }}</label>
+                    <input id="title" type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <select  class="form-control"  name="fields[callbackTime]">
+                        {% for time in entry.callbackTime.options %}
+                        {% set chosen = false %}
+
+                        {% if time.selected %}
+                        {% set chosen = true %}
+                        {% endif %}
+
+                        <option value="{{ time.value }}"{% if chosen %} selected{% endif %}>{{ time.label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="body">{{ "Message" | t }}</label>
+                    <textarea class="form-control"  id="body" name="fields[body]"></textarea>
+
+                </div>
+                <div class="form-group">
+
+                </div>
+
+
+                <input type="submit" class="btn- btn-default" value="Publish">
+                <input type="hidden" name="enabled" value="0">
+                <input type="hidden" name="postDate" value="{{ now|date("Y-m-j H:i:s") }}" />
+
+
+            </form>
+        </div>
+        <div class="col-md-3 col-md-offset-1 sidebar">
+
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

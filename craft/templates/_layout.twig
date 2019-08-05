@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ craft.locale }}">
+<head>
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+    {% set baseUrl = craft.config.environmentVariables.baseUrl %}
+    {% block head %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="google" value="notranslate">
+    {# SEO META #}
+    {% hook 'seomaticRender' %}
+    {% set baseUrl = craft.config.environmentVariables.baseUrl %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}css/main.css">
+
+    {% endblock %}
+
+    {% import "_macros" as macros %}
+
+
+
+    {% if pageClass is defined and pageClass is not empty%}
+    {% set pageClass = pageClass %}
+    {% else %}
+    {% set pageClass = '' %}
+    {% endif %}
+
+    {% if not craft.request.isLivePreview %}
+    <script type="text/javascript">
+        // Google Analytics tracking code
+    </script>
+    {% endif %}
+</head>
+
+
+
+
+<body  id="page-top"  {% if bodyClass is defined %}class="{{ currentLocale }} {{pageClass}}"{% endif %} >
+
+{% include '_includes/header.html' %}
+{% block content %}
+
+{% endblock %}
+{% block foot %}
+{% include '_includes/footer.html' %}
+{% include '_includes/footer-js.html' %}
+
+{% endblock %}
+</body>
+</html>

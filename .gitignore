@@ -1,3 +1,66 @@
-# Craft Storage (cache) [http://buildwithcraft.com/help/craft-storage-gitignore]
-/craft/storage/*
-!/craft/storage/logo/*
+# Mac specific craft 2 gitiginore using codekit joomkit dev cycle
+.DS_Store
+.DS_Store?
+.AppleDouble
+.LSOverride
+ehthumbs.db
+Thumbs.db
+*.pdf
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+
+/backups
+
+#phpstorm
+
+*.csv
+.env.php
+#custom
+
+/backups
+/public_html/.htaccess
+/public_html/assets/
+
+# Craft specific
+/autodata/export_users_log.txt
+
+#/craft/plugins/**
+/craft/storage/backups/
+/craft/storage/runtime/
+/craft/storage/userphotos/
+
+/scripts/.env.sh
+/scripts/.env-production.sh
+
+.env.php
+config.codekit3
+*.codekit3
+/public_html/.well-known/
+
+/public_html/mail-template.html
+/public_html/order-note.html
+/public_html/order-note.html.php
+/public_html/assets.zip
+/public_html/imager/
+/autodata/register/regusers/**
+/craft/storage/wipexport/users/**
+
+/public_html/mail.php
+
+/public_html/assets/javascript/
+/public_html/assets/fonts/
+/public_html/assets/styles/
+/public_html/assets/icons/
+/public_html/assets/css/
+/public_html/assets/js/

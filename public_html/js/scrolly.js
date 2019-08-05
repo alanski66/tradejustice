@@ -195,9 +195,6 @@ $(document).ready(function () {
       //  resizeSidebar();
     });
 
-
-
-
 //Deasl with scrollspy resize for incoming hash urls to about page
 //    if($('body').hasClass("pages")) {
 //        if ( window.location.hash ) scroll(0,0);

@@ -31,6 +31,8 @@ return array(
         ),
         'templateselectSubfolder' => 'pages/_types',
         'useCompressedJs' => false,
+        'requireMatchingUserAgentForSession' => false
+
     ),
 
     'tjm.org.uk' => array(
@@ -53,6 +55,8 @@ return array(
         'enableTemplateCaching' => true,
         'generateTransformsBeforePageLoad' => true,
         'templateselectSubfolder' => 'pages/_types',
+        'requireMatchingUserAgentForSession' => false
+
     )
 
 

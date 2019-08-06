@@ -229,6 +229,33 @@ section.content h3{
     font-size: $font-size-large;
   }
 }
+.blog .dark-title h1 {
+
+  //margin-bottom:0;
+
+  @include breakpoint(xxxs) {
+    font-size: $font-size-small;
+    height:60px;
+    margin:0;
+  }
+  @include breakpoint(xs) {
+    font-size: $font-size-medium;
+  }
+  @include breakpoint(sm) {
+    display: table-cell;
+    vertical-align: middle;
+    height: 120px;
+    margin: 0;
+    font-size: $font-size-medium;
+  }
+  @include breakpoint(md) {
+    font-size: $font-size-medium;
+  }
+  @include breakpoint(md) {
+    font-size: $font-size-large;
+  }
+}
+
 .time-label{
   @include breakpoint(xxxs) {
     display:none;
@@ -710,7 +737,8 @@ section.main .resources>a:hover{
 }
 
 .media-left{
-  padding: 6px 15px 15px 0px
+  //padding: 6px 15px 15px 0px;
+  padding:3px 15px 4px 0px
 }
 //generic card style
 
@@ -841,6 +869,12 @@ section.main.blogentry{
 }
 .blog .psidemenu .media{
   margin-top:0;
+  @include breakpoint(xxs) {
+    margin-bottom:30px;
+  }
+  @include breakpoint(md) {
+    margin-bottom:inherit;
+  }
 }
 
 .blog .psidemenu .media-body{

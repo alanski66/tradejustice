@@ -63,7 +63,34 @@
                 {% set image = entry.leadImage[0] ?? null %}
 
                 {% if image %}
-                <img class="img-responsive" src="{{ image.getUrl('tablet') }}" >
+                    {% if image.focalPoint | length %}
+                        {#{% set focalPoint = image.getFocalPoint() %}#}
+                        {% set position = image.focalPoint %}
+                    {% else %}
+                        {% set position = entry.leadImage[0].cropPosition |default("center-center") %}
+                    {% endif %}
+                    {% set transformedImages = craft.imager.transformImage(image,
+                    [
+                    { width: 600, ratio: 4/3, jpegQuality: 65 },
+                    { width: 768, ratio: 1/1 ,jpegQuality: 80 },
+                    { width: 900, ratio: 1/1, jpegQuality: 90 },
+
+                    ],
+                    {
+                    format: 'jpg',
+                    allowUpscale: false,
+                    mode: 'crop',
+                    interlace: true
+                    }
+                    ) %}
+
+                    <picture>
+                        <source media="(max-width: 600px)" sizes="100vw" srcset="{{ transformedImages[0].url }}">
+                        <source media="(max-width: 768px)" sizes="100vw" srcset="{{ transformedImages[1].url }}">
+                        <source media="(max-width: 2000px)" sizes="100vw" srcset="{{ transformedImages[2].url }}">
+                        <img class="img-responsive" src="{{ transformedImages[1].url }}" alt="{{ image.title }}">
+                    </picture>
+
                 {% endif %}
                 {{ entry.body }}
 

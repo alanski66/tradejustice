@@ -26,199 +26,147 @@
 }).tjmOwnedResource('yes').id(ids).order('sticky desc','postDate desc')
 %}
 
+{% set query = craft.request.getParam('q') %}
+{% set results  = craft.entries({
+limit:null,
+section:'reports,briefings',
+order:['title asc'],
+with:['categoryFieldHandle'],
+localeEnabled: false
+}).order('sticky desc','postDate desc')
+%}
+
+{%  paginate results.limit(10) as pageInfo, pageEntries %}
+
 
 {% block content %}
 <div class="container-xl dark-bg ">
     <div class="container resources ">
         <section class="dark-title">
-            <div class="col-xs-12  col-sm-12 col-md-12">
-                <h1 class=""><span class="report-category">Resources</span> <span class="title-shrunk">Resources</span></h1>
+            <div class="col-xs-5  col-sm-9 col-md-9">
+                <h1 class="inline"><span class="report-category">Resources</span> <span class="title-shrunk">Resources</span></h1>
 
             </div>
-            <div class="col-xs-4 col-sm-4 col-md-4 time-bg">
-
-                <div class="time">
-
-                    <span class="hide glyphicon glyphicon-time"></span>
-                    <div class="time-heading">Resources</div>
-                    <div class="estimate">Essential reading on trade</div></div>
+            <div class="col-xs-11 col-sm-7 col-md-7 res-search-col">
+                {% include 'resources/_search-form' %}
             </div>
         </section>
     </div>
 </div>
 <div class="container site page resources-list">
     <section class="main">
-        <div class="col-md-12 col-md-offset-0 ">
+
+        <div class="col-xs-16  col-md-9 col-md-offset-0 ">
 
 
 
-            <h2>TJM Publications</h2>
-            {% cache %}
-            {% for entry in TJMentries %}
+            {% for entry in pageEntries %}
 
 
-                {% set image = entry.resourceImage[0] ?? null %}
-                {% set file = entry.resourcesFile[0] ?? null %}
-                {% set category = entry.category[0] ?? null %}
+            {% set image = entry.resourceImage[0] ?? null %}
+            {% set file = entry.resourcesFile[0] ?? null %}
+            {% set category = entry.category[0] ?? null %}
             {% set publisher = "" %}
             {% set publisherUrl = "" %}
             {% set memberPublisher = entry.createdByMember.first() %}
 
 
             {% if image %}
-            {% set media = image.getUrl('tinyThumb') %}
+                {% set media = image.getUrl('tinyThumb') %}
             {% else %}
-            {% set media = 'images/meta/pdf-default.png' %}
+                {% set media = 'images/meta/pdf-default.png' %}
             {% endif %}
 
+                <div class=" media {{ macros.isSticky(entry) }}">
+                    <div class="media-left">
+                        <a href="{{ entry.url }}" class="">
+                            <img class="media-object shadow" src="{{ media }}" alt="{{ entry.title }}">
+                        </a>
+                    </div>
 
-            <div class=" media {{ macros.isSticky(entry) }}">
-                <div class="media-left">
-                    <a href="{{ entry.url }}" class="">
-                        <img class="media-object shadow" src="{{ media }}" alt="{{ entry.title }}">
-                    </a>
-                </div>
+                    <div class="media-body">
+                        <h4 class="media-heading"><a href="{{ entry.url }}" class="">{{ entry.title }}</a></h4>
+                        {% if entry.ShortDescription | length %}
+                            <p>{{ entry.ShortDescription | striptags}}</p>
 
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="{{ entry.url }}" class="">{{ entry.title }}</a></h4>
-                    {% if entry.ShortDescription | length %}
-                    <p>{{ entry.ShortDescription | striptags}}</p>
-                    {% else %}
+                        {% else %}
 
-                    {% set summary = entry.body | striptags %}
-                    <p>{{ summary | slice(0, 100) ~ '...' }}</p>
-                    {% endif %}
-                    <a href="{{ category.url }}"></a><span class="label label-primary category">{{ category.title  | trim ('s') }}</span>
+                            {% set summary = entry.body | striptags %}
+                            <p>{{ summary | slice(0, 100) ~ '...' }}</p>
+
+                        {% endif %}
+                        <a href="{{ category.url }}"></a><span class="label label-primary category">{{ category.title  | trim ('s') }}</span>
 
 
                       <span class ="publisher">
-                        by Trade Justice Movement
+                        by {{ entry.category.first.title }}
                     </span>
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
-            {% endcache %}
-<hr>
-
-            {% set MemberEntries = craft.entries({
-            with:[
-            'category',
-            'resourceImage',
-            'resourcesFile'
-            ]
-            }).memberResource('yes').id(ids).order('sticky desc','postDate asc')
-            %}
-
-
-            <h3>TJM member publications</h3>
-
-            {% cache %}
-            {% for entry in MemberEntries %}
-
-            {% set image = entry.resourceImage[0] ?? null %}
-            {% set file = entry.resourcesFile[0] ?? null %}
-            {% set category = entry.category[0] ?? null %}
-            {% set publisher = "" %}
-            {% set publisherUrl = "" %}
-            {% set memberPublisher = entry.createdByMember[0] ?? null %}
-            {% if memberPublisher  %}
-
-            {% set publisher = entry.createdByMember[0] %}
-            {% set publisherUrl = entry.createdByMember[0].url %}
-
-            {% endif %}
-
-            {% if image %}
-            {% set media = image.getUrl('tinyThumb') %}
-            {% else %}
-            {% set media = 'images/meta/pdf-default.png' %}
-            {% endif %}
-
-
-
-            <div class=" media  {{ macros.isSticky(entry) }}">
-                <div class="media-left">
-                    <a href="{{ entry.url }}" class="">
-                        <img class="media-object shadow" src="{{ media }}" alt="{{ entry.title }}">
-                    </a>
-                </div>
-
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="{{ entry.url }}" class="">{{ entry.title }}</a></h4>
-                    {% if entry.ShortDescription | length %}
-                    <p>{{ entry.ShortDescription | striptags}}</p>
-                    {% else %}
-
-                    {% set summary = entry.body | striptags %}
-                    <p>{{ summary | slice(0, 100) ~ '...' }}</p>
-                    {% endif %}
-                    <a href="{{ category.url }}"></a><span class="label label-primary category">{{ category.title   | trim ('s') }}</span>
-
-                    <span class ="publisher">
-                    {% if publisher  %} by {{ publisher }}{% endif %}
-                    </span>
-                </div>
-            </div>
 
             {% endfor %}
 
-            {% endcache %}
 
-            {% set NonMemberEntries = craft.entries({
-            with:[
-            'category',
-            'resourceImage',
-            'resourcesFile'
-            ]
-            }).tjmOwnedResource('no').memberResource('no').id(ids).order('sticky desc','postDate desc')
-            %}
-            <h3>Other useful resources</h3>
 
-            {% cache %}
-            {% for entry in NonMemberEntries %}
 
-            {% set image = entry.resourceImage[0] ?? null %}
-            {% set file = entry.resourcesFile[0] ?? null %}
-            {% set category = entry.category[0] ?? null %}
-            {% set publisher = "" %}
-            {% set publisherUrl = "" %}
-            {% set memberPublisher = entry.createdByMember.first() %}
 
-            {% if image %}
-            {% set media = image.getUrl('tinyThumb') %}
-            {% else %}
-            {% set media = 'images/meta/pdf-default.png' %}
-            {% endif %}
+            <div class=" container">
+                <div class="row ">
+                    <div class="col-xs-16  text-sm-center">
+                        <ul class="pagination mb-5 justify-content-center">
+                            <li class="page-item d-none d-sm-block">
+                                <a class="page-link" href="{{ pageInfo.firstUrl }}">Start</a>
+                            </li>
 
-            <div class=" media  {{ macros.isSticky(entry) }}">
-                <div class="media-left">
-                    <a href="{{ entry.url }}" class="">
-                        <img class="media-object shadow" src="{{ media }}" alt="{{ entry.title }}">
-                    </a>
-                </div>
+                            {% if pageInfo.prevUrl %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ pageInfo.prevUrl }}">Previous</a>
+                                </li>
+                            {% endif %}
 
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="{{ entry.url }}" class="{{entry.id}}">{{ entry.title }}</a></h4>
-                    {% if entry.ShortDescription | length %}
-                    <p>{{ entry.ShortDescription | striptags}}</p>
-                    {% else %}
 
-                    {% set summary = entry.body | striptags %}
-                    <p>{{ summary | slice(0, 100) ~ '...' }}</p>
-                    {% endif %}
-                    <a href="{{ category.url }}"></a><span class="label label-primary category">{{ category.title  | trim ('s') }}</span>
 
-                <span class="hide">Published {{ entry.postDate.format('F  Y') }} </span>
-                <span class ="publisher">by {{ entry.createdBy }}</span>
+                            {% for page, url in pageInfo.getPrevUrls(3) %}
+                            <li class="page-item "><a class="page-link" href="{{ url }}">{{ page }}</a>
+                                {% endfor %}
+
+                            <li class="page-item "><a class="page-link">{{ pageInfo.currentPage }}</a></li>
+
+                            {% for page, url in pageInfo.getNextUrls(3) %}
+                            <li class="page-item "><a class="page-link" href="{{ url }}">{{ page }}</a>
+                                {% endfor %}
+
+                                {% if pageInfo.nextUrl %}
+                            <li class="page-item "><a class="page-link" href="{{ pageInfo.nextUrl }}">Next</a></li>
+                            {% endif %}
+
+                            <li class="page-item d-none d-sm-block">
+                                <a class="page-link" href="{{ pageInfo.lastUrl }}">End</a>
+                            </li>
+                        </ul>
+
+                    </div>
 
                 </div>
             </div>
 
-            {% endfor %}
-            {% endcache %}
+        </div>
 
+        {# side col cats#}
+        <div class=" col-xs-16  col-md-4 col-md-offset-2 side-co    ">
 
-
+            <ul>
+                {% nav category in craft.categories.group('resources') %}
+                <li>
+                    <a href="{{ category.url }}">{{ category.title }}</a>
+                    {% ifchildren %}
+                    <ul>
+                        {% children %}
+                    </ul>
+                    {% endifchildren %}
+                </li>
+                {% endnav %}
+            </ul>
         </div>
 
     </section>

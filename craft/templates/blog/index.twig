@@ -60,13 +60,20 @@
             {#{% if image %}#}
             {#{% set media = image.getUrl('tablet') %}#}
             {#{% endif %}#}
-
             <article>
                 <h2><a href="{{entry.url}}"> {{entry.title}}</a></h2>
                 {% set image = entry.leadImage[0] %}
                 {% if image %}
 
                     {% set position = entry.leadImage[0].cropPosition |default("center-center") %}
+
+                    {% if image.focalPoint | length %}
+                        {#{% set focalPoint = image.getFocalPoint() %}#}
+                        {% set position = image.focalPoint %}
+                    {% else %}
+                        {% set position = 'center-center' %}
+                    {% endif %}
+
                     {% set transformedImages = craft.imager.transformImage(image,
                     [
                     { width: 1200, ratio: 2/1 },
@@ -160,12 +167,16 @@
 
                             <div class="media {{sticky}}">
 
-
                                 {% set image = entry.leadImage[0] %}
 
                                 <div class="media-left">
                                     {% if image %}
-                                        {% set position = entry.leadImage[0].cropPosition |default("center-center") %}
+                                        {% if image.focalPoint | length %}
+                                            {#{% set focalPoint = image.getFocalPoint() %}#}
+                                            {% set position = image.focalPoint %}
+                                        {% else %}
+                                            {% set position = entry.leadImage[0].cropPosition |default("center-center") %}
+                                        {% endif %}
                                         {% set transformedImages = craft.imager.transformImage(image,
                                         [
                                         { width: 320, ratio: 4/3, jpegQuality: 65 },
@@ -177,7 +188,6 @@
                                         allowUpscale: true,
                                         mode: 'crop',
                                         jpegQuality: 80,
-
                                         interlace: true
                                         }
                                         ) %}

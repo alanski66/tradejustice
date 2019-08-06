@@ -1,0 +1,226 @@
+{#
+ # News index template
+ # -------------------
+ #
+ # This template is loaded whenever http://example.com/news is
+ # requested, because it is located at news/index.html in your
+ # craft/templates/ folder.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/site" %}
+
+
+{% set ids = [] %}
+
+{% set ids = ids|merge(craft.entries.section('reports,briefings').ids()) %}
+
+{% set TJMentries = craft.entries({
+    with:[
+        'category',
+        'resourceImage',
+        'resourcesFile'
+    ]
+}).tjmOwnedResource('yes').id(ids).order('sticky desc','postDate desc')
+%}
+
+
+{% block content %}
+<div class="container-xl dark-bg ">
+    <div class="container resources ">
+        <section class="dark-title">
+            <div class="col-xs-12  col-sm-12 col-md-12">
+                <h1 class=""><span class="report-category">Resources</span> <span class="title-shrunk">Resources</span></h1>
+
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 time-bg">
+
+                <div class="time">
+
+                    <span class="hide glyphicon glyphicon-time"></span>
+                    <div class="time-heading">Resources</div>
+                    <div class="estimate">Essential reading on trade</div></div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="container site page resources-list">
+    <section class="main">
+        <div class="col-md-12 col-md-offset-0 ">
+
+
+
+            <h2>TJM Publications</h2>
+            {% cache %}
+            {% for entry in TJMentries %}
+
+
+                {% set image = entry.resourceImage[0] ?? null %}
+                {% set file = entry.resourcesFile[0] ?? null %}
+                {% set category = entry.category[0] ?? null %}
+            {% set publisher = "" %}
+            {% set publisherUrl = "" %}
+            {% set memberPublisher = entry.createdByMember.first() %}
+
+
+            {% if image %}
+            {% set media = image.getUrl('tinyThumb') %}
+            {% else %}
+            {% set media = 'images/meta/pdf-default.png' %}
+            {% endif %}
+
+
+            <div class=" media {{ macros.isSticky(entry) }}">
+                <div class="media-left">
+                    <a href="{{ entry.url }}" class="">
+                        <img class="media-object shadow" src="{{ media }}" alt="{{ entry.title }}">
+                    </a>
+                </div>
+
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ entry.url }}" class="">{{ entry.title }}</a></h4>
+                    {% if entry.ShortDescription | length %}
+                    <p>{{ entry.ShortDescription | striptags}}</p>
+                    {% else %}
+
+                    {% set summary = entry.body | striptags %}
+                    <p>{{ summary | slice(0, 100) ~ '...' }}</p>
+                    {% endif %}
+                    <a href="{{ category.url }}"></a><span class="label label-primary category">{{ category.title  | trim ('s') }}</span>
+
+
+                      <span class ="publisher">
+                        by Trade Justice Movement
+                    </span>
+                </div>
+            </div>
+            {% endfor %}
+            {% endcache %}
+<hr>
+
+            {% set MemberEntries = craft.entries({
+            with:[
+            'category',
+            'resourceImage',
+            'resourcesFile'
+            ]
+            }).memberResource('yes').id(ids).order('sticky desc','postDate asc')
+            %}
+
+
+            <h3>TJM member publications</h3>
+
+            {% cache %}
+            {% for entry in MemberEntries %}
+
+            {% set image = entry.resourceImage[0] ?? null %}
+            {% set file = entry.resourcesFile[0] ?? null %}
+            {% set category = entry.category[0] ?? null %}
+            {% set publisher = "" %}
+            {% set publisherUrl = "" %}
+            {% set memberPublisher = entry.createdByMember[0] ?? null %}
+            {% if memberPublisher  %}
+
+            {% set publisher = entry.createdByMember[0] %}
+            {% set publisherUrl = entry.createdByMember[0].url %}
+
+            {% endif %}
+
+            {% if image %}
+            {% set media = image.getUrl('tinyThumb') %}
+            {% else %}
+            {% set media = 'images/meta/pdf-default.png' %}
+            {% endif %}
+
+
+
+            <div class=" media  {{ macros.isSticky(entry) }}">
+                <div class="media-left">
+                    <a href="{{ entry.url }}" class="">
+                        <img class="media-object shadow" src="{{ media }}" alt="{{ entry.title }}">
+                    </a>
+                </div>
+
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ entry.url }}" class="">{{ entry.title }}</a></h4>
+                    {% if entry.ShortDescription | length %}
+                    <p>{{ entry.ShortDescription | striptags}}</p>
+                    {% else %}
+
+                    {% set summary = entry.body | striptags %}
+                    <p>{{ summary | slice(0, 100) ~ '...' }}</p>
+                    {% endif %}
+                    <a href="{{ category.url }}"></a><span class="label label-primary category">{{ category.title   | trim ('s') }}</span>
+
+                    <span class ="publisher">
+                    {% if publisher  %} by {{ publisher }}{% endif %}
+                    </span>
+                </div>
+            </div>
+
+            {% endfor %}
+
+            {% endcache %}
+
+            {% set NonMemberEntries = craft.entries({
+            with:[
+            'category',
+            'resourceImage',
+            'resourcesFile'
+            ]
+            }).tjmOwnedResource('no').memberResource('no').id(ids).order('sticky desc','postDate desc')
+            %}
+            <h3>Other useful resources</h3>
+
+            {% cache %}
+            {% for entry in NonMemberEntries %}
+
+            {% set image = entry.resourceImage[0] ?? null %}
+            {% set file = entry.resourcesFile[0] ?? null %}
+            {% set category = entry.category[0] ?? null %}
+            {% set publisher = "" %}
+            {% set publisherUrl = "" %}
+            {% set memberPublisher = entry.createdByMember.first() %}
+
+            {% if image %}
+            {% set media = image.getUrl('tinyThumb') %}
+            {% else %}
+            {% set media = 'images/meta/pdf-default.png' %}
+            {% endif %}
+
+            <div class=" media  {{ macros.isSticky(entry) }}">
+                <div class="media-left">
+                    <a href="{{ entry.url }}" class="">
+                        <img class="media-object shadow" src="{{ media }}" alt="{{ entry.title }}">
+                    </a>
+                </div>
+
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ entry.url }}" class="{{entry.id}}">{{ entry.title }}</a></h4>
+                    {% if entry.ShortDescription | length %}
+                    <p>{{ entry.ShortDescription | striptags}}</p>
+                    {% else %}
+
+                    {% set summary = entry.body | striptags %}
+                    <p>{{ summary | slice(0, 100) ~ '...' }}</p>
+                    {% endif %}
+                    <a href="{{ category.url }}"></a><span class="label label-primary category">{{ category.title  | trim ('s') }}</span>
+
+                <span class="hide">Published {{ entry.postDate.format('F  Y') }} </span>
+                <span class ="publisher">by {{ entry.createdBy }}</span>
+
+                </div>
+            </div>
+
+            {% endfor %}
+            {% endcache %}
+
+
+
+        </div>
+
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends '_layouts/cp' %}
+{% set title = "Search - Unsplash"|t %}
+
+{% set tabs = {
+    popular: { label: "Popular"|t, url: url('unsplash')},
+    latest: { label: "Last Added"|t, url: url('unsplash/latest') },
+    search: { label: "Search"|t, url: url('unsplash/search')},
+} %}
+{% set selectedTab = 'search' %}
+
+{% set extraPageHeaderHtml %}
+    {% include 'unsplash/components/_searchForm' %}
+{% endset %}
+
+{% set content %}
+    {% set pluginUrl = '/' ~ craft.config.get('cpTrigger') ~ '/unsplash' %}
+    {% if results.images|length %}
+    <div id="splashing-container">
+        {% set downloadIcon = resourceUrl('unsplash/download.svg') %}
+
+        {% for image in results.images %}
+            <div class="splashing" data-id="{{ image.id }}" data-attr="{{ image.attr.name }}">
+                <img src="{{ image.small }}">
+                <span class="attribute"><a href="{{ image.attr.link }}" target="_blank">{{ image.attr.name }}</a></span>
+            </div>
+        {% endfor %}
+    </div>
+    <hr>
+
+    {{ results.pagination.total_results }} {{ 'results found for'|t }} {{ craft.request.getParam('q') }}.
+    {% set currentPage =  craft.request.getParam('page') %}
+    {% if currentPage != 1 %}
+
+    <a href="{{ url(pluginUrl~'/search', { 'q' : craft.request.getParam('q'), 'page' : '1'}) }}">{{ 'First'|t }}</a> |
+    <a href="{{ url(pluginUrl~'/search', { 'q' : craft.request.getParam('q'), 'page' : currentPage-1}) }}">{{ 'Previous'|t }}</a> |
+    {% endif %}
+    {{ 'Page'|t }} {{ currentPage }}
+    {% if currentPage != results.pagination.total_pages %}
+    | <a href="{{ url(pluginUrl~'/search', { 'q' : craft.request.getParam('q'), 'page' : currentPage+1}) }}">{{ 'Next'|t }}</a> |
+    <a href="{{ url(pluginUrl~'/search', { 'q' : craft.request.getParam('q'), 'page' : results.pagination.total_pages }) }}">{{ 'Last'|t }}</a>
+    {% endif %}
+
+    <script type="text/javascript">
+        window.csrfTokenName = "{{ craft.config.get('csrfTokenName') }}";
+        window.csrfTokenValue = "{{ craft.request.getCsrfToken }}";
+    </script>
+
+
+    {% set masonry %}
+        $(document).ready(function () {
+        var grid = jQuery('#splashing-container').masonry({
+        itemSelector: 'div.splashing',
+        gutter: 10,
+        });
+        grid.imagesLoaded().progress(function () {
+        grid.masonry();
+        });
+        });
+    {% endset %}
+
+    {% includeJs masonry %}
+    {% includeCssResource "unsplash/css/splashingimages.css" %}
+    {% includeJsResource "unsplash/js/jquery-3.2.1.min.js" %}
+    {% includeJsResource "unsplash/js/splashingimages.js" %}
+    {% includeJsResource "unsplash/js/loadingoverlay.min.js" %}
+    {% includeJsResource "unsplash/js/imagesloaded.pkgd.min.js" %}
+    {% includeJsResource "unsplash/js/masonry.pkgd.min.js" %}
+    {% else %}
+        {{ 'No results found for'|t }} <strong>{{ craft.request.getParam('q') }}</strong>.
+    {% endif %}
+{% endset %}

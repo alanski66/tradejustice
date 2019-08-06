@@ -33,6 +33,42 @@
 {% block content %}
 
     <div class="container-xl">
+
+        {%  if entry.featuredItems |length == '0'  %}
+        <div class="hero">
+            <div class="container">
+
+                <section>
+                    <div class="col-xs-16 col-sm-10 col-md-10">
+
+                        <div class="home-over-title">
+                            <h1>{{ entry.mainStrapline }}<br><span class="yellow">{{ entry.subStrapLine1 }}</span></h1>
+                        </div>
+                        <div class="home-over-text">
+                            <h4>{{ entry.latestHeading }}</h4>
+                            <div class="latest">
+
+                                {% if entry.latestLinkManual | length %}
+                                    <a class=" " href="{{ entry.latestLinkManual }}">{{ entry.latestText }}<span class="isprite icon-chev-right"></span></a>
+                                {% else %}
+                                    {% set latest = entry.latestLink.first %}
+                                    {% if latest | length %}
+                                        <a class=" " href="{{ latest.url }}">{{ entry.latestText }}<span class="isprite icon-chev-right"></span></a>
+                                    {% endif %}
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xs-16 col-sm-8 col-md-10">
+
+                    </div>
+                </section>
+            </div>
+        </div>
+        {% else %}
     <div class="hero">
         <div class="container">
             <div class="row">
@@ -74,6 +110,7 @@
             </div>
         </div>
     </div>
+        {% endif %}
 
 </div>
 

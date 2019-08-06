@@ -1,6 +1,8 @@
 /* Utils styles */
 
-
+span.resquery {
+background-color: #fbfbcf;
+}
 .sprite {
   background-image: url(../img/sprite.svg);
   background-size: 600px 300px;
@@ -30,8 +32,17 @@
     margin-top: 14px;
   }
 }
+@media (max-width: 768px) {
+  .res-search-col{
+    margin-top: 13px;
+  }
+}
 .res-search-col{
-  padding-right: 0;
+  @include breakpoint(xxxs){
+    //margin-top: 14px;
+  }
+  //padding-right: 0;
+  text-align: right;
 }
 .res-search-mob{
   @include breakpoint(sm){
@@ -41,6 +52,12 @@
 .res-search-desktop{
   @include breakpoint(sm){
     display: inherit;
+  }
+}
+
+.res-search input{
+  @include breakpoint(sm){
+    min-width:250px;
   }
 }
 .inline{
@@ -139,13 +156,22 @@
       //margin: 0 15px 0 0;
       ////position: relative;
       //background-position: 0 30px;
-      width: 229px;
-      height: 82px;
-      background-size: 345px 172px;
+      width: 191px;
+      height: 74px;
+      background-size: 345px 141px;
       background-repeat: no-repeat;
       margin: 0 15px 0 0;
-      background-position: 0 28px;
-      z-index:999;
+      background-position: -29px 28px;
+
+  }
+  @include breakpoint(md){
+    width: 229px;
+    height: 82px;
+    background-size: 345px 172px;
+    background-repeat: no-repeat;
+    margin: 0 15px 0 0;
+    background-position: 0 28px;
+    z-index:999;
   }
   //@include breakpoint(lg) {
   //  //width: 222px;

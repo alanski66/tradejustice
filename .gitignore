@@ -68,3 +68,4 @@ config.codekit3
 /public_html/assets/css/
 /public_html/assets/js/
 
+.idea/workspace.xml

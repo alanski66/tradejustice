@@ -7640,6 +7640,32 @@ section.content h3 {
       font-size: 30px; } }
 
 @media (min-width: 320px) {
+  .blog .dark-title h1 {
+    font-size: 14px;
+    height: 60px;
+    margin: 0; } }
+
+@media (min-width: 641px) {
+  .blog .dark-title h1 {
+    font-size: 20px; } }
+
+@media (min-width: 768px) {
+  .blog .dark-title h1 {
+    display: table-cell;
+    vertical-align: middle;
+    height: 120px;
+    margin: 0;
+    font-size: 20px; } }
+
+@media (min-width: 992px) {
+  .blog .dark-title h1 {
+    font-size: 20px; } }
+
+@media (min-width: 992px) {
+  .blog .dark-title h1 {
+    font-size: 30px; } }
+
+@media (min-width: 320px) {
   .time-label {
     display: none; } }
 
@@ -7999,7 +8025,7 @@ section.main .resources > a:hover {
   margin-bottom: 25px; }
 
 .media-left {
-  padding: 6px 15px 15px 0px; }
+  padding: 3px 15px 4px 0px; }
 
 .card {
   background: #f4f4f4;
@@ -8087,6 +8113,12 @@ section.main img {
 
 .blog .psidemenu .media {
   margin-top: 0; }
+  @media (min-width: 481px) {
+    .blog .psidemenu .media {
+      margin-bottom: 30px; } }
+  @media (min-width: 992px) {
+    .blog .psidemenu .media {
+      margin-bottom: inherit; } }
 
 @media (min-width: 481px) {
   .blog .psidemenu .media-left {

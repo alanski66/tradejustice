@@ -6700,7 +6700,8 @@ header.video {
   position: relative; }
 
 .homepage img.img-responsive {
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  width: 100%; }
 
 .gray-bg-light {
   background: #F4F4F4; }

@@ -4,24 +4,33 @@
   padding: 0px;
   width: auto;
   height: auto;
+  margin-top: 0px;
+  //height: 209px;
+  background-size: 2500px 329px;
+  background-position-x: 50px;
+  background-position-y: top;
 }
 
 @media (min-width: 600px) {
   .hero {
-    margin-top: -140px;
-    height: 209px;
-    background-size: 1500px 209px;
-    background-position-x: 50px;
-
+    //margin-top: -140px;
+    //height: 209px;
+    //background-size: 1500px 209px;
+    //background-position-x: 50px;
+    //
+    //
+    ////new
+    //margin-top: -90px;
+    //height:auto;
+    //background-position-y: 0px;
+    //background-size: 2500px 309px;
 
     //new
-    margin-top: -90px;
-    height:auto;
-    background-position-y: 0px;
-    background-size: 2500px 309px;
-
-    //new
-
+    margin-top: 0;
+    height: 437px;
+    background-position-y: -2px;
+    background-size: 3541px 457px;
+    background-position-x: center;
   }
 }
 

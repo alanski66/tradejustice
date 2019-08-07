@@ -6502,18 +6502,19 @@ section.main a.btn-default:hover,
   background: #3C3C3B url(../img/map.png) center center no-repeat;
   padding: 0px;
   width: auto;
-  height: auto; }
+  height: auto;
+  margin-top: 0px;
+  background-size: 2500px 329px;
+  background-position-x: 50px;
+  background-position-y: top; }
 
 @media (min-width: 600px) {
   .hero {
-    margin-top: -140px;
-    height: 209px;
-    background-size: 1500px 209px;
-    background-position-x: 50px;
-    margin-top: -90px;
-    height: auto;
-    background-position-y: 0px;
-    background-size: 2500px 309px; } }
+    margin-top: 0;
+    height: 437px;
+    background-position-y: -2px;
+    background-size: 3541px 457px;
+    background-position-x: center; } }
 
 @media (min-width: 768px) {
   .hero {
@@ -7486,7 +7487,7 @@ body {
 
 @media (min-width: 320px) {
   body.homepage {
-    padding-top: 150px; } }
+    padding-top: 60px; } }
 
 @media (min-width: 768px) {
   body.homepage {
@@ -8423,9 +8424,6 @@ form.monkey {
 .flex-grid-even .flexcol {
   width: 49%; }
 
-.flexcol .card-content h2 {
-  font-size: 19px; }
-
 .flexcol .card-content h2 a {
   color: #FFFFFF; }
 
@@ -8439,11 +8437,19 @@ form.monkey {
   background-position: 0 -3px; }
 
 @media (max-width: 600px) {
+  .flexcol .card-content h2 {
+    font-size: 17px;
+    line-height: 1.2; }
   .flex-grid,
   .flex-grid-thirds {
     display: block; }
     .flex-grid .flexcol,
     .flex-grid-thirds .flexcol {
+      width: 100%;
+      margin: 0 0 10px 0; }
+  .flex-grid-even {
+    display: block; }
+    .flex-grid-even .flexcol {
       width: 100%;
       margin: 0 0 10px 0; }
   .hero {
@@ -8456,6 +8462,11 @@ form.monkey {
     display: none; }
   .flexcol .card-content h2 a {
     color: #FFFFFF; } }
+
+@media (min-width: 768px) {
+  .flexcol .card-content h2 {
+    font-size: 20px;
+    line-height: 1.2; } }
 
 @media (min-width: 992px) {
   .flexcol .card-content p {

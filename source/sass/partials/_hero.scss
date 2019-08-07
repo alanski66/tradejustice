@@ -6,7 +6,7 @@
   height: auto;
 }
 
-@media (min-width: 320px) {
+@media (min-width: 600px) {
   .hero {
     margin-top: -140px;
     height: 209px;
@@ -19,15 +19,24 @@
     height:auto;
     background-position-y: 0px;
     background-size: 2500px 309px;
+
+    //new
+
   }
 }
 
 @media (min-width: 768px) {
   .hero {
+    //margin-top: 0px;
+    //height: 444px;
+    //background-size: 3400px 330px;
+    //background-position-x: 0px;
+    //
+
     margin-top: 0px;
-    height: 444px;
-    background-size: 3400px 330px;
-    background-position-x: 0px;
+    height: 449px;
+    background-size: 3400px 450px;
+    background-position-x: -104px;
   }
 }
 

@@ -6504,7 +6504,7 @@ section.main a.btn-default:hover,
   width: auto;
   height: auto; }
 
-@media (min-width: 320px) {
+@media (min-width: 600px) {
   .hero {
     margin-top: -140px;
     height: 209px;
@@ -6518,9 +6518,9 @@ section.main a.btn-default:hover,
 @media (min-width: 768px) {
   .hero {
     margin-top: 0px;
-    height: 444px;
-    background-size: 3400px 330px;
-    background-position-x: 0px; } }
+    height: 449px;
+    background-size: 3400px 450px;
+    background-position-x: -104px; } }
 
 @media (min-width: 992px) {
   .hero {

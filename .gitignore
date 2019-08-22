@@ -27,7 +27,6 @@ Icon
 .idea
 .idea/*
 .idea/**
-
 *.csv
 .env.php
 #custom

@@ -14,7 +14,7 @@ body {
 
 body.homepage{
   @include breakpoint(xxxs) {
-    padding-top:150px;
+    padding-top:60px;
   }
   @include breakpoint(sm) {
     padding-top:150px;

@@ -9,7 +9,6 @@
 
 return array(
     '*' => array(
-        'devMode' => true,
         'environmentVariables' => array(
             'baseUrl'  => getenv('CRAFTENV_BASE_URL'),
             'basePath' => getenv('CRAFTENV_BASE_PATH'),
@@ -23,7 +22,7 @@ return array(
     ),
 
     'tjm.test' => array(
-        'devMode' => true,
+        'devMode' => getenv('CRAFTENV_DEVMODE'),
         'environmentVariables' => array(
             'enableTemplateCaching' => false,
             'cache' => false,
@@ -31,6 +30,8 @@ return array(
         ),
         'templateselectSubfolder' => 'pages/_types',
         'useCompressedJs' => false,
+        'requireMatchingUserAgentForSession' => false
+
     ),
 
     'tjm.org.uk' => array(
@@ -53,6 +54,8 @@ return array(
         'enableTemplateCaching' => true,
         'generateTransformsBeforePageLoad' => true,
         'templateselectSubfolder' => 'pages/_types',
+        'requireMatchingUserAgentForSession' => false
+
     )
 
 

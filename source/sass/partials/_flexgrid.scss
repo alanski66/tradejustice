@@ -21,9 +21,7 @@
   width: 49%;
 }
 
-.flexcol .card-content h2{
-  font-size:19px;
-}
+
 .flexcol .card-content h2 a {
   color: $white;
 }
@@ -39,9 +37,22 @@
 }
 
 @media (max-width: 600px) {
+
+  .flexcol .card-content h2{
+    font-size:17px;
+    line-height: 1.2;
+  }
   .flex-grid,
 
   .flex-grid-thirds {
+    display: block;
+
+    .flexcol {
+      width: 100%;
+      margin: 0 0 10px 0;
+    }
+  }
+  .flex-grid-even {
     display: block;
 
     .flexcol {
@@ -69,7 +80,21 @@
 
   }
 }
+
+@media (min-width: 768px) {
+  .flexcol .card-content h2{
+    font-size:20px;
+    line-height: 1.2;
+  }
+}
 @media (min-width: 992px) {
+
+  //change gird for one item!
+
+  .flen1 .flex-grid-thirds{
+
+  }
+
   .flexcol .card-content p{
     //display:none
     color:$white;

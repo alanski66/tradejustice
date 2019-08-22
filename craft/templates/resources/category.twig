@@ -45,27 +45,22 @@ localeEnabled: false
 <div class="container-xl dark-bg ">
     <div class="container resources ">
         <section class="dark-title">
-            <div class="col-xs-12  col-sm-12 col-md-12">
+            <div class="col-xs-5  col-sm-9 col-md-9">
                 <h1 class=""><span class="report-category">Resources: {{ category.title }}</span> <span class="title-shrunk">Resources:{{ category.title }}</span></h1>
 
             </div>
-            <div class="col-xs-4 col-sm-4 col-md-4 time-bg">
-
-                <div class="time">
-
-                    <span class="hide glyphicon glyphicon-time"></span>
-                    <div class="time-heading">Resources</div>
-                    <div class="estimate">Essential reading on trade</div></div>
+            <div class="col-xs-11 col-sm-7 col-md-7 res-search-col">
+                {% include 'resources/_search-form' %}
             </div>
         </section>
     </div>
 </div>
 <div class="container site page resources-list">
     <section class="main">
-        {% include 'resources/_search-form' %}
+
         <div class="col-xs-16  col-md-9 col-md-offset-0 ">
 
-
+            <p>{{ pageEntries|length }} results:</p>
 
             {% for entry in pageEntries %}
 
@@ -114,7 +109,7 @@ localeEnabled: false
 
 
 
-
+        {% if pageEntries | length %}
             <div class=" container">
                 <div class="row ">
                     <div class="col-xs-16  text-sm-center">
@@ -154,7 +149,7 @@ localeEnabled: false
 
                 </div>
             </div>
-
+        {% endif %}
         </div>
 
         {# side col cats#}

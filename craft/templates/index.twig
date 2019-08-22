@@ -69,7 +69,7 @@
             </div>
         </div>
         {% else %}
-    <div class="hero">
+    <div class="hero flen{{ entry.featuredItems |length }}">
         <div class="container">
             <div class="row">
                 <div class="col-xs-16">
@@ -98,7 +98,13 @@
                             {% if link %}</a>{% endif %}
 
                         <div class="card-content">
-                            <h2>{% if link %}<a href="{{link}}">{% endif %}{{ fentry.title }}{% if link %}</a>{% endif %}</h2>
+                            <h2>{% if link %}<a href="{{link}}">{% endif %}
+                                    {% if fentry.ShortDescription |length %}
+                                    {{ fentry.ShortDescription }}
+                                    {% else %}
+                                    {{ fentry.title }}
+                                    {% endif %}
+                                    {% if link %}</a>{% endif %}</h2>
                             {#<p>{{ fentry.ShortDescription }}{% if link %}<a href="{{fentry.url}}">{% endif %} <span class="isprite icon-chev-right-dk"></span>{% if link %}</a>{% endif %}</p>#}
                         </div>
                         <span class="yellowline"></span>

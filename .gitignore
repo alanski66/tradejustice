@@ -69,3 +69,11 @@ config.codekit3
 /public_html/assets/js/
 
 .idea/workspace.xml
+<<<<<<< Updated upstream
+=======
+.idea/workspace.xml
+.idea/workspace.xml
+.idea/misc.xml
+>>>>>>> Stashed changes
+.idea/workspace.xml
+.idea/misc.xml

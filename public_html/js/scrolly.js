@@ -206,7 +206,7 @@ $(document).ready(function () {
        // console.log("click");
 
         if($('body').hasClass("pages")){
-
+z
         }
 
         if($nav.hasClass("shrink")){
@@ -237,6 +237,9 @@ $(document).ready(function () {
             if (target.length) {
 
                 var targetOffset = target.offset().top + (- headerHeight);
+                if($('body').hasClass("pages")){
+                    var targetOffset = targetOffset - 70;
+                }
               //  console.log("target Offset" + targetOffset);
                 $('html,body').delay(0).animate({
                     scrollTop: targetOffset

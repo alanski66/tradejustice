@@ -24,6 +24,9 @@ body.pages{
   @include breakpoint(xxxs) {
     padding-top:100px;
   }
+  @include breakpoint(sm) {
+    padding-top:220px;
+  }
 }
 
 div,p a{

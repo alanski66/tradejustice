@@ -204,9 +204,10 @@ $(document).ready(function () {
     $('a[href^="#"]:not(a[data-toggle])').bind('click.smoothscroll', function (e) {
         e.preventDefault();
        // console.log("click");
-
+        $featheight = addFeaturedHeight();
+        headerHeight = ($featheight + $topOffSet);
         if($('body').hasClass("pages")){
-z
+
         }
 
         if($nav.hasClass("shrink")){
@@ -226,8 +227,7 @@ z
         });
         console.log("footer margin added");
 
-        $featheight = addFeaturedHeight();
-        headerHeight = ($featheight + $topOffSet);
+
        // console.log('header offset height is ' + headerHeight);
 
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
@@ -238,7 +238,7 @@ z
 
                 var targetOffset = target.offset().top + (- headerHeight);
                 if($('body').hasClass("pages")){
-                    var targetOffset = targetOffset - 70;
+                    var targetOffset = targetOffset - 50;
                 }
               //  console.log("target Offset" + targetOffset);
                 $('html,body').delay(0).animate({

@@ -60,7 +60,11 @@ localeEnabled: false
 
             <div class="col-xs-16  col-md-9 col-md-offset-0 ">
 
-                <p>{{ pageEntries|length }} results:</p>
+                <p>{{ results|length }} results:</p>
+                {#{% set index = (pageInfo.currentPage - 1) * 10 + loop.index0 %}#}
+
+                {#<p>{{ pageInfo.total - index }} of#}
+                    {#{{ pageInfo.total }}</p>#}
 
                 {% for entry in pageEntries %}
 
@@ -109,41 +113,38 @@ localeEnabled: false
                 {% endfor %}
 
 
-
-
-
                 <div class=" container">
                     <div class="row ">
                         <div class="col-xs-16  text-sm-center">
                             <ul class="pagination mb-5 justify-content-center">
                                 <li class="page-item d-none d-sm-block">
-                                    <a class="page-link" href="{{ pageInfo.firstUrl }}">Start</a>
+                                    <a class="page-link" href="{{ pageInfo.firstUrl }}?q={{ query }}">Start</a>
                                 </li>
 
                                 {% if pageInfo.prevUrl %}
                                     <li class="page-item">
-                                        <a class="page-link" href="{{ pageInfo.prevUrl }}">Previous</a>
+                                        <a class="page-link" href="{{ pageInfo.prevUrl }}?q={{ query }}">Previous</a>
                                     </li>
                                 {% endif %}
 
 
 
-                                {% for page, url in pageInfo.getPrevUrls(3) %}
-                                <li class="page-item "><a class="page-link" href="{{ url }}">{{ page }}</a>
-                                    {% endfor %}
+                                {% for page, url in pageInfo.getPrevUrls(5) %}
+                                    <li class="page-item "><a class="page-link" href="{{ url }}?q={{ query }}">{{ page }}</a>
+                                {% endfor %}
 
                                 <li class="page-item "><a class="page-link">{{ pageInfo.currentPage }}</a></li>
 
-                                {% for page, url in pageInfo.getNextUrls(3) %}
-                                <li class="page-item "><a class="page-link" href="{{ url }}">{{ page }}</a>
+                                {% for page, url in pageInfo.getNextUrls(5) %}
+                                <li class="page-item "><a class="page-link" href="{{ url }}?q={{ query }}">{{ page }}</a>
                                     {% endfor %}
 
                                     {% if pageInfo.nextUrl %}
-                                <li class="page-item "><a class="page-link" href="{{ pageInfo.nextUrl }}">Next</a></li>
+                                <li class="page-item "><a class="page-link" href="{{ pageInfo.nextUrl }}?q={{ query }}">Next</a></li>
                                 {% endif %}
 
                                 <li class="page-item d-none d-sm-block">
-                                    <a class="page-link" href="{{ pageInfo.lastUrl }}">End</a>
+                                    <a class="page-link" href="{{ pageInfo.lastUrl }}?q={{ query }}">End</a>
                                 </li>
                             </ul>
 

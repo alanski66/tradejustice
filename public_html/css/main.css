@@ -8147,6 +8147,9 @@ section.main img {
 .blog article img {
   margin-bottom: 10px; }
 
+.blogentry p {
+  margin-bottom: 1.2em; }
+
 .resources .publisher {
   font-size: 14px; }
 

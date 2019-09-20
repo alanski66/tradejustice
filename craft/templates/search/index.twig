@@ -18,16 +18,16 @@
 
 {% set q = craft.request.getParam('q')  %}
 
-
+{% set query = craft.request.getParam('q') %}
 {% if q | length %}
     {% set results = craft.entries({
-        limit:500,
+        limit:null,
         search: {
             query: q,
             subLeft: true,
             subRight: true
         }
-    })
+    }).section('and, not homepage')
 %}
 {% else %}
     {% set results = craft.entries({
@@ -116,27 +116,36 @@
             <div class="res">
                 <p>Current results:({{ pageInfo.total }})</p>
 
-                <ul class="pagination pagination-sm">
-                    <li><a class="first" href="{{ pageInfo.firstUrl }}">First Page</a></li>
+                <ul class="pagination mb-5 justify-content-center">
+                    <li class="page-item d-none d-sm-block">
+                        <a class="page-link" href="{{ pageInfo.firstUrl }}?q={{ query }}">Start</a>
+                    </li>
+
                     {% if pageInfo.prevUrl %}
-                    <li><a class="prev" href="{{ pageInfo.prevUrl }}"> < </a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="{{ pageInfo.prevUrl }}?q={{ query }}">Previous</a>
+                        </li>
                     {% endif %}
+
 
 
                     {% for page, url in pageInfo.getPrevUrls(5) %}
-                    <li><a href="{{ url }}">{{ page }}</a></li>
-                    {% endfor %}
+                    <li class="page-item "><a class="page-link" href="{{ url }}?q={{ query }}">{{ page }}</a>
+                        {% endfor %}
 
-                    <li><span class="current">{{ pageInfo.currentPage }}</span></li>
+                    <li class="page-item "><a class="page-link">{{ pageInfo.currentPage }}</a></li>
 
                     {% for page, url in pageInfo.getNextUrls(5) %}
-                    <li><a href="{{ url }}">{{ page }}</a></li>
-                    {% endfor %}
+                    <li class="page-item "><a class="page-link" href="{{ url }}?q={{ query }}">{{ page }}</a>
+                        {% endfor %}
 
-                    {% if pageInfo.nextUrl %}
-                    <li><a class="next" href="{{ pageInfo.nextUrl }}"> > </a></li>
+                        {% if pageInfo.nextUrl %}
+                    <li class="page-item "><a class="page-link" href="{{ pageInfo.nextUrl }}?q={{ query }}">Next</a></li>
                     {% endif %}
-                    <li><a  class="last"    href="{{ pageInfo.lastUrl }}">Last Page</a></li>
+
+                    <li class="page-item d-none d-sm-block">
+                        <a class="page-link" href="{{ pageInfo.lastUrl }}?q={{ query }}">End</a>
+                    </li>
                 </ul>
 
             </div>

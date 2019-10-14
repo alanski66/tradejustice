@@ -12,34 +12,56 @@
 
 {% extends "_layouts/site" %}
 
-
-{% set ids = [] %}
-
-{% set ids = ids|merge(craft.entries.section('reports,briefings').ids()) %}
-
-{% set TJMentries = craft.entries({
-    with:[
-        'category',
-        'resourceImage',
-        'resourcesFile'
-    ]
-}).tjmOwnedResource('yes').id(ids).order('sticky desc','postDate desc')
-%}
-
 {% set query = craft.request.getParam('q') %}
+
+{% set reports = craft.categories.group('resources').slug('reports') %}
+{% set briefings = craft.categories.group('resources').slug('briefings') %}
+{% set evidence = craft.categories.group('resources').slug('tjm-written-evidence') %}
+
+{% set memberresource = craft.categories.group('resources').slug('member-resource') %}
+{% set otherresource = craft.categories.group('resources').slug('other-resource') %}
+
+
+{# .order('sticky desc','postDate desc') #}
 {% set results  = craft.entries({
 limit:null,
 section:'reports,briefings',
-order:['title asc'],
 with:['categoryFieldHandle'],
+relatedTo: [
+'or',
+{ targetElement: reports },
+{ targetElement: briefings },
+{ targetElement: evidence }
+],
 localeEnabled: false
-}).order('sticky desc','postDate desc')
+}).order('sticky desc','postDate desc').ids()
 %}
 
-{%  paginate results.limit(10) as pageInfo, pageEntries %}
+{% set lowresults  = craft.entries({
+limit:null,
+section:'reports,briefings',
+
+with:['categoryFieldHandle'],
+relatedTo: [
+'or',
+{ targetElement: memberresource },
+{ targetElement: otherresource }
+],
+localeEnabled: false
+}).order('sticky desc','postDate desc').ids()
+%}
+
+
+
+{% set allEntries = results|merge(lowresults) %}
+
+{% set posts = craft.entries.id( allEntries ).fixedOrder(true) %}
+
+{%  paginate posts.limit(10) as pageInfo, pageEntries %}
 
 
 {% block content %}
+
 <div class="container-xl dark-bg ">
     <div class="container resources ">
         <section class="dark-title">
@@ -47,9 +69,9 @@ localeEnabled: false
                 <h1 class="inline"><span class="report-category">Resources</span> <span class="title-shrunk">Resources</span></h1>
 
             </div>
-            <div class="col-xs-11 col-sm-7 col-md-7 res-search-col">
-                {% include 'resources/_search-form' %}
-            </div>
+                <div class="col-xs-11 col-sm-7 col-md-7 res-search-col">
+                    {% include 'resources/_search-form' %}
+                </div>
         </section>
     </div>
 </div>
@@ -57,6 +79,23 @@ localeEnabled: false
     <section class="main">
 
         <div class="col-xs-16  col-md-9 col-md-offset-0 ">
+
+           {#<pre> {{ dump(allEntries) }}</pre><hr>#}
+            {#<pre> {{ dump(posts) }}</pre>#}
+
+            {# the field ID of your relation field, you can as well grab it via #}
+            {# set field = craft.app.getFields().getFieldByHandle('carCategory').id #}
+            {#{% set fieldId = 46 %}#}
+            {#{% set entries = craft#}
+            {#.entries#}
+            {#.section('reports,briefings')#}
+            {#.leftJoin('{{%relations}} as myrelations', '[[myrelations.sourceId]] = [[elements.id]] and [[myrelations.fieldId]] = ' ~ fieldId)#}
+            {#.leftJoin('{{%content}} as mycontent', '[[myrelations.targetId]] = [[mycontent.elementId]]')#}
+            {#.groupBy('elements.id')#}
+            {#.orderBy({'mycontent.title': SORT_ASC})#}
+            {#.all()#}
+            {#%}#}
+
 
 
 
@@ -70,40 +109,28 @@ localeEnabled: false
             {% set publisherUrl = "" %}
             {% set memberPublisher = entry.createdByMember.first() %}
 
-
             {% if image %}
                 {% set media = image.getUrl('tinyThumb') %}
             {% else %}
                 {% set media = 'images/meta/pdf-default.png' %}
             {% endif %}
 
-                <div class=" media {{ macros.isSticky(entry) }}">
-                    <div class="media-left">
-                        <a href="{{ entry.url }}" class="">
-                            <img class="media-object shadow" src="{{ media }}" alt="{{ entry.title }}">
-                        </a>
-                    </div>
+                    {#{{ category.slug  }}#}
+                {#{% switch category.slug %}#}
 
-                    <div class="media-body">
-                        <h4 class="media-heading"><a href="{{ entry.url }}" class="">{{ entry.title }}</a></h4>
-                        {% if entry.ShortDescription | length %}
-                            <p>{{ entry.ShortDescription | striptags}}</p>
+                    {#{% case "briefings" %}#}
+                    {#<p>Cat slug: {{ category.slug  }}</p>#}
 
-                        {% else %}
+                {#{% case "reports" %}#}
+                {#<p>Rep slug: {{ category.slug  }}</p>#}
 
-                            {% set summary = entry.body | striptags %}
-                            <p>{{ summary | slice(0, 100) ~ '...' }}</p>
+                {#{% endswitch %}#}
 
-                        {% endif %}
-                        <a href="{{ category.url }}"></a><span class="label label-primary category">{{ category.title  | trim ('s') }}</span>
-
-
-                      <span class ="publisher">
-                        by {{ entry.category.first.title }}
-                    </span>
-                    </div>
-                </div>
-
+                {% if category.slug in ["reports","briefings","tjm-written-evidence"] %}
+                    {% include 'resources/_index-item.twig' %}
+                    {% elseif category.slug in ["other-resource","member-resource"] %}
+                        {% include 'resources/_index-item.twig' %}
+                {% endif %}
             {% endfor %}
 
 

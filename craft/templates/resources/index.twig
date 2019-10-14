@@ -60,6 +60,13 @@ localeEnabled: false
 {%  paginate posts.limit(10) as pageInfo, pageEntries %}
 
 
+{% set sticky = craft.entries({
+limit:null,
+section:'reports,briefings',
+sticky:'1'
+}).limit(1)
+%}
+{#{% set sticky = craft.entries.section('reports,briefings').sticky('1') %}#}
 {% block content %}
 
 <div class="container-xl dark-bg ">
@@ -75,29 +82,31 @@ localeEnabled: false
         </section>
     </div>
 </div>
+
+
 <div class="container site page resources-list">
     <section class="main">
 
+
         <div class="col-xs-16  col-md-9 col-md-offset-0 ">
 
-           {#<pre> {{ dump(allEntries) }}</pre><hr>#}
-            {#<pre> {{ dump(posts) }}</pre>#}
+            {% if sticky | length %}
+                {% set entry = sticky[0] %}
+                {% set image = entry.resourceImage[0] ?? null %}
+                {% set file = entry.resourcesFile[0] ?? null %}
+                {% set category = entry.category[0] ?? null %}
+                {% set publisher = "" %}
+                {% set publisherUrl = "" %}
+                {% set memberPublisher = entry.createdByMember.first() %}
 
-            {# the field ID of your relation field, you can as well grab it via #}
-            {# set field = craft.app.getFields().getFieldByHandle('carCategory').id #}
-            {#{% set fieldId = 46 %}#}
-            {#{% set entries = craft#}
-            {#.entries#}
-            {#.section('reports,briefings')#}
-            {#.leftJoin('{{%relations}} as myrelations', '[[myrelations.sourceId]] = [[elements.id]] and [[myrelations.fieldId]] = ' ~ fieldId)#}
-            {#.leftJoin('{{%content}} as mycontent', '[[myrelations.targetId]] = [[mycontent.elementId]]')#}
-            {#.groupBy('elements.id')#}
-            {#.orderBy({'mycontent.title': SORT_ASC})#}
-            {#.all()#}
-            {#%}#}
+                {% if image %}
+                    {% set media = image.getUrl('tinyThumb') %}
+                {% else %}
+                    {% set media = 'images/meta/pdf-default.png' %}
+                {% endif %}
 
-
-
+                {% include 'resources/_index-item-sticky.twig' %}
+            {% endif %}
 
             {% for entry in pageEntries %}
 
@@ -126,11 +135,12 @@ localeEnabled: false
 
                 {#{% endswitch %}#}
 
-                {% if category.slug in ["reports","briefings","tjm-written-evidence"] %}
-                    {% include 'resources/_index-item.twig' %}
-                    {% elseif category.slug in ["other-resource","member-resource"] %}
-                        {% include 'resources/_index-item.twig' %}
-                {% endif %}
+                {% include 'resources/_index-item.twig' %}
+                {#{% if category.slug in ["reports","briefings","tjm-written-evidence"] %}#}
+                    {#{% include 'resources/_index-item.twig' %}#}
+                    {#{% elseif category.slug in ["other-resource","member-resource"] %}#}
+                       {##}
+                {#{% endif %}#}
             {% endfor %}
 
 

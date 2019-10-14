@@ -1,6 +1,11 @@
-
+<!-- sticky item -->
 <div class=" media {{ macros.isSticky(entry) }}">
+    {% if sticky | length %}
 
+        {%  if globalContent.stickyFeaturedTitle | length %}
+           <h3> {{ globalContent.stickyFeaturedTitle }}</h3>
+        {% endif %}
+    {% endif %}
     <div class="media-left">
         <a href="{{ entry.url }}" class="">
             <img class="media-object shadow" src="{{ media }}" alt="{{ entry.title }}">

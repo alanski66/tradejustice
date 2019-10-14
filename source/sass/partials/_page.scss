@@ -133,7 +133,14 @@ section.main.shrink{
 
 }
 
-
+.resources-list .media.sticky{
+  background: #fcf8e3;
+  padding: 30px;
+  //padding-top: 0;
+}
+.resources-list .media.sticky h3{
+  margin-top:0;
+}
 //adjust padding for featured report showing
 
 section.main.showfeatured{

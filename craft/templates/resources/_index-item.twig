@@ -1,0 +1,29 @@
+<div class=" media {{ macros.isSticky(entry) }}">
+    <div class="media-left">
+        <a href="{{ entry.url }}" class="">
+            <img class="media-object shadow" src="{{ media }}" alt="{{ entry.title }}">
+        </a>
+    </div>
+
+    <div class="media-body">
+        <h4 class="media-heading"><a href="{{ entry.url }}" class="">{{ entry.title }}</a></h4>
+        {% if entry.ShortDescription | length %}
+            <p>{{ entry.ShortDescription | striptags}}</p>
+
+        {% else %}
+
+            {% set summary = entry.body | striptags %}
+            <p>{{ summary | slice(0, 100) ~ '...' }}</p>
+
+        {% endif %}
+        <a href="{{ category.url }}"></a><span class="label label-primary category">{{ category.title  | trim ('s') }}</span>
+
+
+                      <span class ="publisher">
+                        by {{ entry.category.first.title }}
+                    </span>
+    </div>
+</div>
+
+
+

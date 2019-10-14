@@ -9,6 +9,8 @@
 
 return array(
     '*' => array(
+
+        'devMode' => getenv('CRAFTENV_DEVMODE'),
         'environmentVariables' => array(
             'baseUrl'  => getenv('CRAFTENV_BASE_URL'),
             'basePath' => getenv('CRAFTENV_BASE_PATH'),
@@ -22,7 +24,6 @@ return array(
     ),
 
     'tjm.test' => array(
-        'devMode' => getenv('CRAFTENV_DEVMODE'),
         'environmentVariables' => array(
             'enableTemplateCaching' => false,
             'cache' => false,

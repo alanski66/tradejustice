@@ -7573,6 +7573,13 @@ ul {
   section.main.shrink {
     padding-top: 80px; } }
 
+.resources-list .media.sticky {
+  background: #fcf8e3;
+  padding: 30px; }
+
+.resources-list .media.sticky h3 {
+  margin-top: 0; }
+
 @media (min-width: 320px) {
   section.main.showfeatured {
     padding-top: 115px; } }

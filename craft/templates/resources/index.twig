@@ -51,14 +51,11 @@ localeEnabled: false
 }).order('sticky desc','postDate desc').ids()
 %}
 
-
-
 {% set allEntries = results|merge(lowresults) %}
 
 {% set posts = craft.entries.id( allEntries ).fixedOrder(true) %}
 
 {%  paginate posts.limit(10) as pageInfo, pageEntries %}
-
 
 {% set sticky = craft.entries({
 limit:null,

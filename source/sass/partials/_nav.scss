@@ -152,7 +152,8 @@
 //set reduced header height
 .navbar-default.shrink {
   @include breakpoint(sm) {
-    height:110px;
+    //height:110px;
+    height:112px;
   }
 }
 

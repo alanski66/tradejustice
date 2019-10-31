@@ -100,7 +100,7 @@ return array(
 /**
  * Determines the string prepended to the <title> tag when devMode is on.
  */
-    "siteDevModeTitle" => '[devMode]',
+    "siteDevModeTitle" => '',
 
 /**
  * This allows you to globally override the meta settings on your website.  WARNING:

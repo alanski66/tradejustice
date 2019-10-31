@@ -14,6 +14,7 @@ if (!defined('CRAFT_ENVIRONMENT'))
 //	$_SERVER['SCRIPT_NAME'] = 'tjm.test';
 //}
 
+
 // Path to your craft/ folder
 $craftPath = '../craft';
 

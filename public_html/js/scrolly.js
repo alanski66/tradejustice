@@ -288,10 +288,10 @@ $(document).ready(function () {
          //   });
 
 
-            document.body.classList.remove('scroll-up');
+            document.body.classList.add('scroll-up');
         } else if (delta > 0 && scrollTop > 0) {
            // console.log("plus");
-            document.body.classList.add('scroll-up');
+            document.body.classList.remove('scroll-up');
         }
 
         window.setTimeout(resetScrollTop, 100);

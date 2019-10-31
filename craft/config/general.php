@@ -36,7 +36,7 @@ return array(
     ),
 
     'tjm.org.uk' => array(
-        'devMode' => false,
+
         'environmentVariables' => array(
             'enableTemplateCaching' => true,
             'cache' => true,
@@ -50,7 +50,7 @@ return array(
 
 
     'tjm.stagingbox.co.uk' => array(
-        'devMode' => false,
+
         'cache' => true,
         'enableTemplateCaching' => true,
         'generateTransformsBeforePageLoad' => true,

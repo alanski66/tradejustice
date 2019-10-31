@@ -80,35 +80,6 @@
 
             </div>
             <div class="caption">
-                {% set publisher = "" %}
-                {% set memberPublisher = entry.createdByMember.first() %}
-
-                {% if entry.tjmOwnedResource == "yes" %}
-
-                    {% set publisher = 'TJM' %}
-
-                {% elseif entry.memberResource == "yes" %}
-
-                    {% if memberPublisher  %}
-
-                        {% set publisher = entry.createdByMember.first() %}
-                        {% set publisherUrl = entry.createdByMember.first().url %}
-
-                    {% endif %}
-
-                {% elseif entry.createdBy | length and  entry.memberResource == "no" %}
-
-                    {% set memberPublisher = "" %}
-                    {% set publisher = entry.createdBy %}
-
-                {% endif %}
-
-                <span class="hide">Published {{ entry.postDate.format('F  Y') }} </span>
-                <span class="author">
-                    {% if memberPublisher  %}by <a href="{{publisherUrl}}">{% endif %}
-                        {{publisher}}
-                    {% if memberPublisher  %}</a>{% endif %}
-                    </span>
 
 
 

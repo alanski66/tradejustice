@@ -126,6 +126,11 @@ blockquote cite{
   font-size: $font-size-small;
 }
 
+@media (min-width: 0px) {
+  .lead {
+    font-size: 21px;
+  }
+}
 //.icon-twitter{
 //  width: 46px;
 //  height: 46px;

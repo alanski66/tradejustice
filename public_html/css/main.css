@@ -6213,7 +6213,15 @@ span.yellowline {
 
 @media (min-width: 320px) {
   .flash-bg .glyphicon-exclamation-sign {
-    font-size: 40px; } }
+    font-size: 40px; }
+  .shrink .time-bg {
+    display: none; }
+  .time-bg {
+    display: none; } }
+
+@media (min-width: 580px) {
+  .time-bg {
+    display: block; } }
 
 @media (min-width: 768px) {
   .flash-bg .glyphicon-exclamation-sign {
@@ -8264,6 +8272,10 @@ blockquote {
 
 blockquote cite {
   font-size: 14px; }
+
+@media (min-width: 0px) {
+  .lead {
+    font-size: 21px; } }
 
 .subs-bg {
   background: #F4D233;

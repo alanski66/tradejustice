@@ -297,11 +297,25 @@ span.yellowline{
 @media (min-width: 320px) {
   .flash-bg .glyphicon-exclamation-sign {
     font-size: 40px; }
+
+  .shrink .time-bg{
+    display:none;
+  }
+  .time-bg{
+    display:none;
+  }
+
+}
+@media (min-width: 580px){
+  .time-bg{
+    display:block;
+  }
 }
 @media (min-width: 768px) {
   .flash-bg .glyphicon-exclamation-sign {
     font-size: 40px;
     margin-left: 10px; }
+
 }
 @media (min-width: 768px) {
   .flash-bg .glyphicon-exclamation-sign {

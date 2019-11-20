@@ -12,7 +12,7 @@
  # This template defines one block region, `main`, which should be extended by
  # child templates to define the main contents for the page.
 -#}
-
+{% set baseUrl = craft.config.environmentVariables.baseUrl %}
 {% extends "_layouts/base" %}
 
 {# Set the `bodyClass` variable to the entry's section handle if there is one,

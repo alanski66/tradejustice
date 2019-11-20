@@ -8228,6 +8228,12 @@ a:hover {
 section a:hover span.sprite.icon-download:hover {
   background-position: -141px 0px; }
 
+section.main .label:hover {
+  background-color: #555555; }
+
+section.main .label a {
+  color: #FFFFFF; }
+
 .logos h5 {
   color: #bbb; }
 

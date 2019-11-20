@@ -69,6 +69,14 @@ a:hover{
 section a:hover span.sprite.icon-download:hover {
   background-position: -141px 0px;
 }
+
+section.main .label:hover{
+  background-color: $gray-dark;
+}
+section.main .label a{
+  color:$white;
+}
+
 .logos h5{
   color:#bbb;
 }

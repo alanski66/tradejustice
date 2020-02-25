@@ -279,11 +279,16 @@
                             <li class="section-nav">
                             </li>
                             {% nav entry in sidemenu %}
-                            {% set navlink = entry.uri %}
-                            {% set navlink = entry.entryLink.first().url %}
-                            <li {{ macros.isMenuActive(entry.slug)|trim }}>
-                                <a href="{{ navlink }}" class=" level{{ entry.level }}">{{ entry.title }}</a>
-                            </li>
+                                {% if entry.entryLink.first|length %}
+                                    {% set navlink = entry.entryLink.first.uri %}
+                                {% else %}
+                                    {% set navlink = entry.customMenuUrl %}
+                                {% endif %}
+                                {% if navlink| length %}
+                                    <li {{ macros.isMenuActive(entry.slug)|trim }}>
+                                        <a href="{{ navlink }}" class=" level{{ entry.level }}">{{ entry.title }}</a>
+                                    </li>
+                                {% endif %}
                             {% endnav %}
                         </ul>
                         {% endif %}

@@ -65,7 +65,7 @@
                             {% set navlink = entry.customMenuUrl %}
                             {% endif %}
 
-                            {% if entry.level == 1 and entry.children|length %}
+                            {% if entry.level == 1 and entry.children|length and navlink|length %}
                                 <li class="dropdown">
                                     <a  href="{{ siteUrl }}{{ navlink }}"  class="{{ macros.activeLinkClass(navlink, entry.level)|trim }} dropdown-toggle" role="button" {{ dataBehav }}="dropdown" data-length="{{ entry.title|length }}" aria-haspopup="true" aria-expanded="false">{{ entry.title }}<span class="caret"></span></a>
                                     <!-- get children -->
@@ -79,8 +79,9 @@
                                                 {% else %}
                                                 {% set childlink = child.customMenuUrl %}
                                                 {% endif %}
-                                            <li> <a  href="{{ siteUrl }}{{ childlink }}" class="{{ macros.isActiveChildClass(child.slug) | trim }} level{{ child.level }}">{{ child.title }}</a></li>
-
+                                                {%  if childlink|length %}
+                                                    <li> <a  href="{{ siteUrl }}{{ childlink }}" class="{{ macros.isActiveChildClass(child.slug) | trim }} level{{ child.level }}">{{ child.title }}</a></li>
+                                                {% endif %}
                                             {% endfor %}
                                     </ul>
 

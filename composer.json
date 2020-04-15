@@ -1,0 +1,5 @@
+{
+    "require": {
+        "aelvan/mailchimp-subscribe": "^3.0"
+    }
+}

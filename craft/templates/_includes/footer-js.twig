@@ -84,35 +84,34 @@ $(document).ready(function(){$('[data-hover="dropdown"]').dropdownHover()}),$(fu
 ////            $this.parent().toggleClass('open');
 ////        });
 //    });
-//
-//
-//    $('.submail').on('click', function(e) {
-//        $(this).val('').fadeOut;
-//    });
-//
-//    $('#monkey').on("submit", function(event) {
-//
-//        event.preventDefault();
-//
-//        $.post('{{ siteUrl}}mailchimpSubscribe/list/Subscribe', $('#monkey').serialize())
-//                .done( function(data) {
-//
-//                    if (!data.success)
-//                    {
-//
-//                        $("#subResult").text(data.message  + ': {{globalContent.subscribeIssue}}');
-//                        $('#msg').modal();
-//                    }
-//                    else
-//                    {
-//                        // Success
-//                        $("#subResult").text(data.message + ': {{globalContent.subscribeSuccess}}');
-//                        $('#msg').modal();
-//                    }
-//                    //console.log(data);
-//
-//
-//                });
-//    });
+
+$('.submail').on('click', function(e) {
+    $(this).val('').fadeOut;
+});
+
+$('#monkey').on("submit", function(event) {
+
+    event.preventDefault();
+
+    $.post('{{ siteUrl}}mailchimpSubscribe/list/Subscribe', $('#monkey').serialize())
+        .done( function(data) {
+
+            if (!data.success)
+            {
+
+                $("#subResult").text(data.message  + ': {{globalContent.subscribeIssue}}');
+                $('#msg').modal();
+            }
+            else
+            {
+                //Success
+                $("#subResult").text(data.message + ': {{globalContent.subscribeSuccess}}');
+                $('#msg').modal();
+            }
+           // console.log(data);
+
+
+        });
+});
 
 </script>

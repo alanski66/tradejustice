@@ -181,9 +181,12 @@ if ( window.location.hash ) {
     })
 }
 function pushFooterDown(){
-    $('.footwrap').css({
-        'margin-top': "390px"
-    });
+    if($('aside#nav').hasClass('sidemenu')){
+        $('.footwrap').css({
+            'margin-top': "390px"
+        });
+    }
+
 }
 
 $(document).ready(function () {
@@ -222,11 +225,9 @@ $(document).ready(function () {
 
         //console.log(headerHeight);
 
-        $('.footwrap').css({
-            'margin-top': "390px"
-        });
-        console.log("footer margin added");
-
+        // $('.footwrap').css({
+        //     'margin-top': "390px"
+        // });
 
        // console.log('header offset height is ' + headerHeight);
 

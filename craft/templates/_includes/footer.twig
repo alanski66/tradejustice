@@ -1,40 +1,40 @@
 <div class="footwrap">
-<div id="footer" class="footer" style="display:none">
+<div id="footer" class="footer" >
 
 <div class="container-xl subs-bg">
     <div class="container">
 
-        <section class="subscribe">
-            <div class="col-xxs col-xs-8 col-sm-8 col-md-8 col">
-                <div class="instru">
-                <div class="centerBlock">
-                    <span class="pull-left isprite icon-subscribe"></span>
-                    <div class="pull-left">
-                        <div class="subscribe-title">Want to stay up to date?</div>
-                        <span>Enter your email address</span>
+        <section class="subscribe ">
+        <div class="col-xs-1">
+            <img src="{{ siteUrl }}images/email-icon.png">
+        </div>
+            <div class="col-xs-8 subscribe-copy">
+                <div class="subscribe-title">{{ globalContent.subscribeTitle| default("Want to stay up to date?") }}</div>
+                <div class="subscribe-text">{{ globalContent.subscribeText | default("Enter your email address to receive our occasional Trade Justice Briefing") }}</div>
+            </div>
+            <div class="col-xs-7">
+                <div class="center-block ">
+                    <div class="centerBlockBB">
+
+                        <form id="monkey" class="monkey form-inline" action="" method="POST">
+                            <input type="hidden" name="action" value="mailchimpSubscribe/list/Subscribe">
+
+                            <div class="form-group">
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control submail" id="email" name="email" value="enter your email"/>
+                                    <div class="input-group-addon subme"><button type="submit">Sign up</button></div>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
-                </div>
             </div>
-            <div class="col-xxs col-xs-8 col-sm-4 col-md-8 col">
-                <div class="center-block">
-                <div class="centerBlock">
 
-                    <form id="monkey" class="monkey form-inline" action="" method="POST">
-                        <input type="hidden" name="action" value="mailchimpSubscribe/list/Subscribe">
 
-                        <div class="form-group">
 
-                            <div class="input-group">
-                                <input type="text" class="form-control submail" id="email" name="email" value="enter your email"/>
-                                <div class="input-group-addon subme"><button type="submit">Sign up</button></div>
-                            </div>
-                        </div>
-                    </form>
 
-                </div>
-                </div>
-            </div>
         </section>
     </div>
 </div>

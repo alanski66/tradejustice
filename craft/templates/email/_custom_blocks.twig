@@ -5,30 +5,42 @@
 {% switch block.type %}
 
 {% case "emailContent" %}
-
+    {%  set link = "" %}
+    {%  if block.blocklink | length %}
+        {%  set link = block.blocklink %}
+    {% endif %}
 <tr>
-    <td bgcolor="#ffffff" dir="ltr" align="center" valign="top" width="100%" style="padding: 10px;">
+    <td bgcolor="#ffffff" dir="ltr" align="center" valign="top" width="100%" style="padding: 10px 0 0 0;">
         <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
             <tbody><tr>
                 <!-- Column : BEGIN -->
                 {% for image in block.blockimage %}
                 {% set imageTransform = {
-                width: 170,
-                height: auto
+                width: 170
                 } %}
+
+
                 <td width="33.33%" class="stack-column-center" valign="top">
                     <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tbody><tr>
-                            <td dir="ltr" valign="top" style="padding: 0 10px;">
-
+                            <td dir="ltr" valign="top" style="padding: 0 10px 0 0;">
+                                {% if link | length %}
+                                <a href="{{ link }}" >
+                                    {% endif %}
                                     <img src="{{ image.url }}" width="170" height="auto" alt="alt_text" border="0" class="center-on-narrow" style="height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
-
+                                    {% if link | length %}
+                                </a>
+                                {% endif %}
                             </td>
                         </tr>
                         </tbody></table>
                 </td>
                 {% endfor %}
                 <!-- Column : END -->
+
+
+
+
                 <!-- Column : BEGIN -->
                 <td width="66.66%" class="stack-column-center" valign="top">
                     <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -38,6 +50,22 @@
                                 <br>
                                 {{ block.blockBody }}
                                 <br><br>
+                                {% if link | length %}
+                                    <a href="{{ link }}" style=" background: #3C3C3B;
+                border: 5px solid #3C3C3B;
+                font-family: sans-serif;
+                font-size: 13px;
+                line-height: 1.1;
+                text-align: center;
+                text-decoration: none;
+                display: inline;
+                border-radius: 3px;
+                font-weight: bold;
+                width: 100%;
+                padding: 0 5px;" class="button-a">
+                                        <span style="color:#ffffff; width:150px;" class="button-link">&nbsp;&nbsp;&nbsp;&nbsp;Read more&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </a>
+                                {% endif %}
                             </td>
                         </tr>
                         </tbody></table>
@@ -45,8 +73,17 @@
                 <!-- Column : END -->
             </tr>
             </tbody></table>
-        <hr>
+
     </td>
+    <!-- spacing line -->
+    <tr>
+        <td width="100%" bgcolor="#FFFFFF" height="1" style="padding:10px 0;font-size: 1px; line-height: 1px;"> </td>
+    </tr>
+    <tr> <td width="100%" bgcolor="#eeeeee" height="1" style="font-size: 1px; line-height: 1px;"> </td></tr>
+    <tr>
+        <td width="100%" bgcolor="#FFFFFF" height="1" style="padding:10px 0;font-size: 1px; line-height: 1px;"> </td>
+    </tr>
+    <!-- end spacing line -->
 </tr>
 {% default %}
 {% endswitch %}

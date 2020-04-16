@@ -6308,18 +6308,6 @@ section.main .link-resource a:hover > .icon-external-link {
   background-position: -418px -76px;
   padding: 7px 0 0 0px; }
 
-.icon-subscribe {
-  width: 45px;
-  height: 45px;
-  background-position: -75px -4px;
-  padding: 0px;
-  font-size: 14px;
-  display: inline-block;
-  margin-right: 27px;
-  float: left;
-  background-color: transparent;
-  margin-top: 15px; }
-
 .shrink .icon-twitter {
   width: 40px;
   height: 35px;
@@ -8191,6 +8179,26 @@ footer {
   width: 100%;
   background: #FFFFFF; }
 
+section.subscribe {
+  padding: 30px 0; }
+
+.subscribe-copy {
+  padding-left: 35px; }
+
+.icon-subscribe {
+  width: 45px;
+  height: 45px;
+  background-position: -75px -4px;
+  padding: 0px;
+  font-size: 14px;
+  display: inline-block;
+  float: left;
+  background-color: transparent;
+  margin-top: 5px; }
+
+.subscribe .subscribe-text {
+  font-size: 18px; }
+
 .subscribe .col {
   position: relative;
   height: 110px; }
@@ -8268,6 +8276,18 @@ form.monkey {
 @media (min-width: 641px) {
   .subscribe .col-xxs {
     width: 50% !important; } }
+
+@media (max-width: 550px) {
+  .subscribe [class*='col-xs-'] {
+    width: 100%;
+    text-align: center; }
+  .subscribe .subscribe-copy {
+    margin-top: 20px; }
+  .subscribe .input-group-addon.subme {
+    width: 30%; }
+  .subscribe form {
+    margin-left: 20%;
+    margin-right: 20%; } }
 
 @media all and (-ms-high-contrast: none) {
   *::-ms-backdrop, .navbar-default, .sprite.logo, .navb, .nav {

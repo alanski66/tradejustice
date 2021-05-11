@@ -21,12 +21,12 @@
 {#  work out odd even for 2 or three item display across the top of the home page #}
 {%  set noHomeCols = entry.featuredItems | length %}
 {% if  noHomeCols is odd  %}
-    {%  set colClass = "flex-grid-thirds" %}
+    {%  set colClass = " flex-grid-thirds" %}
     {% set batchNo = '3' %}
 {% endif %}
 
 {% if  noHomeCols is even  %}
-    {%  set colClass = "flex-grid-even" %}
+    {%  set colClass = " flex-grid-even" %}
     {% set batchNo = '2' %}
 {% endif %}
 
@@ -35,143 +35,143 @@
     <div class="container-xl">
 
         {%  if entry.featuredItems |length == '0'  %}
-        <div class="hero">
-            <div class="container">
+            <div class="hero">
+                <div class="container">
 
-                <section>
-                    <div class="col-xs-16 col-sm-10 col-md-10">
+                    <section>
+                        <div class="col-xs-16 col-sm-10 col-md-10">
 
-                        <div class="home-over-title">
-                            <h1>{{ entry.mainStrapline }}<br><span class="yellow">{{ entry.subStrapLine1 }}</span></h1>
-                        </div>
-                        <div class="home-over-text">
-                            <h4>{{ entry.latestHeading }}</h4>
-                            <div class="latest">
+                            <div class="home-over-title">
+                                <h1>{{ entry.mainStrapline }}<br><span class="yellow">{{ entry.subStrapLine1 }}</span></h1>
+                            </div>
+                            <div class="home-over-text">
+                                <h4>{{ entry.latestHeading }}</h4>
+                                <div class="latest">
 
-                                {% if entry.latestLinkManual | length %}
-                                    <a class=" " href="{{ entry.latestLinkManual }}">{{ entry.latestText }}<span class="isprite icon-chev-right"></span></a>
-                                {% else %}
-                                    {% set latest = entry.latestLink.first %}
-                                    {% if latest | length %}
-                                        <a class=" " href="{{ latest.url }}">{{ entry.latestText }}<span class="isprite icon-chev-right"></span></a>
+                                    {% if entry.latestLinkManual | length %}
+                                        <a class=" " href="{{ entry.latestLinkManual }}">{{ entry.latestText }}<span class="isprite icon-chev-right"></span></a>
+                                    {% else %}
+                                        {% set latest = entry.latestLink.first %}
+                                        {% if latest | length %}
+                                            <a class=" " href="{{ latest.url }}">{{ entry.latestText }}<span class="isprite icon-chev-right"></span></a>
+                                        {% endif %}
                                     {% endif %}
-                                {% endif %}
+
+                                </div>
 
                             </div>
+                        </div>
+
+                        <div class="col-xs-16 col-sm-8 col-md-10">
 
                         </div>
-                    </div>
-
-                    <div class="col-xs-16 col-sm-8 col-md-10">
-
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
-        </div>
         {% else %}
-    <div class="hero flen{{ entry.featuredItems |length }}">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-16">
-                    <div class="strap">
-                        <h1>{{ entry.mainStrapline }}<br><span class="yellow">{{ entry.subStrapLine1 }}</span></h1>
-                    </div>
-                </div>
-            </div>
-            <div class="flexcont {{ colClass  }}">
-
-            {% for fentry in entry.featuredItems %}
-                {% set link = fentry.url %}
-                {% set image = fentry.leadImage.first %}
-                <div class="flexcol">
-                    <div class="home-top-col">
-
-                            {% set imageTransform = {
-                            width: 530,
-                            height: 296,
-                            mode: 'crop',
-
-                            } %}
-                            {% if link %}<a href="{{link}}">{% endif %}
-                            <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}">
-                            {% if link %}</a>{% endif %}
-
-                        <div class="card-content">
-                            <h2>{% if link %}<a href="{{link}}">{% endif %}
-                                    {% if fentry.ShortDescription |length %}
-                                    {{ fentry.ShortDescription }}
-                                    {% else %}
-                                    {{ fentry.title }}
-                                    {% endif %}
-                                    {% if link %}</a>{% endif %}</h2>
-                            {#<p>{{ fentry.ShortDescription }}{% if link %}<a href="{{fentry.url}}">{% endif %} <span class="isprite icon-chev-right-dk"></span>{% if link %}</a>{% endif %}</p>#}
+            <div class="hero flen{{ entry.featuredItems |length }}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-16">
+                            <div class="strap">
+                                <h1>{{ entry.mainStrapline }}<br><span class="yellow">{{ entry.subStrapLine1 }}</span></h1>
+                            </div>
                         </div>
-                        <span class="yellowline"></span>
+                    </div>
+
+                    <div class="flexcont  {{ colClass  }}">
+                        {% for fentry in entry.featuredItems %}
+                            {% set link = fentry.url %}
+                            {% set image = fentry.leadImage.first %}
+                            <div class="flexcol">
+                                <div class="home-top-col">
+
+                                    {% set imageTransform = {
+                                        width: 530,
+                                        height: 296,
+                                        mode: 'crop',
+
+                                    } %}
+                                    {% if link %}<a href="{{link}}">{% endif %}
+                                        <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}">
+                                        {% if link %}</a>{% endif %}
+
+                                    <div class="card-content">
+                                        <h2>{% if link %}<a href="{{link}}">{% endif %}
+                                                {% if fentry.ShortDescription |length %}
+                                                    {{ fentry.ShortDescription }}
+                                                {% else %}
+                                                    {{ fentry.title }}
+                                                {% endif %}
+                                                {% if link %}</a>{% endif %}</h2>
+                                        {#<p>{{ fentry.ShortDescription }}{% if link %}<a href="{{fentry.url}}">{% endif %} <span class="isprite icon-chev-right-dk"></span>{% if link %}</a>{% endif %}</p>#}
+                                    </div>
+                                    <span class="yellowline"></span>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
                     </div>
                 </div>
-
-            {% endfor %}
-
             </div>
-        </div>
-    </div>
         {% endif %}
 
-</div>
+    </div>
 
-{% if globalContent.showNewsFlash and globalContent.newsflashLink.first | length %}
+    {% if globalContent.showNewsFlash and globalContent.newsflashLink.first | length %}
 
-<div class="container-xl flash-bg" style="background-color:#3c3c3b">
-    <div class="container">
+        <div class="container-xl flash-bg" style="background-color:#3c3c3b">
+            <div class="container">
 
-            <div class="col-xs-3 col-md-2 vertical-centre-container">
-                <span class="glyphicon glyphicon-exclamation-sign"></span>
-            </div>
-            <div class="col-xs-13 col-md-14 vertical-centre-container">
+                <div class="col-xs-3 col-md-2 vertical-centre-container">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                </div>
+                <div class="col-xs-13 col-md-14 vertical-centre-container">
 
-                <div class="flash">
+                    <div class="flash">
 
-                    <a href="{{globalContent.newsflashLink.first().url }}">{{globalContent.newsflashIntro }}</a>
+                        <a href="{{globalContent.newsflashLink.first().url }}">{{globalContent.newsflashIntro }}</a>
+
+                    </div>
 
                 </div>
 
             </div>
+        </div>
+    {% endif %}
+    <div class="container-xl tweet-bg">
+        <div class="container ">
+            <section class="">
+                <div class="col-xs-3 col-md-2">
+                    <span class="sprite icon-twitter"></span>
+                </div>
+                <div class="col-xs-13 col-md-14 ">
 
+                    <div class="tweet">
+
+                        {% cache for 5 mins %}
+                            {% set tweets = craft.twitter.get('statuses/user_timeline', {
+                                count:1,
+                                exclude_replies: true,
+                                include_rts: false,
+                            }) %}
+
+                            {% if tweets %}
+                                {% for tweet in tweets %}
+                                    {{tweet|tweetLink|raw}}
+                                {% endfor %}
+                            {% else %}
+                                No tweets
+                            {% endif %}
+                        {% endcache %}
+
+                    </div>
+
+                </div>
+            </section>
+        </div>
     </div>
-</div>
-{% endif %}
-<div class="container-xl tweet-bg">
-<div class="container ">
-    <section class="">
-        <div class="col-xs-3 col-md-2">
-            <span class="sprite icon-twitter"></span>
-        </div>
-        <div class="col-xs-13 col-md-14 ">
-
-            <div class="tweet">
-
-                {% cache for 5 mins %}
-                    {% set tweets = craft.twitter.get('statuses/user_timeline', {
-                    count:1,
-                    exclude_replies: true,
-                    include_rts: false,
-                    }) %}
-
-                    {% if tweets %}
-                        {% for tweet in tweets %}
-                            {{tweet|tweetLink|raw}}
-                        {% endfor %}
-                    {% else %}
-                        No tweets
-                    {% endif %}
-                {% endcache %}
-
-            </div>
-
-        </div>
-    </section>
-</div>
-</div>
 
 
     {% for block in entry.homeBlockRow | batch(2) %}
@@ -186,14 +186,14 @@
                         <div class="col-xxs-16 col-xs-8 col-sm-8">
                             {% for image in column.blockImage %}
                                 {% set imageTransform = {
-                                width: 527,
-                                height: 296,
-                                mode: 'crop',
-                                position: column.focalPoint
+                                    width: 527,
+                                    height: 296,
+                                    mode: 'crop',
+                                    position: column.focalPoint
                                 } %}
                                 {% if link %}<a href="{{link.url}}">{% endif %}
-                                        <span class="yellowline"></span>
-                                        <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}">
+                                <span class="yellowline"></span>
+                                <img class="img-responsive grayscale" src="{{ image.getUrl(imageTransform) }}" alt="{{ image.title }}">
                                 {% if link %}</a>{% endif %}
                             {% endfor %}
                             <h2>{% if link %}<a href="{{link.url}}">{% endif %}{{ column.blockHeading }}{% if link %}</a>{% endif %}</h2>
@@ -209,84 +209,84 @@
 
 
 
-<div class="container-xl gray-bg-light">
-    <div class="container ">
-        <div class="row gutter-85 homerow">
-            <div class="col-md-16 ">
-                <h3 class="text-center">Reports & Briefings</h3>
-            </div>
-            <div class="col-xs-16 col-sm-7">
-                {% cache %}
-                {% set reportlist = entry.latestReports.limit(6) %}
-
-                {% for entry in reportlist %}
-
-                    {% if loop.index is odd %}
-                    {% set link = entry.url %}
-                {% set image = entry.resourceImage.first() %}
-                    {% set file = entry.resourcesFile.first() %}
-
-                {% if image %}
-                {% set media = image.getUrl('tinyThumb') %}
-                {% else %}
-                {% set media = 'images/meta/pdf-default.png' %}
-                {% endif %}
-                    <div class="media">
-                        <div class="media-left">
-
-                                <a href="{{ entry.url }}" class="">
-                                    <img class="media-object" src="{{ media}}" alt="...">
-                                </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">{{ entry.title }}</h4>
-                            {{ entry.ShortDescription  }}
-
-                        </div>
-                    </div>
-                {% endif %}
-                {% endfor %}
-                {% endcache %}
-
-            </div>
-            <div class="col-xs-2">
-                <div class="sprite replogo"></div>
-            </div>
-            <div class="col-xs-16 col-sm-7">
-                {% cache %}
-                {% for entry in reportlist %}
-
-                {% if loop.index is even %}
-                {% set link = entry.url %}
-                {% set image = entry.resourceImage.first() %}
-                {% set file = entry.resourcesFile.first() %}
-
-                {% if image %}
-                {% set media = image.getUrl('tinyThumb') %}
-                {% else %}
-                {% set media = 'images/meta/pdf-default.png' %}
-                {% endif %}
-                <div class="media">
-
-                    <div class="media-left">
-                            <a href="{{ entry.url }}" class="">
-                                <img class="media-object" src="{{ media }}" alt="...">
-                            </a>
-                    </div>
-
-                    <div class="media-body">
-                        <h4 class="media-heading"> <a href="{{ entry.url }}" class="">{{ entry.title }}</a></h4>
-                        {{ entry.ShortDescription  }}
-
-                    </div>
+    <div class="container-xl gray-bg-light">
+        <div class="container ">
+            <div class="row gutter-85 homerow">
+                <div class="col-md-16 ">
+                    <h3 class="text-center">Reports & Briefings</h3>
                 </div>
-                {% endif %}
-                {% endfor %}
-                {% endcache %}
+                <div class="col-xs-16 col-sm-7">
+                    {% cache %}
+                        {% set reportlist = entry.latestReports.limit(6) %}
+
+                        {% for entry in reportlist %}
+
+                            {% if loop.index is odd %}
+                                {% set link = entry.url %}
+                                {% set image = entry.resourceImage.first() %}
+                                {% set file = entry.resourcesFile.first() %}
+
+                                {% if image %}
+                                    {% set media = image.getUrl('tinyThumb') %}
+                                {% else %}
+                                    {% set media = 'images/meta/pdf-default.png' %}
+                                {% endif %}
+                                <div class="media">
+                                    <div class="media-left">
+
+                                        <a href="{{ entry.url }}" class="">
+                                            <img class="media-object" src="{{ media}}" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">{{ entry.title }}</h4>
+                                        {{ entry.ShortDescription  }}
+
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endcache %}
+
+                </div>
+                <div class="col-xs-2">
+                    <div class="sprite replogo"></div>
+                </div>
+                <div class="col-xs-16 col-sm-7">
+                    {% cache %}
+                        {% for entry in reportlist %}
+
+                            {% if loop.index is even %}
+                                {% set link = entry.url %}
+                                {% set image = entry.resourceImage.first() %}
+                                {% set file = entry.resourcesFile.first() %}
+
+                                {% if image %}
+                                    {% set media = image.getUrl('tinyThumb') %}
+                                {% else %}
+                                    {% set media = 'images/meta/pdf-default.png' %}
+                                {% endif %}
+                                <div class="media">
+
+                                    <div class="media-left">
+                                        <a href="{{ entry.url }}" class="">
+                                            <img class="media-object" src="{{ media }}" alt="...">
+                                        </a>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <h4 class="media-heading"> <a href="{{ entry.url }}" class="">{{ entry.title }}</a></h4>
+                                        {{ entry.ShortDescription  }}
+
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endcache %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 

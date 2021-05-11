@@ -1,14 +1,35 @@
 
 {% set entries = craft.entries.section('members').order('title asc').find() %}
 
+
+
+{% set entries = craft.entries.section('members').order('title asc').find() %}
+{% set relatedCats = craft.categories.relatedTo(entries) %}
+
+{#{% for category in relatedCats %}#}
+{#    <h3 style="padding-top:40px">{{ category.title }}</h3>#}
+{#    #}{# Get and loop through entries related to this cat #}
+{#    {% set relatedEntries = craft.entries.relatedTo(category) %}#}
+{#    {% for entry in relatedEntries %}#}
+{#        #}{# this list of entries needs to be grouped by the regionCountry field #}
+{#         <a href="{{ entry.memberUrl }}" target="_self">{{ entry.title }}</a>{% if loop.last %}{% else %}, {% endif %}#}
+{#    {% endfor %}#}
+{#{% endfor %}#}
+
+
 {% for entry in entries %}
+    {% set category = entry.membershipCategory.first() %}
+
+
 {% if entry.sticky %}
 {% set sticky = "sticky" %}
 {% else %}
 {% set sticky = '' %}
 {% endif %}
+
 <article class="{{sticky}}">
     <h3><a target="_blank" href="{{ entry.memberUrl }}">{{ entry.title }}</a></h3>
+
 
     {% if entry.ShortDescription %}
     {{ entry.ShortDescription }}

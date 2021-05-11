@@ -13,7 +13,7 @@ itself with node visitors.
 
 .. note::
 
-    The first section of this chapter describes how to extend Twig easily. If
+    The first section of this chapter describes how to extend Twig. If
     you want to reuse your changes in different projects or if you want to
     share them with others, you should then create an extension as described
     in the following section.
@@ -41,7 +41,7 @@ generate).
 
 You can use a ``lipsum`` *tag*:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {% lipsum 40 %}
 
@@ -52,7 +52,7 @@ three main reasons:
 * The tag outputs something;
 * The tag is not flexible as you cannot use it in an expression:
 
-  .. code-block:: jinja
+  .. code-block:: twig
 
       {{ 'some text' ~ {% lipsum 40 %} ~ 'some more text' }}
 
@@ -61,7 +61,7 @@ the most complex extension point of Twig.
 
 Now, let's use a ``lipsum`` *filter*:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ 40|lipsum }}
 
@@ -72,14 +72,14 @@ transform).
 
 Next, let's use a ``lipsum`` *function*:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ lipsum(40) }}
 
 Here we go. For this specific example, the creation of a function is the
 extension point to use. And you can use it anywhere an expression is accepted:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ 'some text' ~ ipsum(40) ~ 'some more text' }}
 
@@ -88,7 +88,7 @@ extension point to use. And you can use it anywhere an expression is accepted:
 Last but not the least, you can also use a *global* object with a method able
 to generate lorem ipsum text:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ text.lipsum(40) }}
 
@@ -120,7 +120,7 @@ available in all templates and macros::
 
 You can then use the ``text`` variable anywhere in a template:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ text.lipsum(40) }}
 
@@ -134,13 +134,13 @@ arguments passed to the filter (within parentheses ``()``) as extra arguments.
 Defining a filter is as easy as associating the filter name with a PHP
 callable. For instance, let's say you have the following code in a template:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ 'TWIG'|lower }}
 
 When compiling this template to PHP, Twig looks for the PHP callable
 associated with the ``lower`` filter. The ``lower`` filter is a built-in Twig
-filter, and it is simply mapped to the PHP ``strtolower()`` function. After
+filter, and it is mapped directly to the PHP ``strtolower()`` function. After
 compilation, the generated PHP code is roughly equivalent to:
 
 .. code-block:: html+php
@@ -152,7 +152,7 @@ function.
 
 A filter can also take extra arguments like in the following example:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ now|date('d/m/Y') }}
 
@@ -169,7 +169,7 @@ In this section, we will create a ``rot13`` filter, which should return the
 `rot13`_ transformation of a string. Here is an example of its usage and the
 expected output:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ "Twig"|rot13 }}
 
@@ -188,7 +188,7 @@ of the PHP function to call, here ``str_rot13``, a native PHP function.
 
 Let's say I now want to be able to add a prefix before the converted string:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ "Twig"|rot13('prefix_') }}
 
@@ -297,13 +297,13 @@ Functions
 A function is a regular PHP function or an object method that can be called from
 templates.
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ constant("DATE_W3C") }}
 
 When compiling this template to PHP, Twig looks for the PHP callable
 associated with the ``constant`` function. The ``constant`` function is a built-in Twig
-function, and it is simply mapped to the PHP ``constant()`` function. After
+function, and it is mapped directly to the PHP ``constant()`` function. After
 compilation, the generated PHP code is roughly equivalent to:
 
 .. code-block:: html+php
@@ -368,7 +368,7 @@ feature as you need to understand how Twig's internals work.
 Let's create a simple ``set`` tag that allows the definition of simple
 variables from within a template. The tag can be used like follows:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {% set name = "value" %}
 
@@ -503,8 +503,6 @@ developer generate beautiful and readable PHP code:
 * ``outdent()``: Outdents the generated code (see ``\Twig\Node\BlockNode`` for a
   usage example).
 
-.. _creating_extensions:
-
 Creating an Extension
 ---------------------
 
@@ -619,8 +617,7 @@ possible::
 
 .. note::
 
-    Of course, this extension does nothing for now. We will customize it in
-    the next sections.
+    This extension does nothing for now. We will customize it in the next sections.
 
 Twig does not care where you save your extension on the filesystem, as all
 extensions must be registered explicitly to be available in your templates.
@@ -631,8 +628,8 @@ main ``Environment`` object::
     $twig = new \Twig\Environment($loader);
     $twig->addExtension(new Project_Twig_Extension());
 
-Of course, you need to first load the extension file by either using
-``require_once()`` or by using an autoloader (see `spl_autoload_register()`_).
+Don't forget to load first the extension file by either using ``require_once()``
+or by using an autoloader (see `spl_autoload_register()`_).
 
 .. tip::
 
@@ -733,7 +730,7 @@ at the cost of a small overhead.
 Overriding default Filters
 ..........................
 
-If some default core filters do not suit your needs, you can easily override
+If some default core filters do not suit your needs, you can override
 them by creating your own extension. Just use the same names as the one you
 want to override::
 
@@ -836,7 +833,7 @@ Testing an Extension
 Functional Tests
 ~~~~~~~~~~~~~~~~
 
-You can create functional tests for extensions simply by creating the
+You can create functional tests for extensions by creating the
 following file structure in your test directory::
 
     Fixtures/
@@ -865,7 +862,7 @@ The ``IntegrationTest.php`` file should look like this::
 
         public function getFixturesDir()
         {
-            return dirname(__FILE__).'/Fixtures/';
+            return __DIR__.'/Fixtures/';
         }
     }
 
@@ -881,5 +878,5 @@ Testing the node visitors can be complex, so extend your test cases from
 
 .. _`spl_autoload_register()`: https://secure.php.net/spl_autoload_register
 .. _`rot13`:                   https://secure.php.net/manual/en/function.str-rot13.php
-.. _`tests/Twig/Fixtures`:     https://github.com/twigphp/Twig/tree/master/test/Twig/Tests/Fixtures
-.. _`tests/Twig/Node`:         https://github.com/twigphp/Twig/tree/master/test/Twig/Tests/Node
+.. _`tests/Twig/Fixtures`:     https://github.com/twigphp/Twig/tree/1.x/tests/Fixtures
+.. _`tests/Twig/Node`:         https://github.com/twigphp/Twig/tree/1.x/tests/Node

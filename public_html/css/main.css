@@ -6002,9 +6002,6 @@ span.resquery {
 .pagination > li > a.last {
   border-right: 0; }
 
-.main.row.gutter-85.land {
-  padding-top: 50px; }
-
 span.yellowline {
   width: 100%;
   border-top: 8px solid #F4D233;
@@ -7098,11 +7095,11 @@ aside .nav > li > a:hover, aside .nav > li > a:focus {
 
 @media (min-width: 768px) {
   .sidemenu.showfeatured {
-    padding-top: 75px; } }
+    padding-top: 124px; } }
 
 @media (min-width: 768px) {
   .showfeatured.shrink {
-    padding-top: 100px; } }
+    padding-top: 70px; } }
 
 .pside-inner {
   position: relative; }
@@ -7942,7 +7939,7 @@ section.main img {
 
 @media (min-width: 768px) {
   section.main.blogindex {
-    padding-top: 80px; } }
+    padding-top: 114px; } }
 
 @media (min-width: 768px) {
   section.main.blogentry {
@@ -7977,7 +7974,8 @@ section.main img {
     display: none; } }
 
 .blog h2 {
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  margin-top: 0; }
 
 .blog article {
   margin-bottom: 40px; }

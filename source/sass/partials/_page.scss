@@ -853,7 +853,7 @@ section.main img{
 }
 section.main.blogindex{
   @include breakpoint(sm) {
-    padding-top: 80px;
+    padding-top: 114px;
   }
 }
 section.main.blogentry{
@@ -905,6 +905,7 @@ section.main.blogentry{
 }
   .blog h2{
     margin-bottom:15px;
+    margin-top:0;
   }
 
   .blog article{

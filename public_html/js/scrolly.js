@@ -59,6 +59,11 @@ function resizeSidebar(){
 }
 
 function adjustSideHeight(){
+
+
+    if($sidebarHeight > '300'){
+        console.log("fixed side menu");
+    }
     var top_of_element = $(".footwrap").offset().top;
     var bottom_of_element = $(".footwrap").offset().top + $(".footwrap").outerHeight();
     var bottom_of_screen = $(window).scrollTop() + $(window).height();
@@ -72,7 +77,7 @@ function adjustSideHeight(){
         });
         $sidebar.css({
             'position':'relative',
-            'margin-left':'15px'
+            'margin-left':'17px'
         });
         $sideInner.css({
             'position':'absolute',

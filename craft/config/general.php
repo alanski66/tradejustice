@@ -10,7 +10,7 @@
 return array(
     '*' => array(
 
-        'devMode' => getenv('CRAFTENV_DEVMODE'),
+
         'environmentVariables' => array(
             'baseUrl'  => getenv('CRAFTENV_BASE_URL'),
             'basePath' => getenv('CRAFTENV_BASE_PATH'),
@@ -24,6 +24,7 @@ return array(
     ),
 
     'tjm.test' => array(
+        'devMode' => 'true',
         'environmentVariables' => array(
             'enableTemplateCaching' => false,
             'cache' => false,
@@ -36,7 +37,7 @@ return array(
     ),
 
     'tjm.org.uk' => array(
-
+        'devMode' => getenv('CRAFTENV_DEVMODE'),
         'environmentVariables' => array(
             'enableTemplateCaching' => true,
             'cache' => true,
@@ -50,7 +51,7 @@ return array(
 
 
     'tjm.stagingbox.co.uk' => array(
-
+        'devMode' => getenv('CRAFTENV_DEVMODE'),
         'cache' => true,
         'enableTemplateCaching' => true,
         'generateTransformsBeforePageLoad' => true,

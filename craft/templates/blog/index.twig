@@ -158,7 +158,7 @@
                             section: 'blog',
                             with:
                             ['leadImage']
-                            }).order('sticky desc', 'postDate desc')  %}
+                            }).order('sticky desc', 'postDate desc').limit(15)  %}
                                 {% if entry.sticky %}
                                 {% set sticky = "sticky" %}
                                 {% else %}

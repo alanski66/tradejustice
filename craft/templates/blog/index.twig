@@ -151,14 +151,12 @@
                 <aside id="nav" class="psidemenu ">
                     <h3>Blog posts</h3>
 
-
-
                         <div class="nav" data-spy="scrollspy">
                             {% for entry in craft.entries({
                             section: 'blog',
                             with:
                             ['leadImage']
-                            }).order('sticky desc', 'postDate desc')  %}
+                            }).order('sticky desc', 'postDate desc').limit(15)  %}
                                 {% if entry.sticky %}
                                 {% set sticky = "sticky" %}
                                 {% else %}

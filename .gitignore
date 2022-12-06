@@ -42,7 +42,9 @@ Icon
 /craft/storage/backups/
 /craft/storage/runtime/
 /craft/storage/userphotos/
-
+/commission
+/email
+/sql
 /scripts/.env.sh
 /scripts/.env-production.sh
 
